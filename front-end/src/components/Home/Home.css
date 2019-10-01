@@ -1,0 +1,14 @@
+.home{
+    padding: 0px !important;
+}
+
+.home .upper-fold{
+    height: 100vh !important;
+    /* background-image: url('https://images.immediate.co.uk/production/volatile/sites/4/2018/08/GettyImages-87987137-932ecf3.jpg?quality=90&resize=940,404'); */
+    background-size: cover;
+}
+
+.h1{
+    padding: 0px !important;
+    margin-top: 100px !important;
+}
