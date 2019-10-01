@@ -2,16 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import reduxPromise from 'redux-promise';
 
-import * as firebase from 'firebase';
-import firebaseConfig from './components/Firebase/firebase';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers/rootReducer';
 
-firebase.initializeApp(firebaseConfig);
+// import * as firebase from 'firebase';
+// import firebaseConfig from './components/Firebase/firebase';
 
+// firebase.initializeApp(firebaseConfig);
 
+const reduxMiddleware = [reduxPromise]
+const store = applyMiddleware(...reduxMiddleware)(createStore)(rootReducer);
 
 ReactDOM.render( 
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>
     , 
     document.getElementById('root')
 );
