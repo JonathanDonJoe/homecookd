@@ -88,10 +88,10 @@ function mapStateToProps(state){
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({
-        registerAction
-    },dispatch)
-}
+// function mapDispatchToProps(dispatch){
+//     return bindActionCreators({
+//         registerAction
+//     },dispatch)
+// }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Register);
+export default connect(mapStateToProps)(Register);
