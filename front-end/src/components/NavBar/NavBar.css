@@ -1,3 +1,7 @@
+.nav-row {	
+    margin-bottom: 0px;	
+}
+
 .nav{
     position: absolute;
     width: 100%;
@@ -7,6 +11,11 @@
 
 .nav nav{
     box-shadow: none;
+}
+
+.site-title {	
+    font-size: 30px;	
+    padding-left: 30px;	
 }
 
 .nav ul li{
