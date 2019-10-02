@@ -18,10 +18,10 @@ class NavBar extends Component {
     render() {
         return (
             <div className='container-fluid nav'>
-                <div className='row'>
+                <div className='row nav-row'>
                     <nav className='green'>
                         <div className='nav-wrapper'>
-                            <Link to='/' className='left site-title'>HomeMade</Link>
+                            <Link to='/' className='left site-title'>HomeCook'd</Link>
                             <ul id='nav-mobile' className='right'>
                                 <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events'>Events</Link></li>
