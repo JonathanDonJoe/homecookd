@@ -28,10 +28,7 @@ router.post('*', (req, res, next) => {
         next();
     })
 })
-// Temporary post response
-router.post('/', function (req, res, next) {
-    res.send('Post Request');
-});
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
