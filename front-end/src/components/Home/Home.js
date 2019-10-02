@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import './Home.css'
 
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import modalAction from '../../actions/modalAction';
+
 class Home extends Component {
     
     state = {
@@ -9,6 +14,8 @@ class Home extends Component {
     };
 
     componentDidMount(){
+
+        // this.props.modal('openModal');
         let d = new Date()
         let time = d.getHours()
         let picLink = ''
@@ -56,4 +63,17 @@ class Home extends Component {
     }
 }
 
-export default Home
+function mapStateToProps(state) {
+    return ({
+        auth: state.auth
+    })
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        modal: modalAction
+    }, dispatch)
+}
+
+// export default NavBar;
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

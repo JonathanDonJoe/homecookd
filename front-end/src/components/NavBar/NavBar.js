@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import './NavBar.css';
 import Modal from './Modal';
 import Login from './Login';
 import Register from './Register';
+import modalAction from '../../actions/modalAction';
 
 class NavBar extends Component {
     state = { 
@@ -15,6 +19,20 @@ class NavBar extends Component {
         this.setState({
             modalContent: <Modal changeModalContent={this.changeModalContent}/>            
         })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.auth.modal !== this.props.auth.modal) {
+            if (this.props.auth.modal === 'close') {
+                this.setState({
+                    showModal: false
+                })
+            } else if (this.props.auth.modal === 'open') {
+                this.setState({
+                    showModal: true
+                })
+            } 
+        }
     }
 
     changeModalContent = (newContent)=>{
@@ -46,6 +64,7 @@ class NavBar extends Component {
     }
 
     render() {
+        console.log(this.state.showModal);
         return (
             <div className='container-fluid nav'>
                 <div className='row nav-row'>
@@ -72,4 +91,17 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+function mapStateToProps(state) {
+    return ({
+        auth: state.auth
+    })
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        modal: modalAction
+    }, dispatch)
+}
+
+// export default NavBar;
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
