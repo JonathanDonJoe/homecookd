@@ -43,3 +43,13 @@ create table host_reviews (
     title varchar(50) not null,
     review varchar(1000) not NULL
 );
+
+DROP TABLE messages;
+
+create table messages (
+    id serial primary key,
+    sender_id integer REFERENCES users(id),
+    event_id integer references events(id),
+    content varchar(1000) not NULL,
+    sent_time TIMESTAMP default CURRENT_TIMESTAMP
+);
