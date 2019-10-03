@@ -79,7 +79,9 @@ class NavBar extends Component {
     }
 
     render() {
-        console.log(this.state.showModal);
+        // console.log(this.state.showModal);
+        // console.log(auth0Client.getIdToken())
+        // console.log(auth0Client.getProfile())
         return (
             <div className='container-fluid nav'>
                 <div className='row nav-row'>

@@ -1,7 +1,9 @@
 import auth0 from 'auth0-js';
+import auth_config from '../../config';
 
 class Auth {
   constructor() {
+<<<<<<< HEAD
     this.auth0 = new auth0.WebAuth({        
         clientID: `1GhYuE5mUY005Y6imP9Auc2R7smNW848`,
         domain: `dev-ag0cp9dk.auth0.com`,        
@@ -10,6 +12,9 @@ class Auth {
         responseType: `id_token`,
         scope: `openid profile`
     });
+=======
+    this.auth0 = new auth0.WebAuth(auth_config.auth);
+>>>>>>> 3fd403e040b13c8d1330d2181094c5763aa4e096
 
     this.getProfile = this.getProfile.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
