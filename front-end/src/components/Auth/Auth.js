@@ -1,15 +1,9 @@
 import auth0 from 'auth0-js';
+import auth_config from '../../config';
 
 class Auth {
   constructor() {
-    this.auth0 = new auth0.WebAuth({        
-        clientID: `1GhYuE5mUY005Y6imP9Auc2R7smNW848`,
-        domain: `dev-ag0cp9dk.auth0.com`,        
-        redirectUri: `http://localhost:3000/callback`,
-        audience: `https://dev-ag0cp9dk.auth0.com/userinfo`,
-        responseType: `id_token`,
-        scope: `openid profile`
-    });
+    this.auth0 = new auth0.WebAuth(auth_config.auth);
 
     this.getProfile = this.getProfile.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
