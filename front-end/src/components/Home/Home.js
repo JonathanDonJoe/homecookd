@@ -5,6 +5,7 @@ import './Home.css'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import modalAction from '../../actions/modalAction';
+import EventCard from '../EventCard/EventCard';
 
 class Home extends Component {
     
@@ -57,6 +58,12 @@ class Home extends Component {
                         </div>
                     </div>
                     <h1> {this.state.text}</h1>
+                    <div className='row'>
+                        <EventCard />
+                        <EventCard />
+                        <EventCard />
+                        <EventCard />
+                    </div>
                 </div>
             </div>
         )
