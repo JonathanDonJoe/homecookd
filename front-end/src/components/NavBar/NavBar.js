@@ -2,83 +2,20 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import auth0Client from '../Auth/Auth';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 
 import './NavBar.css';
-import Modal from './Modal';
-import Login from './Login';
-import Register from './Register';
-import modalAction from '../../actions/modalAction';
 
 class NavBar extends Component {
-    state = { 
-        showModal: false,
-        modalContent: "" 
-        }
-
-    componentDidMount(){
-        this.setState({
-            modalContent: <Modal changeModalContent={this.changeModalContent}/>            
-        })
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.auth.modal !== this.props.auth.modal) {
-            if (this.props.auth.modal === 'close') {
-                this.setState({
-                    showModal: false
-                })
-            } else if (this.props.auth.modal === 'open') {
-                this.setState({
-                    showModal: true
-                })
-            } 
-        }
-    }
 
     signOut = () => {
         auth0Client.signOut();
         this.props.history.replace('/');
     };
 
-    changeModalContent = (newContent)=>{
-        let modalContent = <Modal changeModalContent={this.changeModalContent}/>
-        if(newContent === 'login'){
-            modalContent = <Login  changeModalContent={this.changeModalContent} closeModal={this.closeModal}/>
-        }else if(newContent === 'register'){
-            modalContent = <Register  changeModalContent={this.changeModalContent} closeModal={this.closeModal} />
-        }
-        this.setState({
-            modalContent
-        })
-    }
-
-    register = (e)=>{        
-        e.preventDefault();
-        document.querySelector('body').className = 'body-modal-show';
-        this.setState({
-            showModal: true,
-        })
-    }
-
-    login = (e) => {
-        e.preventDefault();
-        document.querySelector('body').classList = 'body-modal-show';
-        this.setState({
-            showModal: true
-        })
-        this.changeModalContent('login');
-    }
-
-    closeModal = (e)=>{
-        e.preventDefault();
-        document.querySelector('body').className = '';
-        this.setState({
-            showModal: false
-        })
-    }
 
     render() {
+        // console.log(this.props.auth.modal)
         // console.log(this.state.showModal);
         // console.log(auth0Client.getIdToken())
         // console.log(auth0Client.getProfile())
@@ -103,12 +40,7 @@ class NavBar extends Component {
                         </div>
                     </nav>
                 </div>
-                <div className="login-modal" style={this.state.showModal ? {"display": "block"} : {}} >
-                    <button id="close-modal" onClick={this.closeModal}>&Chi;</button>
-                    <div className="modal-content">
-                        {this.state.modalContent}
-                    </div>
-                </div>
+                
             </div>
         );
     }
@@ -120,11 +52,14 @@ function mapStateToProps(state) {
     })
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        modal: modalAction
-    }, dispatch)
-}
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators({
+//         modal: modalAction
+//     }, dispatch)
+// }
 
 // export default NavBar;
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
+export default withRouter(connect(mapStateToProps, 
+    null
+    // mapDispatchToProps
+    )(NavBar));
