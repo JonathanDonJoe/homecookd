@@ -15,7 +15,7 @@ class Home extends Component {
 
     componentDidMount(){
 
-        // this.props.modal('openModal');
+        this.props.modal('openModal');
         let d = new Date()
         let time = d.getHours()
         let picLink = ''

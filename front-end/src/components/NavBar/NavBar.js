@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import auth0Client from '../Auth/Auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -35,6 +36,11 @@ class NavBar extends Component {
         }
     }
 
+    signOut = () => {
+        auth0Client.signOut();
+        this.props.history.replace('/');
+    };
+
     changeModalContent = (newContent)=>{
         let modalContent = <Modal changeModalContent={this.changeModalContent}/>
         if(newContent === 'login'){
@@ -53,6 +59,15 @@ class NavBar extends Component {
         this.setState({
             showModal: true,
         })
+    }
+
+    login = (e) => {
+        e.preventDefault();
+        document.querySelector('body').classList = 'body-modal-show';
+        this.setState({
+            showModal: true
+        })
+        this.changeModalContent('login');
     }
 
     closeModal = (e)=>{
@@ -74,8 +89,14 @@ class NavBar extends Component {
                             <ul id='nav-mobile' className='right'>
                                 <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events'>Events</Link></li>
-                                <li className='nav-non-link' onClick={this.login}>Log In</li>
-                                <li className='nav-non-link' onClick={this.register}>Register</li>
+                                {
+                                    !auth0Client.isAuthenticated() &&
+                                    <li className='nav-non-link' onClick={auth0Client.signIn}>Log In</li>
+                                }
+                                {
+                                    !auth0Client.isAuthenticated() &&
+                                <li className='nav-non-link' onClick={auth0Client.signIn}>Register</li>
+                                }
                             </ul>
                         </div>
                     </nav>
@@ -104,4 +125,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // export default NavBar;
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
