@@ -6,7 +6,6 @@ export class SearchBar extends Component {
         return (
                 <div className="search-row">
                     <form>
-                        <h3>Find some Fresh Grub</h3>
                         <div className="inner-form">
                             <div className="input-field first-wrap">
                                 <input id="search" type="text" placeholder="What are you looking for?" />

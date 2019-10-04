@@ -6,7 +6,14 @@ export class ChatBar extends Component {
         return (
             <div className='container-fluid chat-bar'>
                 <div className='row chat-bar-row green'>
-                    Hello I'm the bloody chat bar
+                    <div className='col s12 m8 l8'>
+                        Contact you events with chat
+                    </div>
+                    <a className='chat-window-link' href='#openChatWindow'>
+                        <div className='col s12 m4 l4'>
+                            Chat Pop Up Area
+                        </div>
+                    </a>
                 </div>   
             </div>
         )
