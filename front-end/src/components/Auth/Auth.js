@@ -3,7 +3,6 @@ import auth_config from '../../config';
 import axios from 'axios';
 
 class Auth {
-<<<<<<< HEAD
   constructor() {
     this.auth0 = new auth0.WebAuth(auth_config.auth);
     this.getProfile = this.getProfile.bind(this);
@@ -54,7 +53,6 @@ class Auth {
     this.profile = null;
     this.expiresAt = null;
   }
-=======
     constructor() {
         this.auth0 = new auth0.WebAuth(auth_config.auth);
 
