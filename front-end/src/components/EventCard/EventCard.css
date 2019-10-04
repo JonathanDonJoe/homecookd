@@ -1,21 +1,14 @@
-.event-card-content{
-    padding: 5px;
-    border: solid 2px green;
-    border-radius: 10%;
-    background-color: #EBEBEB;
+.event-card{
+    text-align: left;
 }
 
 .food-hero{
     height: 240px !important;
     background-image: url('https://i.redd.it/pu0mz1l9ruk31.jpg');
     background-size: cover;
-    border-radius: 10%;
 
 }
 .tag-list-item, .info-list-item{
-    background-color: slategray;	    
-    background-color: #C9C9C9 ;
-    border-radius: 5%;
     color: black !important
 }
 

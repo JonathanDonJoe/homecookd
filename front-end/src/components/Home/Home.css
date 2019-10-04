@@ -4,17 +4,20 @@
 
 .home .upper-fold{
     height: 100vh !important;
-    /* background-image: url('https://images.immediate.co.uk/production/volatile/sites/4/2018/08/GettyImages-87987137-932ecf3.jpg?quality=90&resize=940,404'); */
     background-size: cover;
+    align-items: center;
+    
 }
-upper-fold-text{
-    position: absolute;
-    top: 15vh !important;
-    left: 2vh;
-    height: 60vh;
-    width: 45vh;
-    padding: 0px !important;	    padding: 0px !important;
-    margin-top: 100px !important;	    background-color: black;
+
+.upper-fold-content{
+    position: relative;
+    top: 25vh;
+}
+
+.upper-fold-text{
     color: white;
-    font-size: 7rem;
-} 	
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+    font-size: 8vh;
+}
