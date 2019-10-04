@@ -14,11 +14,11 @@
 }
 
 .site-title {	
-    font-size: 30px;	
+    /* font-size: 30px;	 */
     padding-left: 30px;	
 }
 
-.nav ul li{
+.nav ul li {
     color: white;
     cursor: pointer;
 }

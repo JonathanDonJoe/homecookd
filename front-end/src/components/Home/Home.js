@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
 import EventCard from '../EventCard/EventCard';
+import SearchBar from '../SearchBar/SearchBar';
 
 class Home extends Component {
     
@@ -54,6 +55,7 @@ class Home extends Component {
                 <div className="row">
                     <div className="home col s12">
                         <div className="upper-fold" style={{backgroundImage: `url(${this.state.imageLink})`}}>
+                        <SearchBar />
                         </div>
                     </div>
                     <h1> {this.state.text}</h1>
