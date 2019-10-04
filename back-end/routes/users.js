@@ -5,49 +5,39 @@ const db = require('../db');
 
 router.post('/login', function (req, res) {
     console.log('reached /users/login')
-    res.json(req.body)
-})
-
-router.post('/signup', function (req, res) {
-    console.log('req.body: ')
     console.log(req.body)
-    const { first, last, email, picture, token } = req.body;
-    if ((!first) || (!last) || (!email) || (!token)) {
+    const { token, first, last, email, picture } = req.body;
+    if (res.locals.loggedIn) {
         res.json({
-            msg: 'invalidData'
+            msg: 'loggedIn',
+            user_id: res.locals.uid,
+            first,
+            last,
+            email,
+            picture
         })
-        return;
-    }
-    console.log( 'hi')
-    const checkUserQuery = `SELECT * FROM users WHERE email = ?`
-    db.query(checkUserQuery, [email], (err, results) => {
-        if (err) {
-            throw err
-        }
-        if (results.length > 0) {
+    } else if (!res.locals.loggedIn) {
+        const insertUserQuery = `
+        INSERT INTO users 
+            (first_name, last_name, email, picture)
+        VALUES (?, ?, ?, ?)
+        `
+        db.query(insertUserQuery, [first, last, email, picture], (err2, results, fields) => {
+            if (err2) {
+                throw err2
+            }
+            console.log(results)
             res.json({
-                msg: 'userExists'
+                msg: 'userAdded',
+                user_id: results.insertId,
+                first,
+                last,
+                email,
+                picture
             })
-        } else {
-            const insertUserQuery = `
-                INSERT INTO users 
-                    (first_name, last_name, email, picture, token)
-                VALUES (?, ?, ?, ?, ?)
-                `
-            db.query(insertUserQuery, [first, last, email, picture, token], (err2) => {
-                if (err2) {
-                    throw err2
-                }
-                res.json({
-                    msg: 'userAdded',
-                    token,
-                    email,
-                    first
-                })
-            })
-        }
-    })
-});
+        })
+    }
+})
 
 
 /* GET users listing. */

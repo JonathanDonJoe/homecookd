@@ -26,7 +26,7 @@ class Auth {
     }
 
     signIn() {
-        this.auth0.authorize();
+        return this.auth0.authorize();
     }
 
     handleAuthentication() {
@@ -39,24 +39,24 @@ class Auth {
                 this.idToken = authResult.idToken;
                 this.profile = authResult.idTokenPayload;
 
-                console.log('Signed in. POST to express here')
-                console.log(this.idToken)
-                console.log(this.profile)
+                // console.log('Signed in. POST to express here')
+                // console.log(this.idToken)
+                // console.log(this.profile)
 
-                const signUpUrl = `${window.apiHost}/users/login`
-                axios.defaults.headers.common['Authorization'] = `Bearer ${this.idToken}`;
+                // const signUpUrl = `${window.apiHost}/users/login`
+                // axios.defaults.headers.common['Authorization'] = `Bearer ${this.idToken}`;
 
                 // // Fail Case
                 // axios.defaults.headers.common['Authorization'] = `Bearer ${this.idToken}`.replace('d','b');
 
-                const axiosResponse = axios.post(signUpUrl, {
-                    token:this.idToken, 
-                    first: this.profile.given_name, 
-                    last: this.profile.family_name,
-                    email: this.profile.email
-                });
-                console.log('axiosResponse');
-                console.log(axiosResponse);
+                // const axiosResponse = axios.post(signUpUrl, {
+                //     token:this.idToken, 
+                //     first: this.profile.given_name, 
+                //     last: this.profile.family_name,
+                //     email: this.profile.email
+                // });
+                // console.log('axiosResponse');
+                // console.log(axiosResponse);
 
                 // localStorage['token'] = JSON.stringify(this.idToken);
                 // localStorage['first'] = JSON.stringify(this.profile.given_name);
@@ -65,7 +65,13 @@ class Auth {
 
                 // set the time that the id token will expire at
                 this.expiresAt = authResult.idTokenPayload.exp * 1000;
-                resolve();
+                resolve({
+                    token:this.idToken, 
+                    first: this.profile.given_name, 
+                    last: this.profile.family_name,
+                    email: this.profile.email,
+                    picture: this.profile.picture
+                });
             });
         })
     }
