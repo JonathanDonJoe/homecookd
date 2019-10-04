@@ -3,7 +3,6 @@ var router = express.Router();
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 
-
 const db = require('../db');
 
 const checkJwt = jwt({
