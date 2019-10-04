@@ -3,7 +3,6 @@ import auth_config from '../../config';
 import axios from 'axios';
 
 class Auth {
-  }
     constructor() {
         this.auth0 = new auth0.WebAuth(auth_config.auth);
 
@@ -77,7 +76,6 @@ class Auth {
         this.profile = null;
         this.expiresAt = null;
     }
->>>>>>> 5a268d6ae46500e9ce87023ca4a4eb252a3b93d3
 }
 
 const auth0Client = new Auth();
