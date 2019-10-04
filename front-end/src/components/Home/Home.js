@@ -50,7 +50,7 @@ class Home extends Component {
         })
     }
     render(){
-        return(
+        return(<>
             <div className="container-fluid">
                 <div className="row">
                     <div className="home col s12">
@@ -59,14 +59,24 @@ class Home extends Component {
                         </div>
                     </div>
                     <h1> {this.state.text}</h1>
-                    <div className='row'>
-                        <EventCard />
-                        <EventCard />
-                        <EventCard />
-                        <EventCard />
+                    </div>
+            </div>
+            <div className='upper-fold-text'>
+                {this.state.text}
+            </div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="events col s12">
+                        <div className='row'>
+                            <EventCard />
+                            <EventCard />
+                            <EventCard />
+                            <EventCard />
+                        </div>
                     </div>
                 </div>
             </div>
+            </>
         )
     }
 }

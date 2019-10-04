@@ -1,8 +1,8 @@
 .event-card-content{
     padding: 5px;
-    border: solid 2px black;
+    border: solid 2px green;
     border-radius: 10%;
-    background-color: gray;
+    background-color: #EBEBEB;
 }
 
 .food-hero{
@@ -12,14 +12,9 @@
     border-radius: 10%;
 
 }
-.tag-list-item{
-    background-color: slategray;
-    border-radius: 5%;
-    color: black !important
-}
-
-.info-list-item{
-    background-color: slategray;
+.tag-list-item, .info-list-item{
+    background-color: slategray;	    
+    background-color: #C9C9C9 ;
     border-radius: 5%;
     color: black !important
 }
