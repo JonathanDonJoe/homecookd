@@ -21,7 +21,11 @@ create table events (
     portions INTEGER not null,
     price FLOAT not null,
     tags VARCHAR (100) not null,
-    picture VARCHAR(200) DEFAULT '/images/events/default.png'
+    picture VARCHAR(200) DEFAULT '/images/events/default.png',
+    dine_in BOOLEAN DEFAULT FALSE,
+    pick_up BOOLEAN DEFAULT TRUE
+
+
 );
 
 DROP TABLE attendances;
@@ -30,7 +34,9 @@ create table attendances (
     id serial primary key,
     user_id integer REFERENCES users(id),
     event_id integer references events(id),
-    paid BOOLEAN DEFAULT FALSE
+    paid BOOLEAN DEFAULT FALSE,
+    -- True is dine-in, false is pick-up
+    type BOOLEAN
 );
 
 DROP TABLE host_reviews;

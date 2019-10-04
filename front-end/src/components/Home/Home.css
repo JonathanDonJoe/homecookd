@@ -8,7 +8,14 @@
     background-size: cover;
 }
 
-.h1{
+.upper-fold-text{
+    position: absolute;
+    top: 15vh !important;
+    left: 2vh;
+    height: 60vh;
+    width: 45vh;
     padding: 0px !important;
-    margin-top: 100px !important;
+    background-color: black;
+    color: white;
+    font-size: 7rem;
 }
