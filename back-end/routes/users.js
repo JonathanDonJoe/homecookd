@@ -3,6 +3,11 @@ var router = express.Router();
 
 const db = require('../db');
 
+router.post('/login', function (req, res) {
+    console.log('reached /users/login')
+    res.json(req.body)
+})
+
 router.post('/signup', function (req, res) {
     console.log('req.body: ')
     console.log(req.body)
