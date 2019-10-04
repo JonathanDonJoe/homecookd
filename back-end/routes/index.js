@@ -14,7 +14,7 @@ const checkJwt = jwt({
         jwksUri: `https://dev-ag0cp9dk.auth0.com/.well-known/jwks.json`
     }),
     audience: `1GhYuE5mUY005Y6imP9Auc2R7smNW848`,
-    issuer: `dev-ag0cp9dk.auth0.com`,
+    issuer: `https://dev-ag0cp9dk.auth0.com/`,
     algorithms: [`RS256`]
 })
 
