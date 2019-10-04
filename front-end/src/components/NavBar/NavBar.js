@@ -24,10 +24,10 @@ class NavBar extends Component {
                 <div className='row nav-row'>
                     <nav className='green'>
                         <div className='nav-wrapper'>
-                            <Link to='/' className='left site-title'><h3>HomeCook'd</h3></Link>
+                            <Link to='/' className='left site-title'>HomeCook'd</Link>
                             <ul id='nav-mobile' className='right'>
-                                <li><Link to='/host'><h5>Host a Meal</h5></Link></li>
-                                <li><Link to='/events'><h5>Events</h5></Link></li>
+                                <li><Link to='/host'>Host a Meal</Link></li>
+                                <li><Link to='/events'>Events</Link></li>
                                 {
                                     !auth0Client.isAuthenticated() &&
                                     <li className='nav-non-link' onClick={async ()=>{
@@ -37,7 +37,7 @@ class NavBar extends Component {
                                 }
                                 {
                                     !auth0Client.isAuthenticated() &&
-                                <li className='nav-non-link' onClick={auth0Client.signIn}><h5>Register</h5></li>
+                                <li className='nav-non-link' onClick={auth0Client.signIn}>Register</li>
                                 }
                             </ul>
                         </div>

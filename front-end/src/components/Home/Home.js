@@ -54,16 +54,20 @@ class Home extends Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="home col s12">
-                        <div className="upper-fold" style={{backgroundImage: `url(${this.state.imageLink})`}}>
-                        <SearchBar />
+                        <div className="upper-fold row" style={{backgroundImage: `url(${this.state.imageLink})`}}>
+                            <div className='upper-fold-content row'>
+                                <div className='upper-fold-text s12'>
+                                    <strong>{this.state.text}</strong>
+                                </div>
+                                <div className='upper-fold-search s12'>
+                                    <SearchBar />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <h1> {this.state.text}</h1>
-                    </div>
+                </div>
             </div>
-            <div className='upper-fold-text'>
-                {this.state.text}
-            </div>
+
             <div className="container-fluid">
                 <div className="row">
                     <div className="events col s12">
@@ -71,12 +75,11 @@ class Home extends Component {
                             <EventCard />
                             <EventCard />
                             <EventCard />
-                            <EventCard />
                         </div>
                     </div>
                 </div>
             </div>
-            </>
+        </>
         )
     }
 }

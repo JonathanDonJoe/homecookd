@@ -12,7 +12,7 @@ function App() {
         <Router>
             <div className='App'>
 				<Route path='/' component={NavBar} />
-				<Route path='/' component={ChatBar} />
+				<Route path='/users' component={ChatBar} />
 				<Route exact path='/' component={Home} />
 				<Route exact path='/callback' component={Callback} />
 				{/* <Route exact path='/events' component={Events} /> */}
