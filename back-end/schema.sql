@@ -2,7 +2,6 @@ DROP TABLE users;
 
 create table users (
     id serial primary key,
-    token VARCHAR(257) not null,
     first_name VARCHAR(30) not null,
     last_name VARCHAR(30) not null,
     email varchar(100) not null,

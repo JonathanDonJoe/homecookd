@@ -18,14 +18,14 @@ const checkJwt = jwt({
 })
 
 router.post('*', checkJwt, (req, res, next) => {
-    const { token, first_name, last_name, email, picture } = req.body;
-    console.log(req.body);
+    const email = req.body.email;
+    // console.log(req.body);
     // const token = req.body.token
-    console.log('index token: ')
-    console.log(token)
-    const getUserIdQuery = `SELECT id FROM users WHERE token = ?`;
+    console.log('index email: ')
+    console.log(email)
+    const getUserIdQuery = `SELECT id FROM users WHERE email = ?`;
 
-    db.query(getUserIdQuery, [token], (err, results) => {
+    db.query(getUserIdQuery, [email], (err, results) => {
         if (err) {
             throw err
         }

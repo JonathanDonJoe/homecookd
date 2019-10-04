@@ -30,7 +30,10 @@ class NavBar extends Component {
                                 <li><Link to='/events'><h5>Events</h5></Link></li>
                                 {
                                     !auth0Client.isAuthenticated() &&
-                                    <li className='nav-non-link' onClick={auth0Client.signIn}><h5>Log In</h5></li>
+                                    <li className='nav-non-link' onClick={async ()=>{
+                                        const result = await auth0Client.signIn()
+                                        console.log(result)
+                                    }}>Log In</li>
                                 }
                                 {
                                     !auth0Client.isAuthenticated() &&
