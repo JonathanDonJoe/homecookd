@@ -3,7 +3,7 @@ var router = express.Router();
 
 const db = require('../db');
 
-router.post('/')
+// router.post('/')
 
 
 /* GET users listing. */
