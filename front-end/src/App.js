@@ -7,6 +7,7 @@ import NavBar from './components/NavBar/NavBar';
 import Callback from './components/Auth/Callback';
 import ChatBar from './components/ChatBar/ChatBar';
 import EventCreate from './components/EventCreate/EventCreate';
+import Event from './components/Event/Event';
 
 function App() {
     return (
@@ -18,7 +19,7 @@ function App() {
 				<Route exact path='/callback' component={Callback} />				
 				<Route exact path='/host' component={EventCreate} />
 				{/* <Route exact path='/events' component={Events} /> */}
-				{/* <Route exact path='/register' component={RegisterPage} /> */}
+				<Route exact path='/events/event' component={Event} />
       		</div>
         </Router>
     );

@@ -1,0 +1,5 @@
+.map-hero{
+    height: 70vh !important;
+    background-size: cover;
+    background-image: url('https://developers.google.com/maps/solutions/images/storelocator_clothing.png')    
+}
