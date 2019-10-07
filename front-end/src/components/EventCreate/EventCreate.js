@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { DatePicker, TimePicker } from 'react-materialize';
+import { connect } from 'react-redux';
+
 import './EventCreate.css';
+
 
 export class EventCreate extends Component {
     state={
@@ -101,11 +104,29 @@ export class EventCreate extends Component {
         })
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+        console.log('hi')
+        const file = document.getElementById('picture-location').files[0];
+        console.log(file)
+
+        const data = new FormData()
+        data.append('locationImage', file);
+        // eslint-disable-next-line no-unused-vars
+        for (let key in this.state) {
+            data.append(key, this.state[key])
+            data.append('token', this.props.auth.uid);
+        }
+        console.log(data);
+        // this.props.hostHomeAction(data)
+
+    }
+
     render() {
         console.log(this.state.date);
         return (
 <div id="host-form" className="row">
-    <form className="col s12">
+    <form onSubmit={this.onSubmit} className="col s12">
       <div className="row">
         <div className="input-field col s6 offset-s3">
           <input value={this.state.title} onChange={this.changeTitle} maxLength={100} id="input_text" type="text" className="validate" />
@@ -202,14 +223,14 @@ export class EventCreate extends Component {
             </div>
             <div className="file-field input-field col s3">
             <label htmlFor='date' ></label>
-                <DatePicker type='text' id='date' placeholder='Date' className='datepicker' required onChange={this.changeDate} />
+                <DatePicker type='text' id='date' placeholder='Date' className='datepicker' onChange={this.changeDate} />
             </div>
         </div>
     <div className="row">
         <div className="file-field input-field col s6 offset-s3">
             <div className="btn">
                 <span>File</span>
-                <input type="file" value={this.state.picture} onChange={this.changePicture} />
+                <input id='picture-location' type="file" value={this.state.picture} onChange={this.changePicture} />
             </div>
             <div className="file-path-wrapper">
                 <input className="file-path validate" type="text" placeholder="Upload some food pics!!" />
@@ -229,4 +250,10 @@ export class EventCreate extends Component {
     }
 }
 
-export default EventCreate
+function mapStateToProps(state) {
+    return ({
+        auth: state.auth
+    })
+}
+
+export default connect(mapStateToProps, null)(EventCreate);
