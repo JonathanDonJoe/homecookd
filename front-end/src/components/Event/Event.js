@@ -9,16 +9,15 @@ export class Event extends Component {
     state = {
         event: {}
     }
-    // async componentDidMount(){
-    //     const eventId = this.props.match.params.eventId;
-    //     // console.log(abodeId);
-    //     const url = `${window.apiHost}/abode/${eventId}`
-    //     const axiosResponse = await axios.get(url)
-    //     // console.log(axiosResponse.data);
-    //     this.setState({
-    //         event: axiosResponse.data
-    //     })
-    // }
+    async componentDidMount(){
+        const eventId = this.props.match.params.eventId;
+        const url = `${window.apiHost}/events/${eventId}`
+        const axiosResponse = await axios.get(url)
+        this.setState({
+            event: axiosResponse.data
+        })
+        console.log(axiosResponse)
+    }
     render() {
         return (
             <div className='event-page container-fluid'>
