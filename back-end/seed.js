@@ -4,6 +4,7 @@ const db = require('./db');
 let seedData = [
     {   
         time: 8,
+
         address: `3150 Roswell Rd NW`, 
         zipcode: '00000',
         title: `Pizza Party in Buckhead`,
