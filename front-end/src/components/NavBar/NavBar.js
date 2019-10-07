@@ -28,7 +28,10 @@ class NavBar extends Component {
                             <ul id='nav-mobile' className='right'>
                                 <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events'>Events</Link></li>
-                                <li><Link to='/dashboard'>Dashboard</Link></li>
+                                {
+                                    auth0Client.isAuthenticated() &&
+                                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                                }
                                 {
                                     !auth0Client.isAuthenticated() &&
                                     <li className='nav-non-link' onClick={async ()=>{
