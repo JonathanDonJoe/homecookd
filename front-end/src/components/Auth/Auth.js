@@ -1,6 +1,5 @@
 import auth0 from 'auth0-js';
 import auth_config from '../../config';
-import axios from 'axios';
 
 class Auth {
     constructor() {
