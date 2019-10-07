@@ -18,6 +18,7 @@ class Callback extends Component {
   }
 
   render() {
+    console.log('callback ran')
     return (
       <p>Loading profile...</p>
     );
