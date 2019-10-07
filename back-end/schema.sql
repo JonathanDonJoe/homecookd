@@ -12,8 +12,9 @@ DROP TABLE events;
 
 create table events (
     id serial primary key,
-    time DATE not null,
+    time DATETIME not null,
     address VARCHAR(150) not null,
+    zipcode VARCHAR(5) not null,
     title VARCHAR(100) not null,
     description varchar(300) not null,
     host_id INTEGER REFERENCES users(id),
@@ -41,6 +42,7 @@ DROP TABLE host_reviews;
 create table host_reviews (
     id serial primary key,
     reviewer_id integer REFERENCES users(id),
+    reviewed_id integer REFERENCES users(id),
     event_id integer references events(id),
     stars integer CHECK (stars >= 1 AND stars <=5),
     title varchar(50) not null,

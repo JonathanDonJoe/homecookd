@@ -21,7 +21,7 @@ function App() {
 				<Route exact path='/dashboard' component={Dashboard} />		
 				<Route exact path='/host' component={EventCreate} />
 				{/* <Route exact path='/events' component={Events} /> */}
-				<Route exact path='/events/event' component={Event} />
+				<Route exact path='/events/:eventId' component={Event} />
       		</div>
         </Router>
     );
