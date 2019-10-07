@@ -5,17 +5,15 @@ export class EventImgTitle extends Component {
     render() {
         return (
             <div className='row'>
-                <div className='event-hero col s12 m4'>
+                <div className='event-hero col s12 m4' style={{backgroundImage: `url(../back-end${this.props.event.event_picture})`}}>
 
                 </div>
                 <div className='event-text col s12 m8'>
-                    <h3>Your Event Title Goes Here</h3>
+                    <h3>{this.props.event.event_title}</h3>
                     <p> 
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    {this.props.event.event_description}
                     </p>
-                    <button className='btn btn-primary'>Join</button>
+                    <button className='btn btn-primary'>Join for ${this.props.event.event_price}</button>
 
 
                 </div>
