@@ -6,8 +6,8 @@ export class EventInfoReviews extends Component {
     render() {
         return (
             <div className='event-info-reviews row'>
-                <EventInfo />
-                <EventReviews />         
+                <EventInfo event={this.props.event}/>
+                <EventReviews reviews={this.props.event.reviews} />         
             </div>
         )
     }
