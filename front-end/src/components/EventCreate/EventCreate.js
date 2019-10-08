@@ -9,10 +9,7 @@ import hostMealAction from '../../actions/hostMealAction';
 
 export class EventCreate extends Component {
     state={
-        time: {
-            hour: null,
-            minute: null
-        },
+        time: "",
         date: null,
         address: "",
         zipcode: "",
@@ -31,16 +28,23 @@ export class EventCreate extends Component {
         })
     } 
 
-    changeTime = (number1, number2) => {
-        console.log(number1);
-        console.log(number2)
-        this.setState({
-            time: {
-                hour: number1,
-                minute: number2
-            }
-        })
-    }
+    // changeTime = (number1, number2) => {
+    //     // console.log(number1);
+    //     // console.log(number2)
+    //     // this.setState({
+    //     //     time: {
+    //     //         hour: number1,
+    //     //         minute: number2
+    //     //     }
+    //     // })
+
+    //     const timepickerEl = document.querySelector('.timepicker')
+    //     console.log(timepickerEl.value)
+    //     this.setState({
+    //         time: timepickerEl.value
+    //     })
+
+    // }
 
     changeAddress = (e) => {
         this.setState({
@@ -112,6 +116,14 @@ export class EventCreate extends Component {
         const file = document.getElementById('picture-location').files[0];
         console.log(file)
 
+
+
+        const timepickerEl = document.querySelector('.timepicker')
+        console.log(timepickerEl.value)
+        this.setState({
+            time: timepickerEl.value
+        }, () => {
+            
         const data = new FormData()
         data.append('locationImage', file);
         // eslint-disable-next-line no-unused-vars
@@ -124,13 +136,18 @@ export class EventCreate extends Component {
         console.log(data);
         this.props.hostMeal(data, this.props.auth.token)
 
+        })
     }
 
+    
+
     render() {
-        // console.log(this.state);
-        // console.log(this.state.price);
+        console.log(this.state);
+        console.log(this.state.time);
+        console.log(this.state.date);
         // console.log(this.state.portions);
         // console.log(this.props.auth);
+
         return (
 <div id="host-form" className="row">
     <form onSubmit={this.onSubmit} className="col s12">
@@ -226,7 +243,7 @@ export class EventCreate extends Component {
     </div>
         <div className="row">
             <div className="file-field input-field col s3 offset-s3">
-                <TimePicker type="text" className="timepicker" placeholder="What time?" onChange={this.changeTime}/>
+                <TimePicker type="text" className="timepicker" placeholder="What time?" />
             </div>
             <div className="file-field input-field col s3">
             <label htmlFor='date' ></label>
