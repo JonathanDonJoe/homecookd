@@ -14,7 +14,8 @@ router.post('/login', function (req, res) {
             first,
             last,
             email,
-            picture
+            picture,
+            token
         })
     } else if (!res.locals.loggedIn) {
         const insertUserQuery = `
@@ -33,7 +34,8 @@ router.post('/login', function (req, res) {
                 first,
                 last,
                 email,
-                picture
+                picture,
+                token
             })
         })
     }
