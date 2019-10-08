@@ -1,4 +1,7 @@
 .event-hero{
     background-size: cover;
     height: 35vh;
+    background-color: black;
+    background-position: center;
+
 }

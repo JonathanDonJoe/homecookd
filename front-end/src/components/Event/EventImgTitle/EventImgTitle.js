@@ -5,13 +5,14 @@ import './EventImgTitle.css'
 
 export class EventImgTitle extends Component {
     render() {
+        console.log(this.props.event.event_picture);
         return (
             <div className='row'>
                 <div className='event-hero col s12 m4' 
-                // style={{backgroundImage: `url(../back-end${this.props.event.event_picture})`}}
+                style={{backgroundImage: `url(${window.apiHost}${this.props.event.event_picture})`}}
                 >
 
-                </div> */}
+                </div>
                 <div className='event-text col s12 m8'>
                     <h3>{this.props.event.event_title}</h3>
                     <p> 
