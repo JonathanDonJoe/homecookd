@@ -11,7 +11,7 @@ export class EventImgTitle extends Component {
                 // style={{backgroundImage: `url(../back-end${this.props.event.event_picture})`}}
                 >
 
-                </div> */}
+                </div>
                 <div className='event-text col s12 m8'>
                     <h3>{this.props.event.event_title}</h3>
                     <p> 
