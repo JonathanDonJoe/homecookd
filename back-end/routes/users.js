@@ -14,7 +14,8 @@ router.post('/login', function (req, res) {
             first,
             last,
             email,
-            picture
+            picture,
+            token
         })
     } else if (!res.locals.loggedIn) {
         const insertUserQuery = `
@@ -22,23 +23,40 @@ router.post('/login', function (req, res) {
             (first_name, last_name, email, picture)
         VALUES (?, ?, ?, ?)
         `
+        const gimmeReviewQuery = `
+        INSERT INTO host_reviews
+            (reviewed_id, stars, title, review)
+        VALUES (?, ?, ?, ?)
+        `
+
         db.query(insertUserQuery, [first, last, email, picture], (err2, results, fields) => {
             if (err2) {
                 throw err2
             }
             console.log(results)
+            let reviewQueryArray =[
+                results.insertId,
+                5,
+                `Thank You!`,
+                `As a gift for joing Homecooked, we start our users off with a 5 star review. We know they will live up to it!`
+            ]
+            db.query(gimmeReviewQuery, reviewQueryArray, (err3) => {
+                if (err3) {
+                    throw err3
+                }
+            })
             res.json({
                 msg: 'userAdded',
                 user_id: results.insertId,
                 first,
                 last,
                 email,
-                picture
+                picture,
+                token
             })
         })
     }
 })
-
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
