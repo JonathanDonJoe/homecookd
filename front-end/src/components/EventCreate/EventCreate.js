@@ -127,7 +127,9 @@ export class EventCreate extends Component {
     }
 
     render() {
-        console.log(this.state);
+        // console.log(this.state);
+        // console.log(this.state.price);
+        // console.log(this.state.portions);
         // console.log(this.props.auth);
         return (
 <div id="host-form" className="row">
@@ -154,7 +156,7 @@ export class EventCreate extends Component {
     </div>
     <div className="row">        
         <div className="input-field col s2 offset-s3">
-        <select className="browser-default">
+        <select className="browser-default" value={this.state.portions} onChange={this.changePortions}>
             <option value="">How many servings?</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -175,7 +177,7 @@ export class EventCreate extends Component {
         </select>
         </div>
         <div className="input-field col s2">
-        <select className="browser-default">
+        <select className="browser-default" value={this.state.price} onChange={this.changePrice}>
             <option value="">Price per plate?</option>
             <option value="1">1</option>
             <option value="1.50">$1.50</option>
