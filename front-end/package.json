@@ -8,6 +8,7 @@
     "dotenv": "^8.1.0",
     "firebase": "^6.6.2",
     "materialize-css": "^1.0.0-rc.2",
+    "moment-timezone": "^0.5.26",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-materialize": "^3.4.1",

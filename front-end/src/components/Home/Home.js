@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Home.css'
+import axios from 'axios'
 
 
 import { connect } from 'react-redux';
@@ -12,11 +13,13 @@ class Home extends Component {
     
     state = {
         imageLink : '',
-        text: ''
+        text: '',
+        events: []
     };
 
-    componentDidMount(){
-
+    async componentDidMount(){
+        const url = `${window.apiHost}/events/`
+        const axiosResponse = await axios.get(url)
         let d = new Date()
         let time = d.getHours()
         let picLink = ''
@@ -46,10 +49,17 @@ class Home extends Component {
         }
         this.setState({
             imageLink : picLink,
-            text: text
+            text: text,
+            events: axiosResponse.data
         })
     }
+
     render(){
+        const Events = this.state.events.map((event,i)=>{
+            return(
+                        <EventCard key={i} event={event}/>
+                    )
+        })
         return(<>
             <div className="container-fluid">
                 <div className="row">
@@ -72,9 +82,7 @@ class Home extends Component {
                 <div className="row">
                     <div className="events col s12">
                         <div className='row'>
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
+                            {Events}
                         </div>
                     </div>
                 </div>

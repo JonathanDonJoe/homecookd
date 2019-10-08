@@ -4,8 +4,8 @@
 
 .food-hero{
     height: 240px !important;
-    background-image: url('https://i.redd.it/pu0mz1l9ruk31.jpg');
     background-size: cover;
+    background-position: center;
 
 }
 .tag-list-item, .info-list-item{

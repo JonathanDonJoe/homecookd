@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DatePicker, TimePicker } from 'react-materialize';
 import { connect } from 'react-redux';
-import { bindActionCreators } from '../../../../../../../Library/Caches/typescript/3.6/node_modules/redux';
+import { bindActionCreators } from 'redux';
 
 import './EventCreate.css';
 import hostMealAction from '../../actions/hostMealAction';
