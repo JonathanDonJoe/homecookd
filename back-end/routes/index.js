@@ -1,11 +1,11 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const multer = require('multer');
 const upload = multer( { dest: './public/images/' });
 
-const db = require('../db');
+const db = require("../db");
 
 router.post('*', upload.single('locationImage'), (req, res, next) => {
     console.log(req.body)
@@ -13,24 +13,24 @@ router.post('*', upload.single('locationImage'), (req, res, next) => {
 })
 
 const checkJwt = jwt({
-    secret: jwksRsa.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: `https://dev-ag0cp9dk.auth0.com/.well-known/jwks.json`
-    }),
-    audience: `1GhYuE5mUY005Y6imP9Auc2R7smNW848`,
-    issuer: `https://dev-ag0cp9dk.auth0.com/`,
-    algorithms: [`RS256`]
-})
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://dev-ag0cp9dk.auth0.com/.well-known/jwks.json`
+  }),
+  audience: `1GhYuE5mUY005Y6imP9Auc2R7smNW848`,
+  issuer: `https://dev-ag0cp9dk.auth0.com/`,
+  algorithms: [`RS256`]
+});
 
-router.post('*', checkJwt, (req, res, next) => {
-    const email = req.body.email;
-    // console.log(req.body);
-    // const token = req.body.token
-    console.log('index email: ')
-    console.log(email)
-    const getUserIdQuery = `SELECT id FROM users WHERE email = ?`;
+router.post("*", checkJwt, (req, res, next) => {
+  const email = req.body.email;
+  // console.log(req.body);
+  // const token = req.body.token
+  console.log("index email: ");
+  console.log(email);
+  const getUserIdQuery = `SELECT id FROM users WHERE email = ?`;
 
     db.query(getUserIdQuery, [email], (err, results) => {
         if (err) {
@@ -53,8 +53,8 @@ router.post('*', checkJwt, (req, res, next) => {
 })
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    res.send('Get Request');
+router.get("/", function(req, res, next) {
+  res.send("Get Request");
 });
 
 module.exports = router;

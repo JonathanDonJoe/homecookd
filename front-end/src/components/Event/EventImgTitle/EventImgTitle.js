@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import EventPayment from '../../EventPayment/EventPayment';
 import './EventImgTitle.css'
 
 export class EventImgTitle extends Component {
@@ -16,14 +18,19 @@ export class EventImgTitle extends Component {
                     <p> 
                     {this.props.event.event_description}
                     </p>
-                    <button className='btn btn-primary'>Join for ${this.props.event.event_price}</button>
-
+                    <EventPayment event={this.props.event}/>
 
                 </div>
                 
             </div>
         )
     }
+}
+
+function mapStateToProps(state) {
+    return ({
+        auth: state.auth
+    })
 }
 
 export default EventImgTitle
