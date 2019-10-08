@@ -64,7 +64,7 @@ router.get('/events/:eventId',(req, res)=>{
     users.picture AS users_picture, host_reviews.title AS review_title, host_reviews.review AS review_content, 
     host_reviews.stars AS review_stars, host_reviews.reviewed_id AS reviewed_id
     FROM events, users, host_reviews
-    WHERE events.host_id = users.id and users.id = host_reviews.reviewed_id and events.host_id = 1 and events.id = 1;
+    WHERE events.host_id = users.id and users.id = host_reviews.reviewed_id and events.id = ?;
     `
     db.query(getEventQuery,[eventId],(err, result)=>{
       if(err) throw err;

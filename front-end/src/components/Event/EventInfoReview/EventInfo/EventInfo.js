@@ -13,7 +13,7 @@ export class EventInfo extends Component {
                 <h6>Hosted By:</h6>
                 <h6>{this.props.event.event.users_name}</h6>
                 <img className='host-image' src={this.props.event.event.users_picture}/>
-                <h6>{this.props.event.stars} ★</h6>
+                <h6>{this.props.event.stars} ★ ({this.props.event.reviews.length})</h6>
                 <ul>
                     <li>Start Time: {this.props.event.event.event_time}</li>
                     <li>Dine-In? {answer}</li>
