@@ -34,6 +34,7 @@ export class EventCreate extends Component {
     changeTime = (number1, number2) => {
         console.log(number1);
         console.log(number2)
+        console.log(this.state.time);
         this.setState({
             time: {
                 hour: number1,
