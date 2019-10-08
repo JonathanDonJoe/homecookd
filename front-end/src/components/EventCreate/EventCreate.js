@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { DatePicker, TimePicker } from 'react-materialize';
 import { connect } from 'react-redux';
+import { bindActionCreators } from '../../../../../../../Library/Caches/typescript/3.6/node_modules/redux';
 
 import './EventCreate.css';
+import hostMealAction from '../../actions/hostMealAction';
 
 
 export class EventCreate extends Component {
@@ -115,15 +117,18 @@ export class EventCreate extends Component {
         // eslint-disable-next-line no-unused-vars
         for (let key in this.state) {
             data.append(key, this.state[key])
-            data.append('token', this.props.auth.uid);
         }
+        data.append('user_id', this.props.auth.user_id);
+        data.append('token', this.props.auth.token);
+        console.log(this.props.auth.token);
         console.log(data);
-        // this.props.hostHomeAction(data)
+        this.props.hostMeal(data, this.props.auth.token)
 
     }
 
     render() {
         console.log(this.state.date);
+        console.log(this.props.auth);
         return (
 <div id="host-form" className="row">
     <form onSubmit={this.onSubmit} className="col s12">
@@ -256,4 +261,10 @@ function mapStateToProps(state) {
     })
 }
 
-export default connect(mapStateToProps, null)(EventCreate);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        hostMeal: hostMealAction
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventCreate);

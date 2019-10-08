@@ -2,8 +2,15 @@ var express = require('express');
 var router = express.Router();
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
+const multer = require('multer');
+const upload = multer( { dest: './public/images/' });
 
 const db = require('../db');
+
+router.post('*', upload.single('locationImage'), (req, res, next) => {
+    console.log(req.body)
+    next();
+})
 
 const checkJwt = jwt({
     secret: jwksRsa.expressJwtSecret({
@@ -44,6 +51,9 @@ router.post('*', checkJwt, (req, res, next) => {
         next();
     })
 })
+
+
+
 router.get('/events/:eventId',(req, res)=>{
     const eventId = req.params.eventId;
     const getEventQuery = `
@@ -58,6 +68,7 @@ router.get('/events/:eventId',(req, res)=>{
     `
     db.query(getEventQuery,[eventId],(err, result)=>{
       if(err) throw err;
+      console.log(result)
       res.json(result)
     })
   })
