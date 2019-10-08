@@ -80,9 +80,9 @@ export class EventCreate extends Component {
     }
 
     changeTags = (e) => {
-           var chip = {
-               tag: e.target.value
-           }
+        //    var chip = {
+        //        tag: e.target.value
+        //    }
         this.setState({
             tags: e.target.value
         })
@@ -96,13 +96,13 @@ export class EventCreate extends Component {
 
     changeDineIn = (e) => {
         this.setState({
-            dineIn: e.target.value
+            dineIn: e.target.checked
         })
     }
 
     changePickUp = (e) => {
         this.setState({
-            pickUp: e.target.value
+            pickUp: e.target.checked
         })
     }
 
@@ -127,8 +127,8 @@ export class EventCreate extends Component {
     }
 
     render() {
-        console.log(this.state.date);
-        console.log(this.props.auth);
+        console.log(this.state);
+        // console.log(this.props.auth);
         return (
 <div id="host-form" className="row">
     <form onSubmit={this.onSubmit} className="col s12">
