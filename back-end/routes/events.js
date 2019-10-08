@@ -9,10 +9,32 @@ router.post('/hostMeal', function (req, res, next) {
     console.log(req.file)
     const newFilePath = req.file.destination + Date.now() + req.file.originalname;
     console.log(newFilePath);
-    const filePathForDb = newFilePath.slice(8);
-    console.log(filePathForDb);
+    const picture = newFilePath.slice(8);
+    console.log(picture);
     fs.rename(req.file.path, newFilePath, (err) => { if (err) throw err });
-    res.send('respond with a resource')
+
+    const {time, date, address, zipcode, title, description, user_id, portions, price, dineIn, pickUp} = req.body
+    const dbTime ='2019-10-07 23:04:53'
+    const tags = ''
+
+
+    const insertEventQuery = `
+        INSERT INTO events
+        (time, address, zipcode, title, description, host_id, portions, price, tags, picture, dine_in, pick_up)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `
+    const dine_in = dineIn === 'false' ? false : true
+    const pick_up = pickUp === 'false' ? false : true
+    
+    const dbValues = [dbTime, address, zipcode, title, description, user_id, portions, price, tags, picture, dine_in, pick_up];
+
+    db.query(insertEventQuery, dbValues, (err) => {
+        if (err) throw err;
+        res.json( {
+            msg: 'eventCreated'
+        })
+    })
+
 })
 
 

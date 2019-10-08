@@ -3,7 +3,7 @@ var router = express.Router();
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const multer = require('multer');
-const upload = multer( { dest: './public/images/' });
+const upload = multer( { dest: './public/images/events/' });
 
 const db = require('../db');
 
