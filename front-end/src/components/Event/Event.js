@@ -33,7 +33,7 @@ export class Event extends Component {
     render() {
         return (
             <div className='event-page container-fluid'>
-                <EventImgTitle event={this.state.event}/>
+                <EventImgTitle event={this.state.event} history={this.props.history} />
                 <EventInfoReviews event={this.state}/>
                 {/* <GoogleMap />             */}
             </div>

@@ -3,6 +3,8 @@ var router = express.Router();
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const multer = require('multer');
+const config = require('../config')
+var stripe = require('stripe')(config.stripe)
 const upload = multer( { dest: './public/images/events/' });
 
 const db = require("../db");
@@ -56,5 +58,40 @@ router.post("*", checkJwt, (req, res, next) => {
 router.get("/", function(req, res, next) {
   res.send("Get Request");
 });
+
+router.post('/payment/stripe', (req, res) => {
+    console.log(req.body);
+    // res.json(req.body)
+    if(!res.locals.loggedIn) {
+        res.json({
+            msg:'badToken'
+        })
+        return;
+    }
+    const { stripeToken, amount, email, event_id } = req.body;
+    stripe.charges.create({
+        amount,
+        currency: 'usd',
+        source: stripeToken,
+        description: `Charges for ${email}`
+    }, (err, charge) => {
+        if (err)  {
+          throw err
+            res.json({
+                msg: 'errorProcessing'
+            });
+        } else {
+            const insertAttendingQuery = `
+                INSERT INTO attendances 
+                    (user_id, event_id, paid, dine_in, take_out)
+                VALUES
+                    (?, ?, ?, ?, ?)`
+            db.query( insertAttendingQuery, [res.locals.user_id, 1, event_id, 1, 1]);
+            res.json({
+                msg:'paymentSuccess'
+            })
+        }
+    })
+})
 
 module.exports = router;
