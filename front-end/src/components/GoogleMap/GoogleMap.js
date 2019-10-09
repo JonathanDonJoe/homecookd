@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react';
 import { GoogleApiWrapper, Map, InfoWindow, Marker, Circle } from 'google-maps-react';
+import { googleApiKey } from '../../config'
+
 
 export class MapContainer extends Component {
   state = {
@@ -52,7 +54,7 @@ render() {
         onClose={this.onClose}
       >
         <div>
-          <a href='https://www.google.com/maps/dir//3150+Roswell+Rd+NW,+Atlanta,+GA+30305/'><h4>Big Summer Blowout</h4></a>
+          <a href='https://www.google.com/maps/dir//3151+Roswell+Rd+NW,+Atlanta,+GA+30305/'><h4>Big Summer Blowout</h4></a>
         </div>
       </InfoWindow>
     </Map>
@@ -61,7 +63,7 @@ render() {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDkza9FbkxpbYN5u7ZmXpkQJx5NKtm1u9s'
+  apiKey: googleApiKey
 })(MapContainer);
 
 // import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
@@ -121,5 +123,5 @@ export default GoogleApiWrapper({
 // }
 
 // export default GoogleApiWrapper({
-//   apiKey: 'AIzaSyDkza9FbkxpbYN5u7ZmXpkQJx5NKtm1u9s'
+//   apiKey: googleApiKey
 // })(MapContainer);
