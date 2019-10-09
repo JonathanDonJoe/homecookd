@@ -15,7 +15,7 @@ export class Event extends Component {
         const eventId = this.props.match.params.eventId;
         const url = `${window.apiHost}/events/${eventId}`
         const axiosResponse = await axios.get(url)
-        console.log(axiosResponse)
+        // console.log(axiosResponse)
         let starCount = 0
         let reviews = []
         axiosResponse.data.forEach((arr,i)=>{

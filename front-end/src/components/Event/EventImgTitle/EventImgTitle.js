@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import EventPayment from '../../EventPayment/EventPayment';
 import './EventImgTitle.css'
 
 export class EventImgTitle extends Component {
     render() {
-        console.log(this.props.event.event_picture);
+        // console.log(this.props.event.event_picture);
         return (
             <div className='row'>
                 <div className='event-hero col s12 m4' 
@@ -27,10 +27,10 @@ export class EventImgTitle extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return ({
-        auth: state.auth
-    })
-}
+// function mapStateToProps(state) {
+//     return ({
+//         auth: state.auth
+//     })
+// }
 
 export default EventImgTitle
