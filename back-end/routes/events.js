@@ -97,6 +97,22 @@ router.get('/', function (req, res, next) {
     })
 })
 
+router.post('/getUserEvents', (req, res) => {
+    console.log(res.locals.uid)
+    const getUserEventsQuery = `
+        SELECT *
+        FROM events, attendances
+        WHERE events.id = attendances.event_id
+            AND user_id = ?
+    `
+
+    db.query(getUserEventsQuery, [res.locals.uid], (err, result) => {
+        if (err) throw err;
+        console.log('result')
+        console.log(result)
+        res.json(result)
+    })
+})
 
 router.get('/:eventId', (req, res) => {
     const eventId = req.params.eventId;

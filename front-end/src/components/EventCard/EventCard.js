@@ -23,7 +23,7 @@ export class EventCard extends Component {
         //2019-10-08T15:25:26.366Z
         let date = `${t[5]}${t[6]}/${t[8]}${t[9]}/${t[2]}${t[3]}`
         return (
-            <Link to={`/events/${this.props.event.id}`}>
+            <Link to={`/events/${this.props.event_id}`}>
                 <div className='event-card col s6 m4 l4'>
                     <div className='event-card-content'>
                         <div className='food-hero col s12'

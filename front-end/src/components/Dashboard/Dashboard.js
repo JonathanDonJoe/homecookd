@@ -1,15 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
+import axios from 'axios';
 
 import EventCard from '../EventCard/EventCard';
 import './Dashboard.css'
 
 class Dashboard extends Component {
-    // state = {
+    state = {
+        events: []
+    }
 
-    // }
+    async componentDidMount() {
+        console.log(this.props.auth)
+        const url = `${window.apiHost}/events/getUserEvents`
+        const axiosResponse = await axios.post(url, this.props.auth)
+        this.setState({
+            events: axiosResponse.data
+        })
+    }
+
     render() {
+        console.log(this.state.events)
+
+        const hostingEvents = []
+        const attendingEvents = []
+        console.log(this.props.auth.user_id)
+        this.state.events.forEach( (event, i) => {
+            console.log(event.host_id)
+            if (event.host_id === this.props.auth.user_id) {
+                hostingEvents.push(<EventCard key={i} event={event} event_id={event.event_id} />)
+            } else {
+                attendingEvents.push(<EventCard key={i} event={event} event_id={event.event_id}  />)
+            }
+        })
+
+
+        // const hostedEvents = this.state.events.map((event, i) => {
+        //     return (
+        //         <EventCard key={i} event={event} />
+        //     )
+        // })
         return (
             <section className="container dash-container green lighten-3">
                 <div className='row'>
@@ -23,22 +54,13 @@ class Dashboard extends Component {
                         <div className="divider"></div>
                         <div className="section row">
                             <h2>Hosted Events</h2>
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
+                            {hostingEvents}
                         </div>
 
                         <div className="divider"></div>
                         <div className="section">
                             <h2>Attending Events</h2>
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
+                            {attendingEvents}
                         </div>
                     </section>
                 </div>
@@ -59,7 +81,7 @@ function mapStateToProps(state) {
 //     })
 // }
 
-export default connect(mapStateToProps, 
+export default connect(mapStateToProps,
     // mapDispatchToProps
     null
-    )(Dashboard);
+)(Dashboard);
