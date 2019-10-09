@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Event.css'
 import EventImgTitle from './EventImgTitle/EventImgTitle'
 import EventInfoReviews from './EventInfoReview/EventInfoReviews'
-import EventMap from '../EventMap/EventMap'
+import GoogleMap from '../GoogleMap/GoogleMap'
 import axios from 'axios'
 
 export class Event extends Component {
@@ -35,7 +35,7 @@ export class Event extends Component {
             <div className='event-page container-fluid'>
                 <EventImgTitle event={this.state.event}/>
                 <EventInfoReviews event={this.state}/>
-                <EventMap event={this.state.event}/>            
+                {/* <GoogleMap />             */}
             </div>
         )
     }
