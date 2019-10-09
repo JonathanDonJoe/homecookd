@@ -54,7 +54,7 @@ INSERT INTO events
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 `
 let date = new Date();
-date.setHours(date.getHours() + 8)
+date.setHours(date.getHours() + 1000)
 seedData.forEach((arr,i)=>{
     let dbValues = [date, arr.address, arr.zipcode, arr.title, arr.description, arr.host_id, arr.portions,
          arr.price, arr.tags, arr.dine_in, arr.pick_up]

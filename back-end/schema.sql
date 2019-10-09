@@ -33,8 +33,8 @@ create table attendances (
     user_id integer REFERENCES users(id),
     event_id integer references events(id),
     paid BOOLEAN DEFAULT FALSE,
-    -- True is dine-in, false is pick-up
-    type BOOLEAN
+    dine_in BOOLEAN,
+    pick_up BOOLEAN
 );
 
 DROP TABLE host_reviews;
