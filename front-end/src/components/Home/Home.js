@@ -24,7 +24,6 @@ class Home extends Component {
         let time = d.getHours()
         let picLink = ''
         let text = ''
-        console.log(time)
         switch (true) {
             case (time < 5 || time >= 22):
                 picLink = 'https://marvel-cdn.bc0a.com/Campbellsoup/s3.amazonaws.com/origin.www.cscassets.com/recipes/wide_cknew/wide_61905.jpg'
@@ -57,7 +56,6 @@ class Home extends Component {
     render() {
         
         const events = this.state.events.map((event, i) => {
-            console.log(event)
             return (
                 <EventCard key={i} event={event} event_id={event.id}/>
             )

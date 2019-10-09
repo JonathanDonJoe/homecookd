@@ -53,7 +53,6 @@ export class EventCreate extends Component {
     }
 
     changeZipcode = (code) => {
-        console.log(code);
         this.setState({
             zipcode: code.target.value
         })
@@ -112,14 +111,13 @@ export class EventCreate extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('hi')
         const file = document.getElementById('picture-location').files[0];
-        console.log(file)
+        // console.log(file)
 
 
 
         const timepickerEl = document.querySelector('.timepicker')
-        console.log(timepickerEl.value)
+        // console.log(timepickerEl.value)
         this.setState({
             time: timepickerEl.value
         }, () => {
@@ -132,8 +130,8 @@ export class EventCreate extends Component {
         }
         data.append('user_id', this.props.auth.user_id);
         data.append('token', this.props.auth.token);
-        console.log(this.props.auth.token);
-        console.log(data);
+        // console.log(this.props.auth.token);
+        // console.log(data);
         this.props.hostMeal(data, this.props.auth.token)
 
         })
@@ -142,9 +140,9 @@ export class EventCreate extends Component {
     
 
     render() {
-        console.log(this.state);
-        console.log(this.state.time);
-        console.log(this.state.date);
+        // console.log(this.state);
+        // console.log(this.state.time);
+        // console.log(this.state.date);
         // console.log(this.state.portions);
         // console.log(this.props.auth);
 
