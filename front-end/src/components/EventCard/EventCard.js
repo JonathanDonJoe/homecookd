@@ -7,20 +7,25 @@ export class EventCard extends Component {
     render() {
         console.log(this.props.event.time)
         // Split timestamp into [ Y, M, D, h, m, s ]
+
         // var t = this.props.event.time.split(/[- :]/);
         // t[2] = t[2].split('T')[0]
         // t[4] = t[4].split('.')[0]
 
         // Apply each element to the Date function
         // var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4]));
+      
         let answer = ''
-        if(this.props.event.dine_in == 1){
+        if(this.props.event.dine_in === 1){
             answer='YES'
         }else{answer='NO'}
         // -> Wed Jun 09 2010 14:12:01 GMT+0100 (BST)
         //2019-10-08T15:25:26.366Z
+
+        let date = `${t[5]}${t[6]}/${t[8]}${t[9]}/${t[2]}${t[3]}`
+        
         return (
-            <Link to={`/events/${this.props.event.id}`}>
+            <Link to={`/events/${this.props.event_id}`}>
                 <div className='event-card col s6 m4 l4'>
                     <div className='event-card-content'>
                         <div className='food-hero col s12'

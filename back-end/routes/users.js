@@ -3,6 +3,7 @@ var router = express.Router();
 
 const db = require('../db');
 
+/* POST events listing. */
 router.post('/login', function (req, res) {
     console.log('reached /users/login')
     console.log(req.body)
@@ -57,6 +58,7 @@ router.post('/login', function (req, res) {
         })
     }
 })
+
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {

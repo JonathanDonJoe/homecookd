@@ -4,6 +4,7 @@ const fs = require('fs');
 
 const db = require('../db');
 
+/* POST events listing. */
 router.post('/hostMeal', function (req, res, next) {
     // console.log(req.body)
     // console.log(req.file)
@@ -13,7 +14,7 @@ router.post('/hostMeal', function (req, res, next) {
     // console.log(picture);
     fs.rename(req.file.path, newFilePath, (err) => { if (err) throw err });
 
-    const {time, date, address, zipcode, title, description, user_id, portions, price, dineIn, pickUp} = req.body
+    const { time, date, address, zipcode, title, description, user_id, portions, price, dineIn, pickUp } = req.body
     // const dbTime ='2019-10-07 23:04:53'
 
     // YYYY-MM-DD hh:mm:ss'
@@ -29,15 +30,15 @@ router.post('/hostMeal', function (req, res, next) {
     // console.log('month')
     // console.log(months.indexOf(date.slice(4,7)) + 1)
 
-    let datetimeYear = date.slice(11,15)
-    let datetimeMonth = months.indexOf(date.slice(4,7)) + 1
-    let datetimeDay = date.slice(8,10)
+    let datetimeYear = date.slice(11, 15)
+    let datetimeMonth = months.indexOf(date.slice(4, 7)) + 1
+    let datetimeDay = date.slice(8, 10)
 
-    let datetimeHour = time.slice(0,2)
-    let datetimeMinute = time.slice(3,5)
+    let datetimeHour = time.slice(0, 2)
+    let datetimeMinute = time.slice(3, 5)
 
-    if (time.slice(6,8) === 'PM') {
-        newDatetimeHour = parseInt(datetimeHour) + 12 
+    if (time.slice(6, 8) === 'PM') {
+        newDatetimeHour = parseInt(datetimeHour) + 12
     } else {
         newDatetimeHour = datetimeHour
     }
@@ -54,17 +55,28 @@ router.post('/hostMeal', function (req, res, next) {
     const insertEventQuery = `
         INSERT INTO events
         (time, address, zipcode, title, description, host_id, portions, price, tags, picture, dine_in, pick_up)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         `
     const dine_in = dineIn === 'false' ? false : true
     const pick_up = pickUp === 'false' ? false : true
 
     const dbValues = [dbTime, address, zipcode, title, description, user_id, portions, price, tags, picture, dine_in, pick_up];
 
-    db.query(insertEventQuery, dbValues, (err) => {
+    db.query(insertEventQuery, dbValues, (err, resp) => {
         if (err) throw err;
-        res.json( {
-            msg: 'eventCreated'
+        // console.log(resp)
+        const insertAttendanceQuery = `
+            INSERT INTO attendances
+            (user_id, event_id, paid, dine_in, pick_up)
+            VALUES (?, ?, ?, ?, ?);
+        `
+        insertAttendanceQueryValues = [parseInt(user_id), resp.insertId, false, 0, 0]
+        console.log(insertAttendanceQueryValues)
+        db.query(insertAttendanceQuery, insertAttendanceQueryValues, (err) => {
+            if (err) throw err;
+            res.json({
+                msg: 'eventCreated'
+            })
         })
     })
 
@@ -74,18 +86,35 @@ router.post('/hostMeal', function (req, res, next) {
 /* GET events listing. */
 router.get('/', function (req, res, next) {
     const getEventQuery = `
-    SELECT * 
-    FROM events
-    WHERE time > CURRENT_TIMESTAMP ;
+        SELECT * 
+        FROM events
+        WHERE time > CURRENT_TIMESTAMP ;
     `
-    db.query(getEventQuery,(err, result)=>{
-      if(err) throw err;
-      console.log(result)
-      res.json(result)
+    db.query(getEventQuery, (err, result) => {
+        if (err) throw err;
+        console.log(result)
+        res.json(result)
     })
-  })
+})
 
-router.get('/:eventId',(req, res)=>{
+router.post('/getUserEvents', (req, res) => {
+    console.log(res.locals.uid)
+    const getUserEventsQuery = `
+        SELECT *
+        FROM events, attendances
+        WHERE events.id = attendances.event_id
+            AND user_id = ?
+    `
+
+    db.query(getUserEventsQuery, [res.locals.uid], (err, result) => {
+        if (err) throw err;
+        console.log('result')
+        console.log(result)
+        res.json(result)
+    })
+})
+
+router.get('/:eventId', (req, res) => {
     const eventId = req.params.eventId;
     const getEventQuery = `
     SELECT events.id AS event_id, events.address AS event_address, events.description AS event_description, 
@@ -97,12 +126,12 @@ router.get('/:eventId',(req, res)=>{
     FROM events, users, host_reviews
     WHERE events.host_id = users.id and users.id = host_reviews.reviewed_id and events.id = ?;
     `
-    db.query(getEventQuery,[eventId],(err, result)=>{
-      if(err) throw err;
-      console.log(result)
-      res.json(result)
+    db.query(getEventQuery, [eventId], (err, result) => {
+        if (err) throw err;
+        console.log(result)
+        res.json(result)
     })
-  })
+})
 
 
 module.exports = router;
