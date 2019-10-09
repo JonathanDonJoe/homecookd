@@ -1,0 +1,11 @@
+.image{
+    width: 30vw;
+}
+
+#close-modal{
+    margin-top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}

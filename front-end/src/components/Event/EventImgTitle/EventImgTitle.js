@@ -18,7 +18,7 @@ export class EventImgTitle extends Component {
                     <p> 
                     {this.props.event.event_description}
                     </p>
-                    <EventPayment event={this.props.event}/>
+                    <EventPayment event={this.props.event} history={this.props.history}/>
 
                 </div>
                 

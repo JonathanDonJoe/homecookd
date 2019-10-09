@@ -5,15 +5,16 @@ import { Link } from 'react-router-dom';
 
 export class EventCard extends Component {
     render() {
+        console.log(this.props.event.time)
         // Split timestamp into [ Y, M, D, h, m, s ]
-        var t = this.props.event.time.split(/[- :]/);
-        // console.log(t)
-        t[2] = t[2].split('T')[0]
-        t[4] = t[4].split('.')[0]
+
+        // var t = this.props.event.time.split(/[- :]/);
+        // t[2] = t[2].split('T')[0]
+        // t[4] = t[4].split('.')[0]
 
         // Apply each element to the Date function
-        var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4]));
-        // console.log(d);
+        // var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4]));
+      
         let answer = ''
         if(this.props.event.dine_in === 1){
             answer='YES'
