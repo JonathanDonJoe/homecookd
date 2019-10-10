@@ -30,7 +30,6 @@ export class EventCard extends Component {
         
         return (
             <Link to={`/events/singleEvent/${this.props.event_id}`}>
-                <p>{this.props.event.time}</p>
                 <div className='event-card col s6 m4 l4'>
                     <div className='event-card-content'>
                         <div className='food-hero col s12'

@@ -32,8 +32,8 @@ class EventSearch extends Component {
     }
 
     filterCards = (events) => {
-        
-        return events.filter( (event) => {
+
+        return events.filter((event) => {
             // console.log(event)
             // console.log(this.props.search.searching)
             // console.log(event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching))
@@ -56,36 +56,36 @@ class EventSearch extends Component {
         //     if(a.title > b.title) { return 1; }
         //     return 0;}
         // );
-        
+
         // Sort name descending
         // events.sort( (a,b) => {
         //     if(a.title < b.title) { return 1; }
         //     if(a.title > b.title) { return -1; }
         //     return 0;}
         // );
-        
-        
-        console.log('sortCards')
+
+
+        // console.log('sortCards')
         return events
     }
 
     render() {
 
-        console.log(this.state.events)
+        // console.log(this.state.events)
 
         const filteredCards = this.filterCards(this.state.events);
         const sortedCards = this.sortCards(filteredCards);
         const eventCards = this.makeCards(sortedCards);
-        
+
         return (
             <section className="container dash-container green lighten-3">
-                <SearchBar />
-                <h1>Filtered by: {this.props.search.searching}</h1>
                 <div className='row'>
                     <section className='col s8 offset-s2'>
-                        <h1>EventSearch</h1>
+                        <h3>Search for an event!</h3>
+                        <SearchBar />
+                        <h5>Filtering by: "{this.props.search.searching}"</h5>
                         {/* <p className="flow-text">SearchBar</p> */}
-                        
+
                         {/* <p className="dash-buttons">
                             <a className="btn " href="/update-profile" role="button">Update Profile</a>
                             <a className="btn" href="/host" role="button">Search</a>
