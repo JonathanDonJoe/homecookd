@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom'
 import auth0Client from '../Auth/Auth';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
-
 import './NavBar.css';
 
 class NavBar extends Component {
@@ -24,7 +23,7 @@ class NavBar extends Component {
                 <div className='row nav-row'>
                     <nav className='green'>
                         <div className='nav-wrapper'>
-                            <Link to='/' className='left site-title'>HomeCook'd</Link>
+                            <Link to='/' className='left site-title'>HomeCookd</Link>
                             <ul id='nav-mobile' className='right'>
                                 <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events'>Events</Link></li>
