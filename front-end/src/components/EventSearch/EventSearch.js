@@ -31,8 +31,15 @@ class EventSearch extends Component {
     }
 
     filterCards = (events) => {
-        console.log('filterCards')
-        return events
+        
+        return events.filter( (event) => {
+            // console.log(event)
+            // console.log(this.props.search.searching)
+            // console.log(event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching))
+            return (event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching))
+        })
+        // console.log('filterCards')
+        // return events
     }
     sortCards = (events) => {
         console.log('sortCards')
@@ -51,7 +58,7 @@ class EventSearch extends Component {
         return (
             <section className="container dash-container green lighten-3">
                 <SearchBar />
-                <h1>{this.props.search.searching}</h1>
+                <h1>Filtered by: {this.props.search.searching}</h1>
                 <div className='row'>
                     <section className='col s8 offset-s2'>
                         <h1>EventSearch</h1>
@@ -64,7 +71,6 @@ class EventSearch extends Component {
 
                         <div className="divider"></div>
                         <div className="section">
-                            <h2>Attending Events</h2>
                             {eventCards}
                         </div>
                     </section>
