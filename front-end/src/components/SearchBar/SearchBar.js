@@ -7,13 +7,10 @@ export class SearchBar extends Component {
                 <div className="search-row">
                     <form>
                         <div className="inner-form">
-                            <div className="input-field first-wrap">
+                            <div className="input-field s12">
                                 <input id="search" type="text" placeholder="What are you looking for?" />
                             </div>
-                            <div className="input-field second-wrap">
-                                <input id="location" type="text" placeholder="location" />
-                            </div>
-                            <div className="input-field third-wrap">
+                            <div className="input-field second-wrap third-wrap">
                                 <button className="btn-search" type="button">Search</button>
                             </div>
                         </div>
