@@ -20,8 +20,8 @@ export class SearchBar extends Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log('hi')
-        console.log(this.state)
+        // console.log('hi')
+        // console.log(this.state)
         this.props.searchBarAction(this.state)
     }
 
@@ -38,7 +38,9 @@ export class SearchBar extends Component {
                             <input id="location" type="text" disabled value="Atlanta, GA" placeholder="Atlanta, GA" />
                         </div>
                         <div className="input-field third-wrap">
-                            <button >Search</button>
+                            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+                                <i className="material-icons right">send</i>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -47,8 +49,8 @@ export class SearchBar extends Component {
     }
 }
 
-function mapStateToProps (state) {
-    return({
+function mapStateToProps(state) {
+    return ({
         search: state.search
     })
 }

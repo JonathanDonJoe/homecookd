@@ -20,35 +20,52 @@ class EventSearch extends Component {
         })
     }
 
-    render() {
-        console.log(this.state.events)
-
-
-
-
-        const events = this.state.events.map((event, i) => {
+    makeCards = (events) => {
+        const cards = events.map((event, i) => {
             // console.log(event)
             return (
                 <EventCard key={i} event={event} event_id={event.id} />
             )
         })
+        return cards
+    }
+
+    filterCards = (events) => {
+        console.log('filterCards')
+        return events
+    }
+    sortCards = (events) => {
+        console.log('sortCards')
+        return events
+    }
+
+    render() {
+        console.log(this.state.events)
+
+
+        // this.filterCards()
+        const filteredCards = this.filterCards(this.state.events);
+        const sortedCards = this.sortCards(filteredCards);
+        const eventCards = this.makeCards(sortedCards);
+        
         return (
             <section className="container dash-container green lighten-3">
                 <SearchBar />
+                <h1>{this.props.search.searching}</h1>
                 <div className='row'>
                     <section className='col s8 offset-s2'>
                         <h1>EventSearch</h1>
                         {/* <p className="flow-text">SearchBar</p> */}
                         
-                        <p className="dash-buttons">
-                            {/* <a className="btn " href="/update-profile" role="button">Update Profile</a> */}
-                            {/* <a className="btn" href="/host" role="button">Search</a> */}
-                        </p>
+                        {/* <p className="dash-buttons">
+                            <a className="btn " href="/update-profile" role="button">Update Profile</a>
+                            <a className="btn" href="/host" role="button">Search</a>
+                        </p> */}
 
                         <div className="divider"></div>
                         <div className="section">
                             <h2>Attending Events</h2>
-                            {events}
+                            {eventCards}
                         </div>
                     </section>
                 </div>
@@ -59,7 +76,8 @@ class EventSearch extends Component {
 
 function mapStateToProps(state) {
     return ({
-        auth: state.auth
+        auth: state.auth,
+        search: state.search
     })
 }
 
