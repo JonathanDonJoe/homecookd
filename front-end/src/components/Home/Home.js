@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
 import EventCard from '../EventCard/EventCard';
-import SearchBar from '../SearchBar/SearchBar';
+// import SearchBar from '../SearchBar/SearchBar';
 
 class Home extends Component {
 

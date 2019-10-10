@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import axios from 'axios';
+import moment from 'moment';
 
 import './EventSearch.css'
 import EventCard from '../EventCard/EventCard';
@@ -22,7 +23,7 @@ class EventSearch extends Component {
 
     makeCards = (events) => {
         const cards = events.map((event, i) => {
-            // console.log(event)
+            console.log(event)
             return (
                 <EventCard key={i} event={event} event_id={event.id} />
             )
@@ -36,21 +37,25 @@ class EventSearch extends Component {
             // console.log(event)
             // console.log(this.props.search.searching)
             // console.log(event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching))
-            return (event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching))
+            return event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching)
         })
         // console.log('filterCards')
         // return events
     }
     sortCards = (events) => {
+
+        // Sort time ascending
+        // events.sort( (a,b) => moment(a.time).valueOf() - moment(b.time).valueOf());
+        
+        // Sort time descending
+        // events.sort( (a,b) => moment(b.time).valueOf() - moment(a.time).valueOf());
+        
         console.log('sortCards')
         return events
     }
 
     render() {
-        console.log(this.state.events)
 
-
-        // this.filterCards()
         const filteredCards = this.filterCards(this.state.events);
         const sortedCards = this.sortCards(filteredCards);
         const eventCards = this.makeCards(sortedCards);
