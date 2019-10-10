@@ -8,8 +8,8 @@ import loginAction from '../../actions/loginAction'
 class Callback extends Component {
   async componentDidMount() {
     const resolvedPromise = await auth0Client.handleAuthentication();
-    console.log('Resolved Promise: ')
-    console.log(resolvedPromise)
+    // console.log('Resolved Promise: ')
+    // console.log(resolvedPromise)
     this.props.login(resolvedPromise)
     setTimeout(()=>{
       this.props.history.replace('/');
@@ -17,7 +17,7 @@ class Callback extends Component {
   }
 
   render() {
-    console.log('callback ran')
+    // console.log('callback ran')
     return (
       <p>Loading profile...</p>
     );

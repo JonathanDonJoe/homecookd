@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default (data) => {
-    console.log(data)
+    // console.log(data)
     const signUpUrl = `${window.apiHost}/users/login/`
     axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 

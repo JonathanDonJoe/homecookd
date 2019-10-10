@@ -68,7 +68,7 @@ router.post('/payment/stripe', (req, res) => {
         })
         return;
     }
-    const { stripeToken, amount, email, event_id } = req.body;
+    const { stripeToken, amount, email, event_id, num_servings } = req.body;
     stripe.charges.create({
         amount,
         currency: 'usd',
@@ -76,17 +76,16 @@ router.post('/payment/stripe', (req, res) => {
         description: `Charges for ${email}`
     }, (err, charge) => {
         if (err)  {
-          throw err
             res.json({
                 msg: 'errorProcessing'
             });
         } else {
             const insertAttendingQuery = `
                 INSERT INTO attendances 
-                    (user_id, event_id, paid, dine_in, take_out)
+                    (user_id, event_id, paid, dine_in, pick_up)
                 VALUES
                     (?, ?, ?, ?, ?)`
-            db.query( insertAttendingQuery, [res.locals.user_id, 1, event_id, 1, 1]);
+            db.query( insertAttendingQuery, [res.locals.uid, event_id, num_servings, 1, 1]);
             res.json({
                 msg:'paymentSuccess'
             })

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import './EventCard.css'
 import { Link } from 'react-router-dom';
+import NumberFormat from 'react-number-format';
 
 
 export class EventCard extends Component {
     render() {
-        console.log(this.props.event.time)
+        // console.log(this.props.event.time)
         // Split timestamp into [ Y, M, D, h, m, s ]
 
         // var t = this.props.event.time.split(/[- :]/);
@@ -15,10 +16,13 @@ export class EventCard extends Component {
         // Apply each element to the Date function
         // var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4]));
       
-        let answer = ''
-        if(this.props.event.dine_in === 1){
-            answer='YES'
-        }else{answer='NO'}
+        // let answer = ''
+        // if(this.props.event.dine_in === 1){
+        //     answer='YES'
+        // }else{answer='NO'}
+
+        let answer = this.props.event.dine_in ? 'YES' : 'NO'
+
         // -> Wed Jun 09 2010 14:12:01 GMT+0100 (BST)
         //2019-10-08T15:25:26.366Z
 
@@ -56,7 +60,8 @@ export class EventCard extends Component {
                                     <div className='tag-list-item'>{this.props.event.portions} Portions Remain</div>
                                 </div>
                                 <div className='tag-list-item-container col s3 m3'>
-                                    <div className='tag-list-item'>${this.props.event.price}</div>
+                                    <div className='tag-list-item'><NumberFormat value={this.props.event.price} displayType={'text'} fixedDecimalScale={true} decimalScale={'2'} prefix={'$'} /></div>
+                                    
                                 </div>
                                 <div className='tag-list-item-container col s3 m3'>
                                     <div className='tag-list-item'>Dine-In? {answer}</div>

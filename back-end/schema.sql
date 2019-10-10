@@ -19,7 +19,7 @@ create table events (
     description varchar(300) not null,
     host_id INTEGER REFERENCES users(id),
     portions INTEGER not null,
-    price FLOAT not null,
+    price DECIMAL(13,2) not null,
     tags VARCHAR (100) not null,
     picture VARCHAR(200) DEFAULT '/images/events/default.png',
     dine_in BOOLEAN DEFAULT FALSE,
@@ -32,7 +32,7 @@ create table attendances (
     id serial primary key,
     user_id integer REFERENCES users(id),
     event_id integer references events(id),
-    paid BOOLEAN DEFAULT FALSE,
+    paid INTEGER DEFAULT 0,
     dine_in BOOLEAN,
     pick_up BOOLEAN
 );

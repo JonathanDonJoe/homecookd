@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import auth0Client from "../Auth/Auth";
 import axios from "axios";
 import "./EventPayment.css";
+import NumberFormat from 'react-number-format';
+
 
 class EventPayment extends Component {
   state = {
@@ -33,7 +35,8 @@ class EventPayment extends Component {
           stripeToken: token.id,
           token: this.props.auth.token,
           email: this.props.auth.email,
-          event_id: this.props.event.event_id
+          event_id: this.props.event.event_id,
+          num_servings: numServings
         };
         axios({
           method: "POST",
@@ -96,13 +99,14 @@ class EventPayment extends Component {
     if (this.props.auth.token) {
       button = (
         <button onClick={this.makePayment} className="btn">
-          Reserve 1 night
+          Reserve {this.state.servings} Servings
         </button>
       );
     } else {
       button = (
         <button
           onClick={async () => {
+            // eslint-disable-next-line no-unused-vars
             const result = await auth0Client.signIn();
             // console.log(result);
           }}
@@ -115,7 +119,7 @@ class EventPayment extends Component {
     // console.log(this.state.servings)
     const howManyServings = []
     for(let i=1; i<=this.props.event.event_portions; i++){
-        howManyServings.push(<option value={i}>{i}</option>)
+        howManyServings.push(<option value={i} key={i} >{i}</option>)
     }
 
     // console.log(event);
@@ -133,7 +137,7 @@ class EventPayment extends Component {
             data-target="modal1"
             className="btn modal-trigger"
           >
-            Join for ${this.props.event.event_price}
+            Join for <NumberFormat value={this.props.event.event_price} displayType={'text'} fixedDecimalScale={true} decimalScale={'2'} prefix={'$'} />
           </button>
           <div
             id="modal1"
@@ -148,7 +152,7 @@ class EventPayment extends Component {
                   <div className="row">
                     <div className="col s12 ">
                     <div className="modal-picture">                      
-                        <img className="image" src={`${window.apiHost}${event.event_picture}`}></img>
+                        <img className="image" src={`${window.apiHost}${event.event_picture}`} alt='event_image'></img>
                     </div>
                     
                     <div className="title">{event.event_title}</div>                    
@@ -163,7 +167,7 @@ class EventPayment extends Component {
                   </div>
                   <div className="col s12 right-details">
                     <div className="price-per-serving">
-                      $ {event.event_price} <span>per serving</span>
+                    <NumberFormat value={this.props.event.event_price} displayType={'text'} fixedDecimalScale={true} decimalScale={'2'} prefix={'$'} /> <span>per serving</span>
                     </div>
                     <div className="input-field col s12">
                       <select

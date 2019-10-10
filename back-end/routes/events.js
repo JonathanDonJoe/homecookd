@@ -70,7 +70,7 @@ router.post('/hostMeal', function (req, res, next) {
             (user_id, event_id, paid, dine_in, pick_up)
             VALUES (?, ?, ?, ?, ?);
         `
-        insertAttendanceQueryValues = [parseInt(user_id), resp.insertId, false, 0, 0]
+        insertAttendanceQueryValues = [parseInt(user_id), resp.insertId, 0, 0, 0]
         console.log(insertAttendanceQueryValues)
         db.query(insertAttendanceQuery, insertAttendanceQueryValues, (err) => {
             if (err) throw err;
