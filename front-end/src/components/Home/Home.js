@@ -65,14 +65,14 @@ class Home extends Component {
                 <div className="row">
                     <div className="home col s12">
                         <div className="upper-fold row" style={{ backgroundImage: `url(${this.state.imageLink})` }}>
-                            <div className='upper-fold-content row'>
+                            {/* <div className='upper-fold-content row'>
                                 <div className='upper-fold-text s12'>
                                     <strong>{this.state.text}</strong>
                                 </div>
                                 <div className='upper-fold-search s12'>
                                     <SearchBar />
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
