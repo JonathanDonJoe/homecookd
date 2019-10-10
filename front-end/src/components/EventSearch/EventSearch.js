@@ -27,21 +27,22 @@ class EventSearch extends Component {
 
 
         const events = this.state.events.map((event, i) => {
-            console.log(event)
+            // console.log(event)
             return (
                 <EventCard key={i} event={event} event_id={event.id} />
             )
         })
         return (
             <section className="container dash-container green lighten-3">
+                <SearchBar />
                 <div className='row'>
                     <section className='col s8 offset-s2'>
                         <h1>EventSearch</h1>
                         {/* <p className="flow-text">SearchBar</p> */}
-                        <SearchBar />
+                        
                         <p className="dash-buttons">
                             {/* <a className="btn " href="/update-profile" role="button">Update Profile</a> */}
-                            <a className="btn" href="/host" role="button">Search</a>
+                            {/* <a className="btn" href="/host" role="button">Search</a> */}
                         </p>
 
                         <div className="divider"></div>
