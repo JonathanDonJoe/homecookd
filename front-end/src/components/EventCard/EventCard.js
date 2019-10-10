@@ -22,7 +22,7 @@ export class EventCard extends Component {
         // -> Wed Jun 09 2010 14:12:01 GMT+0100 (BST)
         //2019-10-08T15:25:26.366Z
 
-        let date = `${t[5]}${t[6]}/${t[8]}${t[9]}/${t[2]}${t[3]}`
+        // let date = `${t[5]}${t[6]}/${t[8]}${t[9]}/${t[2]}${t[3]}`
         
         return (
             <Link to={`/events/${this.props.event_id}`}>
