@@ -23,7 +23,7 @@ class EventSearch extends Component {
 
     makeCards = (events) => {
         const cards = events.map((event, i) => {
-            console.log(event)
+            // console.log(event)
             return (
                 <EventCard key={i} event={event} event_id={event.id} />
             )
@@ -46,15 +46,32 @@ class EventSearch extends Component {
 
         // Sort time ascending
         // events.sort( (a,b) => moment(a.time).valueOf() - moment(b.time).valueOf());
-        
+
         // Sort time descending
         // events.sort( (a,b) => moment(b.time).valueOf() - moment(a.time).valueOf());
+
+        // Sort name ascending
+        // events.sort( (a,b) => {
+        //     if(a.title < b.title) { return -1; }
+        //     if(a.title > b.title) { return 1; }
+        //     return 0;}
+        // );
+        
+        // Sort name descending
+        // events.sort( (a,b) => {
+        //     if(a.title < b.title) { return 1; }
+        //     if(a.title > b.title) { return -1; }
+        //     return 0;}
+        // );
+        
         
         console.log('sortCards')
         return events
     }
 
     render() {
+
+        console.log(this.state.events)
 
         const filteredCards = this.filterCards(this.state.events);
         const sortedCards = this.sortCards(filteredCards);
