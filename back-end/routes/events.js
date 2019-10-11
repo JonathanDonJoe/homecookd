@@ -133,5 +133,12 @@ router.get('/:eventId', (req, res) => {
     })
 })
 
+// router.get('/review/:eventId', (req, res) => {
+//     const eventId = req.params.eventId;
+//     const eventForReviewQuery = `
+//     SELECT
+//     `
+// })
+
 
 module.exports = router;
