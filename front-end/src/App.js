@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import EventCreate from './components/EventCreate/EventCreate';
 import EventSearch from './components/EventSearch/EventSearch';
 import Event from './components/Event/Event';
+import Messenger from './components/Messenger/Messenger';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
 				<Route exact path='/dashboard' component={Dashboard} />		
 				<Route exact path='/host' component={EventCreate} />
 				<Route path='/events/search' component={EventSearch} />
+				<Route exact path='/Messenger' component={Messenger} />
 				<Route exact path='/events/singleEvent/:eventId' component={Event} />
       		</div>
         </Router>
