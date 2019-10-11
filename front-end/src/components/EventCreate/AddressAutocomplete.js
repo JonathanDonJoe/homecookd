@@ -4,18 +4,20 @@ import { googleApiKey } from '../../config'
 
 export class AddressAutocomplete extends Component {
     
-    
+    state={
+        address: ''
+    }
+
+    changeAddress = (e) => {
+        this.setState({
+            address: e.target.value
+        }, () =>{this.props.changeAddress(this.state.address) })
+    }  
     componentDidMount() {
-        const googleAutoScript = document.createElement('script')
-        googleAutoScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
-        window.document.body.appendChild(googleAutoScript)
-        
-        googleAutoScript.addEventListener('load', ()=>{
-            this.googleAuto = this.createGoogleAuto()
-            console.log(this.googleAuto);
-            this.googleAuto.setFields(['address_component']);
-            this.googleAuto.addListener('place_changed', this.fillInAddress);
-        })
+        this.googleAuto = this.createGoogleAuto()
+        // console.log(this.googleAuto);
+        this.googleAuto.setFields(['address_component']);
+        this.googleAuto.addListener('place_changed', this.fillInAddress);
     }
     
     createGoogleAuto = () => {
@@ -27,33 +29,18 @@ export class AddressAutocomplete extends Component {
 
     fillInAddress = () => {
         this.place = this.googleAuto.getPlace();
-        this.componentForm = {
-            street_number: 'short_name',
-            route: 'long_name',
-            locality: 'long_name',
-            administrative_area_level_1: 'short_name',
-            country: 'long_name',
-            postal_code: 'short_name'
-          };
-
-        // Get each component of the address from the place details,
-        // and then fill-in the corresponding field on the form.
-        for (var i = 0; i < this.place.address_components.length; i++) {
-          var addressType = this.place.address_components[i].types[0];
-          if (this.componentForm[addressType]) {
-            var val = this.place.address_components[i][this.componentForm[addressType]];
-            document.getElementById(addressType).value = val;
-          }
-        }
-
     } 
     render() {
+        console.log(this.state.address);
         return (<>
-
-            <div id="locationField">
-                <input id="autocomplete"
+            <div id="locationField" className="col s12">
+                <input
+                id="autocomplete"
                 placeholder="Enter your address"
-                type="text"/>
+                type="text"
+                onChange={this.changeAddress}
+                onClick={this.changeAddress}
+                />
             </div>
 
 
