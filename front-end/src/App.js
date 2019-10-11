@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import EventCreate from './components/EventCreate/EventCreate';
 import EventSearch from './components/EventSearch/EventSearch';
 import Event from './components/Event/Event';
-import Messenger from './components/Messenger/Messenger';
+import Messenger from './components/Messenger';
 
 function App() {
     return (
