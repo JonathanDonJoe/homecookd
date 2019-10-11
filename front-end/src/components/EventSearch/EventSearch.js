@@ -44,6 +44,9 @@ class EventSearch extends Component {
     }
     sortCards = (events) => {
 
+        // Sort by newest created
+        events.reverse();
+
         // Sort time ascending
         // events.sort( (a,b) => moment(a.time).valueOf() - moment(b.time).valueOf());
 
