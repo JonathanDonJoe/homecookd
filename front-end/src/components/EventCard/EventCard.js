@@ -1,11 +1,33 @@
 import React, { Component } from 'react'
 import './EventCard.css'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import moment from 'moment';
 import NumberFormat from 'react-number-format';
+import UserReview from '../UserReview/UserReview';
 
 
 export class EventCard extends Component {
+    // state = {
+    //     events: []
+    // }
+
+    // async componentDidMount() {
+    //     console.log(this.props.auth)
+    //     const url = `${window.apiHost}/events/getUserEvents`
+    //     const axiosResponse = await axios.post(url, this.props.auth)
+    //     this.setState({
+    //         events: axiosResponse.data
+    //     })
+    // }
+
     render() {
+    //     this.state.events.forEach( ( event, i ) => {
+    //         if ( event.time < moment() ) {
+
+    //         }
+    //     })
         // console.log(this.props.event.time)
         // Split timestamp into [ Y, M, D, h, m, s ]
 
@@ -20,14 +42,27 @@ export class EventCard extends Component {
         // if(this.props.event.dine_in === 1){
         //     answer='YES'
         // }else{answer='NO'}
-
+        console.log(this.props.event);
         let answer = this.props.event.dine_in ? 'YES' : 'NO'
 
         // -> Wed Jun 09 2010 14:12:01 GMT+0100 (BST)
         //2019-10-08T15:25:26.366Z
 
         // let date = `${t[5]}${t[6]}/${t[8]}${t[9]}/${t[2]}${t[3]}`
-        
+
+        // This URL path with be used to change where an event card redirects you. 
+        // This will help enable a review feature that only attendees can see.
+        // {`events/review/${eventId}`}
+
+
+        // This will throw logic into the Join button... If user attended and the event is over Then add review.
+        // const userReview = 
+        // if(){
+        //     <div>Your review component...import it and call it here!!!!!</div>
+        // } else {
+        //     <div> SIGN UP FOR MUY EVENT! <- call you register component here </div>
+        // }
+
         return (
             <Link to={`/events/singleEvent/${this.props.event_id}`}>
                 <div className='event-card col s6 m4 l4'>
@@ -75,4 +110,10 @@ export class EventCard extends Component {
     }
 }
 
-export default EventCard
+function mapStateToProps(state) {
+    return ({
+        auth: state.auth
+    })
+}
+
+export default connect(mapStateToProps)(EventCard);
