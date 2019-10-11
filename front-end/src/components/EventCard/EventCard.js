@@ -42,7 +42,7 @@ export class EventCard extends Component {
         // if(this.props.event.dine_in === 1){
         //     answer='YES'
         // }else{answer='NO'}
-        console.log(this.props.event);
+        // console.log(this.props.event);
         let answer = this.props.event.dine_in ? 'YES' : 'NO'
 
         // -> Wed Jun 09 2010 14:12:01 GMT+0100 (BST)
