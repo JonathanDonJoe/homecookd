@@ -10,7 +10,8 @@ import SearchBar from '../SearchBar/SearchBar'
 
 class EventSearch extends Component {
     state = {
-        events: []
+        events: [],
+        sortMethod: '',
     }
 
     async componentDidMount() {
@@ -18,6 +19,12 @@ class EventSearch extends Component {
         const axiosResponse = await axios.get(url)
         this.setState({
             events: axiosResponse.data
+        })
+    }
+
+    changeSortMethod = (e) => {
+        this.setState({
+            sortMethod: e.target.value
         })
     }
 
@@ -66,7 +73,7 @@ class EventSearch extends Component {
         //     if(a.title > b.title) { return -1; }
         //     return 0;}
         // );
-        
+
         // Sort price ascending
         // events.sort( (a,b) => a.price - b.price);
 
@@ -81,6 +88,7 @@ class EventSearch extends Component {
     render() {
 
         // console.log(this.state.events)
+        console.log(this.state.sortBy)
 
         const filteredCards = this.filterCards(this.state.events);
         const sortedCards = this.sortCards(filteredCards);
@@ -92,6 +100,17 @@ class EventSearch extends Component {
                     <section className='col s8 offset-s2'>
                         <h3>Search for an event!</h3>
                         <SearchBar />
+                        <div class="input-field col s12">
+                            <select className='browser-default' value={this.state.sortMethod} onChange={this.changeSortMethod}>
+                                    <option value="soonest">Date-Ascending</option>
+                                    <option value="latest">Date-Descending</option>
+                                    <option value="newest">Created-Ascending</option>
+                                    <option value="oldest">Created-Descending</option>
+                                    <option value="cheapest">Price-Ascending</option>
+                                    <option value="priciest">Price-Descending</option>
+                            </select>
+                            <label className='active' id='event-search-label'>Sort by:</label>
+                        </div>
                         <h5>Filtering by: "{this.props.search.searching}"</h5>
                         {/* <p className="flow-text">SearchBar</p> */}
 
