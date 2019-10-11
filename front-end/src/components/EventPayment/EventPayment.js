@@ -3,12 +3,16 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import auth0Client from "../Auth/Auth";
 import axios from "axios";
+import moment from 'moment';
+import EventCard from '../EventCard/EventCard';
 import "./EventPayment.css";
 import NumberFormat from 'react-number-format';
+import UserReview from '../UserReview/UserReview';
 
 
 class EventPayment extends Component {
   state = {
+    events: [],
     servings: 0,
     payment: 0,
     modal: 0,
@@ -98,7 +102,24 @@ class EventPayment extends Component {
 //       })
 //   }
 
-  render() {
+    async componentDidMount() {
+        console.log(this.props.auth)
+        const url = `${window.apiHost}/events/getUserEvents`
+        const axiosResponse = await axios.post(url, this.props.auth)
+        this.setState({
+            events: axiosResponse.data
+        })
+    }
+
+  render() {    
+    const event = this.props.event;
+
+    this.state.events.forEach( ( event, i ) => {
+      if ( event.time < moment() ) {
+        return <UserReview key={i} event={event} event_id={event.event_id} />
+      }
+    })
+
     // this logic is what makes the modal appear and close.
     let modalShow = "none";
     if (this.state.modal === 1) {
@@ -106,7 +127,6 @@ class EventPayment extends Component {
     }
 
     // this logic determines whether the modal allows a payment or tells you to log in. 
-    const event = this.props.event;
     let button;
     if (this.props.auth.token) {
       button = (

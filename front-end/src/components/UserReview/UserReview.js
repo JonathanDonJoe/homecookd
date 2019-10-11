@@ -25,7 +25,7 @@ export class UserReview extends Component {
     render() {
         return (
             <div>
-                <EventCard />
+                
             </div>
         )
     }
