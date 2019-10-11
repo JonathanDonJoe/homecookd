@@ -10,7 +10,8 @@ import SearchBar from '../SearchBar/SearchBar'
 
 class EventSearch extends Component {
     state = {
-        events: []
+        events: [],
+        sortMethod: '',
     }
 
     async componentDidMount() {
@@ -18,6 +19,12 @@ class EventSearch extends Component {
         const axiosResponse = await axios.get(url)
         this.setState({
             events: axiosResponse.data
+        })
+    }
+
+    changeSortMethod = (e) => {
+        this.setState({
+            sortMethod: e.target.value
         })
     }
 
@@ -43,12 +50,24 @@ class EventSearch extends Component {
         // return events
     }
     sortCards = (events) => {
-
-        // Sort time ascending
-        // events.sort( (a,b) => moment(a.time).valueOf() - moment(b.time).valueOf());
-
-        // Sort time descending
-        // events.sort( (a,b) => moment(b.time).valueOf() - moment(a.time).valueOf());
+        if (this.state.sortMethod === 'soonest' || this.state.sortMethod === '') {
+            // Sort time ascending
+            events.sort( (a,b) => moment(a.time).valueOf() - moment(b.time).valueOf());
+        } else if (this.state.sortMethod === 'latest') {
+            // Sort time descending
+            events.sort( (a,b) => moment(b.time).valueOf() - moment(a.time).valueOf());
+        } else if (this.state.sortMethod === 'newest') {
+            // Sort newest created
+            events.reverse();
+        // } else if (this.state.sortMethod === 'oldest') {
+        //     // Sort oldest created
+        } else if (this.state.sortMethod === 'cheapest') {
+            // Sort price ascending
+            events.sort( (a,b) => a.price - b.price);
+        } else if (this.state.sortMethod === 'priciest') {
+            // Sort price descending
+            events.sort( (a,b) => b.price - a.price);
+        }
 
         // Sort name ascending
         // events.sort( (a,b) => {
@@ -64,15 +83,10 @@ class EventSearch extends Component {
         //     return 0;}
         // );
 
-
-        // console.log('sortCards')
         return events
     }
 
     render() {
-
-        // console.log(this.state.events)
-
         const filteredCards = this.filterCards(this.state.events);
         const sortedCards = this.sortCards(filteredCards);
         const eventCards = this.makeCards(sortedCards);
@@ -83,14 +97,18 @@ class EventSearch extends Component {
                     <section className='col s8 offset-s2'>
                         <h3>Search for an event!</h3>
                         <SearchBar />
+                        <div className="input-field col s12">
+                            <select className='browser-default' value={this.state.sortMethod} onChange={this.changeSortMethod}>
+                                    <option value="soonest">Date-Ascending</option>
+                                    <option value="latest">Date-Descending</option>
+                                    <option value="newest">Created-Ascending</option>
+                                    <option value="oldest">Created-Descending</option>
+                                    <option value="cheapest">Price-Ascending</option>
+                                    <option value="priciest">Price-Descending</option>
+                            </select>
+                            <label className='active' id='event-search-label'>Sort by:</label>
+                        </div>
                         <h5>Filtering by: "{this.props.search.searching}"</h5>
-                        {/* <p className="flow-text">SearchBar</p> */}
-
-                        {/* <p className="dash-buttons">
-                            <a className="btn " href="/update-profile" role="button">Update Profile</a>
-                            <a className="btn" href="/host" role="button">Search</a>
-                        </p> */}
-
                         <div className="divider"></div>
                         <div className="section">
                             {eventCards}
