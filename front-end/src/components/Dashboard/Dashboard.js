@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom'
 // import { bindActionCreators } from 'redux';
 import axios from 'axios';
+import moment from 'moment';
 
 import EventCard from '../EventCard/EventCard';
 import './Dashboard.css'
@@ -22,16 +24,20 @@ class Dashboard extends Component {
 
     render() {
         console.log(this.state.events)
-
+        const eventId = this.props.match.params.eventId;
         const hostingEvents = []
         const attendingEvents = []
+        const eventsAttended = []
         console.log(this.props.auth.user_id)
         this.state.events.forEach( (event, i) => {
             console.log(event.host_id)
+            console.log(event.time)
             if (event.host_id === this.props.auth.user_id) {
                 hostingEvents.push(<EventCard key={i} event={event} event_id={event.event_id} />)
-            } else {
+            } else if (event.time > moment()){
                 attendingEvents.push(<EventCard key={i} event={event} event_id={event.event_id}  />)
+            } else {
+                eventsAttended.push(<EventCard key={i} event={event} event_id={event.event_id}  />)
             }
         })
 
@@ -41,6 +47,10 @@ class Dashboard extends Component {
         //         <EventCard key={i} event={event} />
         //     )
         // })
+        // This anchor tag is set aside to remove errors thrown. It belongs right after dash-button below. 
+        // When added change to a Link tag for React.
+        // {/* <a className="btn " href="/update-profile" role="button">Update Profile</a> */}
+
         return (
             <section className="container dash-container green lighten-3">
                 <div className='row'>
@@ -48,8 +58,7 @@ class Dashboard extends Component {
                         <h1>Dashboard</h1>
                         <p className="flow-text">Welcome {this.props.auth.first} to your dashboard!  Here, you can view all of your saved events.</p>
                         <p className="dash-buttons">
-                            {/* <a className="btn " href="/update-profile" role="button">Update Profile</a> */}
-                            <a className="btn" href="/host" role="button">Host a new Event</a>
+                            <Link className="btn" to="/host" role="button">Host a new Event</Link>
                         </p>
                         <div className="divider"></div>
                         <div className="section row">
@@ -61,6 +70,11 @@ class Dashboard extends Component {
                         <div className="section">
                             <h2>Attending Events</h2>
                             {attendingEvents}
+                        </div>
+                        <div className="divider"></div>
+                        <div className="section row">
+                            <h2>Events Attended</h2>
+                            {eventsAttended}
                         </div>
                     </section>
                 </div>

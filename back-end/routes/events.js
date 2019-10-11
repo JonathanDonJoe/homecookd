@@ -14,7 +14,7 @@ router.post('/hostMeal', function (req, res, next) {
     // console.log(picture);
     fs.rename(req.file.path, newFilePath, (err) => { if (err) throw err });
 
-    const { time, date, address, zipcode, title, description, user_id, portions, price, dineIn, pickUp } = req.body
+    const { time, lat, lng, date, realAddress, title, description, user_id, portions, price, dineIn, pickUp } = req.body
     // const dbTime ='2019-10-07 23:04:53'
 
     // YYYY-MM-DD hh:mm:ss'
@@ -54,13 +54,13 @@ router.post('/hostMeal', function (req, res, next) {
 
     const insertEventQuery = `
         INSERT INTO events
-        (time, address, zipcode, title, description, host_id, portions, price, tags, picture, dine_in, pick_up)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        (time, address, lat, lng, title, description, host_id, portions, price, tags, picture, dine_in, pick_up)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         `
     const dine_in = dineIn === 'false' ? false : true
     const pick_up = pickUp === 'false' ? false : true
-
-    const dbValues = [dbTime, address, zipcode, title, description, user_id, portions, price, tags, picture, dine_in, pick_up];
+    console.log(`realAddress is ${realAddress}`)
+    const dbValues = [dbTime, realAddress, lat, lng, title, description, user_id, portions, price, tags, picture, dine_in, pick_up];
 
     db.query(insertEventQuery, dbValues, (err, resp) => {
         if (err) throw err;
@@ -117,7 +117,7 @@ router.post('/getUserEvents', (req, res) => {
 router.get('/:eventId', (req, res) => {
     const eventId = req.params.eventId;
     const getEventQuery = `
-    SELECT events.id AS event_id, events.address AS event_address, events.description AS event_description, 
+    SELECT events.id AS event_id, events.lat, events.lng, events.address AS event_address, events.description AS event_description, 
     events.dine_in AS event_dine_in, events.host_id AS host_id, events.pick_up AS event_pick_up, 
     events.picture AS event_picture, events.portions AS event_portions, events.price AS event_price,
     events.time AS event_time, events.title AS event_title, users.id AS users_id, users.first_name AS users_name,
@@ -132,6 +132,13 @@ router.get('/:eventId', (req, res) => {
         res.json(result)
     })
 })
+
+// router.get('/review/:eventId', (req, res) => {
+//     const eventId = req.params.eventId;
+//     const eventForReviewQuery = `
+//     SELECT
+//     `
+// })
 
 
 module.exports = router;

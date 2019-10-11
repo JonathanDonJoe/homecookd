@@ -11,7 +11,9 @@ class EventPayment extends Component {
   state = {
     servings: 0,
     payment: 0,
-    modal: 0
+    modal: 0,
+    dineIn: 1,
+    pickUp: 1
   };
 
   changeServings = (e) => {
@@ -76,11 +78,18 @@ class EventPayment extends Component {
         modal: 0,
         payment: this.props.event.event_price
       });
-    }
+    }      console.log(this.props.event)
+
   };
 
+  // changeDineIn = (e) => {
+  //   e.preventDefault();
+  //   if (this.props.){
+
+  //   }
+  // }
+
 //   componentDid(){
-//       console.log(this.props.event)
 //       this.setState({
 //           payment: this.props.event.event_price
 //       }, () => {
@@ -90,10 +99,13 @@ class EventPayment extends Component {
 //   }
 
   render() {
+    // this logic is what makes the modal appear and close.
     let modalShow = "none";
     if (this.state.modal === 1) {
       modalShow = "block";
     }
+
+    // this logic determines whether the modal allows a payment or tells you to log in. 
     const event = this.props.event;
     let button;
     if (this.props.auth.token) {
@@ -116,12 +128,21 @@ class EventPayment extends Component {
         </button>
       );
     }
+
+    // this logic auto fills the servings option with only available servings amounts. 
     // console.log(this.state.servings)
     const howManyServings = []
     for(let i=1; i<=this.props.event.event_portions; i++){
         howManyServings.push(<option value={i} key={i} >{i}</option>)
     }
-
+  let dineInOption = '';
+  let pickUpOption = '';
+  if (this.state.dineIn === 0){
+    dineInOption = "disabled"
+  }
+  if(this.state.pickUp === 0){
+    pickUpOption = "disabled"
+  }
     // console.log(event);
     // console.log('servings')
     // console.log(this.state.servings)
@@ -168,10 +189,23 @@ class EventPayment extends Component {
                   <div className="col s12 right-details">
                     <div className="price-per-serving">
                     <NumberFormat value={this.props.event.event_price} displayType={'text'} fixedDecimalScale={true} decimalScale={'2'} prefix={'$'} /> <span>per serving</span>
-                    </div>
+                    </div>                  
+                    <div className="row">
                     <div className="input-field col s12">
+                            <p className='col s6 m2'>
+                              <label>
+                                  <input value={this.state.dineIn} disabled={dineInOption} onChange={this.changeDineIn} type="checkbox" />
+                                  <span>Dine In</span>
+                              </label>
+                          </p>
+                          <p className='col s6 m2'>
+                              <label>
+                                  <input value={this.state.pickUp} disabled={pickUpOption} onChange={this.changePickUp} type="checkbox" />
+                                  <span>Pick-up</span>
+                              </label>
+                          </p>
                       <select
-                      className="browser-default"
+                      className="browser-default col s12 m7"
                         value={this.state.servings}
                         onChange={this.changeServings}
                       >
@@ -181,7 +215,7 @@ class EventPayment extends Component {
                         {howManyServings}
                       </select>
                     </div>
-                    
+                    </div>
                   </div>
                 </div>
               </div>
