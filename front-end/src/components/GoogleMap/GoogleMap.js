@@ -4,25 +4,36 @@ import { googleApiKey } from '../../config'
 
 class GoogleMap extends Component {
   googleMapRef = createRef()
-
-  componentDidMount() {
-    const googleMapScript = document.createElement('script')
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
-    window.document.body.appendChild(googleMapScript)
-
-    googleMapScript.addEventListener('load', ()=>{
-      this.googleMap = this.createGoogleMap()
-      this.marker = this.createMarker()
-    })
+  componentDidUpdate(){
+    this.googleMap = this.createGoogleMap()
+    this.infoWindow = this.createIW()
+    console.log(this.googleMap);
+    console.log(this.infoWindow);
+    // console.log(this.marker);
+    this.marker = this.createMarker()
+    this.marker.addListener('click', ()=> {
+      this.infoWindow.open(this.map, this.marker);
+    });
+    this.circle = this.createCircle()
   }
+  // componentDidMount() {
+  //   this.googleMap = this.createGoogleMap()
+  //   this.marker = this.createMarker()
+    // const googleMapScript = document.createElement('script')
+    // googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
+    // window.document.body.appendChild(googleMapScript)
+
+    // googleMapScript.addEventListener('load', ()=>{
+  // }
 
   createGoogleMap = () => {
+    console.log(this.props.event.event.lat);
     return(
       new window.google.maps.Map(this.googleMapRef.current, {
         zoom: 16,
         center: {
-          lat: 48.858264,
-          lng: 2.294653,
+          lat: this.props.event.event.lat,
+          lng: this.props.event.event.lng,
         }
       })
     )
@@ -31,20 +42,48 @@ class GoogleMap extends Component {
   createMarker = () => {
     return(
       new window.google.maps.Marker({
-        position: { lat: 48.858264, lng: 2.294653 },
+        position: { lat: this.props.event.event.lat, lng: this.props.event.event.lng },
         map: this.googleMap,
       })
     )
   }
 
-  render() {
-    return (
-      <div
-        id="google-map"
-        ref={this.googleMapRef}
-        style={{ width: '400px', height: '300px' }}
-      />
+  createCircle = () => {
+    return(
+      new window.google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: this.googleMap,
+        center: this.googleMap.center,
+        radius: 600
+      })
     )
+  }
+
+  createIW = () => {
+    let urlAddress = this.props.event.event.event_address.replace(/\s/g, '+');
+    console.log(urlAddress);
+    let directionUrl = `https://www.google.com/maps/dir//${urlAddress}/`
+    return(
+      new window.google.maps.InfoWindow({
+        content: `<a href=${directionUrl} target='_blank' <h1>${this.props.event.event.event_address}</h1> </a>`
+      })
+    )
+  }
+
+
+
+  render() {
+      return (
+        <div
+          id="google-map"
+          ref={this.googleMapRef}
+          style={{ width: '100vw', height: '95vh' }}
+        />
+      )
   }
 }
 
