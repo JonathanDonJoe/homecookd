@@ -31,6 +31,7 @@ export class Event extends Component {
         })
     }
     render() {
+        console.log(this.props.match.params.eventId)
         return (
             <div className='event-page container-fluid'>
                 <EventImgTitle event={this.state.event} history={this.props.history} />

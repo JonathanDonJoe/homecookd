@@ -9,25 +9,9 @@ import UserReview from '../UserReview/UserReview';
 
 
 export class EventCard extends Component {
-    // state = {
-    //     events: []
-    // }
-
-    // async componentDidMount() {
-    //     console.log(this.props.auth)
-    //     const url = `${window.apiHost}/events/getUserEvents`
-    //     const axiosResponse = await axios.post(url, this.props.auth)
-    //     this.setState({
-    //         events: axiosResponse.data
-    //     })
-    // }
 
     render() {
-    //     this.state.events.forEach( ( event, i ) => {
-    //         if ( event.time < moment() ) {
 
-    //         }
-    //     })
         // console.log(this.props.event.time)
         // Split timestamp into [ Y, M, D, h, m, s ]
 
@@ -110,10 +94,6 @@ export class EventCard extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return ({
-        auth: state.auth
-    })
-}
 
-export default connect(mapStateToProps)(EventCard);
+
+export default EventCard;
