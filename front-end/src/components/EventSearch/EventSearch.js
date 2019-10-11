@@ -63,6 +63,12 @@ class EventSearch extends Component {
         //     if(a.title > b.title) { return -1; }
         //     return 0;}
         // );
+        
+        // Sort price ascending
+        // events.sort( (a,b) => a.price - b.price);
+
+        // Sort price descending
+        // events.sort( (a,b) => b.price - a.price);
 
 
         // console.log('sortCards')
