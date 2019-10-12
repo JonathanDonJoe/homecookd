@@ -92,7 +92,7 @@ router.get('/', function (req, res, next) {
     `
     db.query(getEventQuery, (err, result) => {
         if (err) throw err;
-        console.log(result)
+        // console.log(result)
         res.json(result)
     })
 })
@@ -108,8 +108,8 @@ router.post('/getUserEvents', (req, res) => {
 
     db.query(getUserEventsQuery, [res.locals.uid], (err, result) => {
         if (err) throw err;
-        console.log('result')
-        console.log(result)
+        // console.log('result')
+        // console.log(result)
         res.json(result)
     })
 })
@@ -128,7 +128,7 @@ router.get('/:eventId', (req, res) => {
     `
     db.query(getEventQuery, [eventId], (err, result) => {
         if (err) throw err;
-        console.log(result)
+        // console.log(result)
         res.json(result)
     })
 })

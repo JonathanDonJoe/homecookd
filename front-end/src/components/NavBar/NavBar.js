@@ -19,6 +19,7 @@ class NavBar extends Component {
         // console.log('componentDidMount')
         if(localStorage['access_token']) {
             // console.log(localStorage['access_token'])
+            console.log('this ran')
             this.props.tokenLogin({token:localStorage['access_token']})
         }
     }
@@ -48,7 +49,7 @@ class NavBar extends Component {
                                 }
                                 {
                                     (auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
-                                <li className='nav-non-link' onClick={this.signOut}>LogOut</li>
+                                <li className='nav-non-link' onClick={this.signOut}>Log Out</li>
                                 }
                             </ul>
                         </div>

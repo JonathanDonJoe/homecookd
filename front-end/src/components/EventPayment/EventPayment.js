@@ -102,15 +102,6 @@ class EventPayment extends Component {
 //       })
 //   }
 
-    async componentDidMount() {
-        console.log(this.props.auth)
-        const url = `${window.apiHost}/events/getUserEvents`
-        const axiosResponse = await axios.post(url, this.props.auth)
-        this.setState({
-            events: axiosResponse.data
-        })
-    }
-
   render() {    
     const event = this.props.event;
 
