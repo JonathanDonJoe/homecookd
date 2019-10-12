@@ -26,51 +26,64 @@ const checkJwt = jwt({
     algorithms: [`RS256`]
 });
 
-router.post("*", checkJwt, (req, res, next) => {
-    console.log('req.body.email')
-    console.log(req.body.email)
-    // If we're checking 
-    if (req.body.email) {
-        const email = req.body.email;
-        // console.log(req.body);
-        // const token = req.body.token
-        console.log("index email: ");
-        console.log(email);
-        const getUserIdQuery = `SELECT id FROM users WHERE email = ?`;
+router.post("*", checkJwt, (err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        console.log('err')
+        res.json({
+            msg: 'unrecognizedUser',
+            user_id: null,
+            first: null,
+            last: null,
+            email: null,
+            picture: null,
+            token: null
+        })
+    } else {
+        console.log('req.body.email')
+        console.log(req.body.email)
+        // If we're checking 
+        if (req.body.email) {
+            const email = req.body.email;
+            // console.log(req.body);
+            // const token = req.body.token
+            console.log("index email: ");
+            console.log(email);
+            const getUserIdQuery = `SELECT id FROM users WHERE email = ?`;
 
-        db.query(getUserIdQuery, [email], (err, results) => {
-            if (err) {
-                throw err
-            }
-            if (!results || results.length === 0) {
-                res.locals.loggedIn = false;
-                console.log('res.locals.loggedIn: ')
-                console.log(res.locals.loggedIn)
-            } else {
-                res.locals.loggedIn = true;
-                res.locals.uid = results[0].id
-                console.log('res.locals.uid: ')
-                console.log(res.locals.uid)
-                console.log('res.locals.loggedIn: ')
-                console.log(res.locals.loggedIn)
+            db.query(getUserIdQuery, [email], (err, results) => {
+                if (err) {
+                    throw err
+                }
+                if (!results || results.length === 0) {
+                    res.locals.loggedIn = false;
+                    console.log('res.locals.loggedIn: ')
+                    console.log(res.locals.loggedIn)
+                } else {
+                    res.locals.loggedIn = true;
+                    res.locals.uid = results[0].id
+                    console.log('res.locals.uid: ')
+                    console.log(res.locals.uid)
+                    console.log('res.locals.loggedIn: ')
+                    console.log(res.locals.loggedIn)
 
-                // UPDATE THE TOKEN IN THE DATABASE HERE
-                const updateUserTokenQuery = `
+                    // UPDATE THE TOKEN IN THE DATABASE HERE
+                    const updateUserTokenQuery = `
                     UPDATE users
                     SET token = ?
                     WHERE email = ?
                     `
-                console.log(req.body.token)
-                db.query(updateUserTokenQuery, [req.body.token, email], (err2) => {
-                    if (err2) throw err2
-                    console.log('Updated Token')
-                })
-            }
-            next();
-        })
-    } else {
-        console.log('no email')
-        next()
+                    console.log(req.body.token)
+                    db.query(updateUserTokenQuery, [req.body.token, email], (err2) => {
+                        if (err2) throw err2
+                        console.log('Updated Token')
+                    })
+                }
+                next();
+            })
+        } else {
+            console.log('no email')
+            next()
+        }
     }
 })
 
