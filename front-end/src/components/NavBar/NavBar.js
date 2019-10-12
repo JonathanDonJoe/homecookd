@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import auth0Client from '../Auth/Auth';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import './NavBar.css';
+import tokenLoginAction from '../../actions/tokenLoginAction'
 
 class NavBar extends Component {
 
@@ -12,6 +13,13 @@ class NavBar extends Component {
         this.props.history.replace('/');
     };
 
+    componentDidMount = () => {
+        console.log('componentDidMount')
+        if(localStorage['access_token']) {
+            console.log(localStorage['access_token'])
+            this.props.tokenLogin({token:localStorage['access_token']})
+        }
+    }
 
     render() {
         // console.log(this.props.auth.modal)
@@ -58,14 +66,14 @@ function mapStateToProps(state) {
     })
 }
 
-// function mapDispatchToProps(dispatch) {
-//     return bindActionCreators({
-//         modal: modalAction
-//     }, dispatch)
-// }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        tokenLogin: tokenLoginAction
+    }, dispatch)
+}
 
 // export default NavBar;
 export default withRouter(connect(mapStateToProps, 
-    null
-    // mapDispatchToProps
+    // null
+    mapDispatchToProps
     )(NavBar));

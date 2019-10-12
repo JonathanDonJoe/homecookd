@@ -5,7 +5,7 @@ const jwksRsa = require('jwks-rsa');
 const multer = require('multer');
 const config = require('../config')
 var stripe = require('stripe')(config.stripe)
-const upload = multer( { dest: './public/images/events/' });
+const upload = multer({ dest: './public/images/events/' });
 
 const db = require("../db");
 
@@ -15,56 +15,68 @@ router.post('*', upload.single('locationImage'), (req, res, next) => {
 })
 
 const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://dev-ag0cp9dk.auth0.com/.well-known/jwks.json`
-  }),
-  audience: `1GhYuE5mUY005Y6imP9Auc2R7smNW848`,
-  issuer: `https://dev-ag0cp9dk.auth0.com/`,
-  algorithms: [`RS256`]
+    secret: jwksRsa.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: `https://dev-ag0cp9dk.auth0.com/.well-known/jwks.json`
+    }),
+    audience: `1GhYuE5mUY005Y6imP9Auc2R7smNW848`,
+    issuer: `https://dev-ag0cp9dk.auth0.com/`,
+    algorithms: [`RS256`]
 });
 
 router.post("*", checkJwt, (req, res, next) => {
-  const email = req.body.email;
-  // console.log(req.body);
-  // const token = req.body.token
-  console.log("index email: ");
-  console.log(email);
-  const getUserIdQuery = `SELECT id FROM users WHERE email = ?`;
+    console.log('req.body.email')
+    console.log(req.body.email)
+    // If we're checking 
+    if (req.body.email) {
+        const email = req.body.email;
+        // console.log(req.body);
+        // const token = req.body.token
+        console.log("index email: ");
+        console.log(email);
+        const getUserIdQuery = `SELECT id FROM users WHERE email = ?`;
 
-    db.query(getUserIdQuery, [email], (err, results) => {
-        if (err) {
-            throw err
-        }
-        if (!results || results.length === 0) {
-            res.locals.loggedIn = false;
-            console.log('res.locals.loggedIn: ')
-            console.log(res.locals.loggedIn)
-        } else {
-            res.locals.loggedIn = true;
-            res.locals.uid = results[0].id
-            console.log('res.locals.uid: ')
-            console.log(res.locals.uid)
-            console.log('res.locals.loggedIn: ')
-            console.log(res.locals.loggedIn)
-        }
-        next();
-    })
+        db.query(getUserIdQuery, [email], (err, results) => {
+            if (err) {
+                throw err
+            }
+            if (!results || results.length === 0) {
+                res.locals.loggedIn = false;
+                console.log('res.locals.loggedIn: ')
+                console.log(res.locals.loggedIn)
+            } else {
+                res.locals.loggedIn = true;
+                res.locals.uid = results[0].id
+                console.log('res.locals.uid: ')
+                console.log(res.locals.uid)
+                console.log('res.locals.loggedIn: ')
+                console.log(res.locals.loggedIn)
+            }
+            next();
+        })
+    } else {
+        console.log('no email')
+        next()
+    }
+})
+
+router.post('/', (req, res, next) => {
+    res.json({msg: 'test works'})
 })
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-  res.send("Get Request");
+router.get("/", function (req, res, next) {
+    res.send("Get Request");
 });
 
 router.post('/payment/stripe', (req, res) => {
     console.log(req.body);
     // res.json(req.body)
-    if(!res.locals.loggedIn) {
+    if (!res.locals.loggedIn) {
         res.json({
-            msg:'badToken'
+            msg: 'badToken'
         })
         return;
     }
@@ -75,7 +87,7 @@ router.post('/payment/stripe', (req, res) => {
         source: stripeToken,
         description: `Charges for ${email}`
     }, (err, charge) => {
-        if (err)  {
+        if (err) {
             res.json({
                 msg: 'errorProcessing'
             });
@@ -85,9 +97,9 @@ router.post('/payment/stripe', (req, res) => {
                     (user_id, event_id, paid, dine_in, pick_up)
                 VALUES
                     (?, ?, ?, ?, ?)`
-            db.query( insertAttendingQuery, [res.locals.uid, event_id, num_servings, 1, 1]);
+            db.query(insertAttendingQuery, [res.locals.uid, event_id, num_servings, 1, 1]);
             res.json({
-                msg:'paymentSuccess'
+                msg: 'paymentSuccess'
             })
         }
     })

@@ -13,7 +13,7 @@ class Callback extends Component {
     this.props.login(resolvedPromise)
     setTimeout(()=>{
       this.props.history.replace('/');
-    }, 2000)
+    }, 500)
   }
 
   render() {
