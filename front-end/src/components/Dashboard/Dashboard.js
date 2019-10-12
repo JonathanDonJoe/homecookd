@@ -13,6 +13,16 @@ class Dashboard extends Component {
         events: []
     }
 
+    async componentDidUpdate(prevProps, prevState) {
+        if (prevProps.auth !== this.props.auth) {
+            console.log(this.props.auth)
+            const url = `${window.apiHost}/events/getUserEvents`
+            const axiosResponse = await axios.post(url, this.props.auth)
+            this.setState({
+                events: axiosResponse.data
+            })
+        }
+    }
     async componentDidMount() {
         console.log(this.props.auth)
         const url = `${window.apiHost}/events/getUserEvents`
@@ -20,6 +30,7 @@ class Dashboard extends Component {
         this.setState({
             events: axiosResponse.data
         })
+
     }
 
     render() {
@@ -29,15 +40,16 @@ class Dashboard extends Component {
         const attendingEvents = []
         const eventsAttended = []
         console.log(this.props.auth.user_id)
-        this.state.events.forEach( (event, i) => {
+        this.state.events.forEach((event, i) => {
             console.log(event.host_id)
             console.log(event.time)
             if (event.host_id === this.props.auth.user_id) {
                 hostingEvents.push(<EventCard key={i} event={event} event_id={event.event_id} />)
+
             } else if (moment(event.time) > moment()){
                 attendingEvents.push(<EventCard key={i} event={event} event_id={event.event_id}  />)
             } else {
-                eventsAttended.push(<EventCard key={i} event={event} event_id={event.event_id}  />)
+                eventsAttended.push(<EventCard key={i} event={event} event_id={event.event_id} />)
             }
         })
 

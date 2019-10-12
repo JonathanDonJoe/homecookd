@@ -6,7 +6,7 @@ export default (data) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 
     // // Fail Case
-    // axios.defaults.headers.common['Authorization'] = `Bearer ${this.idToken}`.replace('d','b');
+    // axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`.replace('d','b');
 
     const axiosResponse = axios.post(signUpUrl, data);
 

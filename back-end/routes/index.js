@@ -10,6 +10,7 @@ const upload = multer({ dest: './public/images/events/' });
 const db = require("../db");
 
 router.post('*', upload.single('locationImage'), (req, res, next) => {
+    console.log('multer')
     console.log(req.body)
     next();
 })
@@ -26,13 +27,51 @@ const checkJwt = jwt({
     algorithms: [`RS256`]
 });
 
-router.post("*", checkJwt, (req, res, next) => {
+// Runs checkJwt.  If an error occurs, this handles the error
+router.post("*", checkJwt, (err, req, res, next) => {
+    console.log('error check checkJwt ran')
+    if (err.name === 'UnauthorizedError') {
+        console.log('Unauthorized err')
+        res.json({
+            msg: 'unauthorizedUser',
+            user_id: null,
+            first: null,
+            last: null,
+            email: null,
+            picture: null,
+            token: null
+        })
+    } else if (err) {
+        console.log('Other err')
+        res.json({
+            msg: 'unrecognizedUser',
+            user_id: null,
+            first: null,
+            last: null,
+            email: null,
+            picture: null,
+            token: null
+        })
+    } else {
+        // This route never runs without an error, so this else block never runs as far as I can tell
+        console.log('no err')
+        next()
+    }
+})
+
+// Runs checkJwt.  If no error occurs, this calls next()
+router.post('*', checkJwt, (req, res, next) => {
+    console.log('regular checkJwt ran')
+    next()
+})
+
+router.post("*", (req, res, next) => {
     console.log('req.body.email')
     console.log(req.body.email)
     // If we're checking 
     if (req.body.email) {
         const email = req.body.email;
-        // console.log(req.body);
+        console.log(req.body);
         // const token = req.body.token
         console.log("index email: ");
         console.log(email);
@@ -42,6 +81,7 @@ router.post("*", checkJwt, (req, res, next) => {
             if (err) {
                 throw err
             }
+            console.log(results)
             if (!results || results.length === 0) {
                 res.locals.loggedIn = false;
                 console.log('res.locals.loggedIn: ')
@@ -72,6 +112,7 @@ router.post("*", checkJwt, (req, res, next) => {
         console.log('no email')
         next()
     }
+
 })
 
 router.post('/MessageEvents', (req, res) => {
