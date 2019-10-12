@@ -16,17 +16,16 @@ class NavBar extends Component {
     };
 
     componentDidMount = () => {
-        console.log('componentDidMount')
+        // console.log('componentDidMount')
         if(localStorage['access_token']) {
-            console.log(localStorage['access_token'])
+            // console.log(localStorage['access_token'])
             this.props.tokenLogin({token:localStorage['access_token']})
         }
     }
 
     render() {
-        console.log('this.props.auth')
+        // console.log('this.props.auth:')
         console.log(this.props.auth)
-        // console.log(this.state.showModal);
         // console.log(auth0Client.getIdToken())
         // console.log(auth0Client.getProfile())
         return (
@@ -44,10 +43,7 @@ class NavBar extends Component {
                                 }
                                 {
                                     !(auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
-                                    <li className='nav-non-link' onClick={async ()=>{
-                                        const result = await auth0Client.signIn()
-                                        console.log(result)
-                                    }}>Log In</li>
+                                    <li className='nav-non-link' onClick={auth0Client.signIn}>Log In</li>
                                 }
                                 {
                                     (auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&

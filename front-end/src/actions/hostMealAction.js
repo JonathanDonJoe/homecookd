@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default (data, token) => {
-    // console.log(data)
+    console.log(data)
     // console.log(token)
     const signUpUrl = `${window.apiHost}/events/hostMeal/`
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

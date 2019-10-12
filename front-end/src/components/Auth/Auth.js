@@ -21,25 +21,7 @@ class Auth {
     }
 
     isAuthenticated() {
-        console.log(new Date().getTime() < this.expiresAt)
-
-        // Old block:
         return new Date().getTime() < this.expiresAt;
-
-
-
-        // // Check if a new login was done
-        // if (new Date().getTime() < this.expiresAt) {
-        //     return new Date().getTime() < this.expiresAt
-        // } else if ()
-        // // if token was found in localhost
-        // // Check for local storage here?
-        // // If local storage exists, pull out the cookie???
-        // console.log(new Date().getTime() < this.expiresAt)
-
-
-
-        
     }
 
     signIn() {
