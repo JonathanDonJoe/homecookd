@@ -1,7 +1,8 @@
-import React from 'react';
 import './Compose.css';
+import React, { Component } from 'react'
 
-export default function Compose(props) {
+export class Compose extends Component {
+  render() {
     return (
       <div className="compose">
         <input
@@ -9,10 +10,9 @@ export default function Compose(props) {
           className="compose-input"
           placeholder="Type a message, @name"
         />
-
-        {
-          props.rightItems
-        }
       </div>
     );
+  }
 }
+
+export default Compose
