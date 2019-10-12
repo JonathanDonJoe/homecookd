@@ -15,7 +15,8 @@ class EventPayment extends Component {
     events: [],
     servings: 0,
     payment: 0,
-    modal: 0,
+    joinModal: 0,
+		reviewModal: 0,
     dineIn: 1,
     pickUp: 1
   };
@@ -70,21 +71,52 @@ class EventPayment extends Component {
     });
   };
 
-  showModal = (e) => {
-    e.preventDefault();
-    if (this.state.modal === 0) {
-      this.setState({
-        modal: 1,
-        payment: this.props.event.event_price
-      });
-    } else {
-      this.setState({
-        modal: 0,
-        payment: this.props.event.event_price
-      });
-    }      console.log(this.props.event)
+	getEvents = async (e) => {
+		e.preventDefault();
+		const url = `${window.apiHost}/events/getUserEvents`
+    const axiosResponse = await axios.post(url, this.props.auth)
+		this.setState({
+      events: axiosResponse.data
+    })
 
+	}
+
+  showModal = () => {
+		console.log(moment(this.props.event.event_time))
+		console.log(moment())
+		console.log(moment(this.props.event.event_time) < moment())
+    if (this.state.joinModal === 0 && moment(this.props.event.event_time) > moment()) {
+      this.setState({
+        joinModal: 1,
+				reviewModal: 0,
+        payment: this.props.event.event_price
+      })
+    } else if( this.state.joinModal === 0 && moment(this.props.event.event_time) < moment() ) {
+      this.setState({
+        joinModal: 0,
+				reviewModal: 1,
+      })
+    } else {
+			this.setState({
+				joinModal: 0,
+				reviewModal: 0
+			})
+		}   
   };
+
+	//   showReviewModal = (e) => {
+  //   e.preventDefault();
+  //   if (this.state.reviewModal === 0 && this.props.event.event_time < moment()) {
+  //     this.setState({
+  //       reviewModal: 1,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       reviewModal: 0,
+  //     });
+  //   }      console.log(this.props.event)
+
+  // };
 
   // changeDineIn = (e) => {
   //   e.preventDefault();
@@ -103,19 +135,43 @@ class EventPayment extends Component {
 //   }
 
   render() {    
+		console.log(this.props.event)
+		console.log(this.state.joinModal)
     const event = this.props.event;
 
-    this.state.events.forEach( ( event, i ) => {
-      if ( event.time < moment() ) {
-        return <UserReview key={i} event={event} event_id={event.event_id} />
-      }
-    })
+    let modalButton = ""
+		if ( moment(event.event_time) < moment() ) {
+        modalButton = <button
+          disabled=""
+          onClick={this.showModal}
+          data-target="modal2"
+          className="btn modal-trigger"
+        >
+				Leave a Review
+        </button>
+      } else if ( moment(event.event_time) > moment()) {
+				  modalButton = <button
+          disabled=""
+          onClick={this.showModal}
+          data-target="modal1"
+          className="btn modal-trigger"
+        >
+				  Join for <NumberFormat value={this.props.event.event_price} displayType={'text'} fixedDecimalScale={true} decimalScale={'2'} prefix={'$'} />
+        </button>
+			}
 
     // this logic is what makes the modal appear and close.
-    let modalShow = "none";
-    if (this.state.modal === 1) {
-      modalShow = "block";
+    let modalShowJoin = "none";
+    if (this.state.joinModal === 1) {
+			console.log('joining modal')
+      modalShowJoin = "block";
     }
+
+		let modalShowReview = "none";
+		if (this.state.reviewModal === 1 ){
+			console.log('reviewing modal')
+			modalShowReview = "block"
+		}
 
     // this logic determines whether the modal allows a payment or tells you to log in. 
     let button;
@@ -164,17 +220,10 @@ class EventPayment extends Component {
     return (
       <div>
         <div>
-          <button
-          disabled=""
-            onClick={this.showModal}
-            data-target="modal1"
-            className="btn modal-trigger"
-          >
-            Join for <NumberFormat value={this.props.event.event_price} displayType={'text'} fixedDecimalScale={true} decimalScale={'2'} prefix={'$'} />
-          </button>
+					{modalButton}
           <div
             id="modal1"
-            style={{ display: `${modalShow}` }}
+            style={{ display: `${modalShowJoin}` }}
             className="modal"
           >
         <button id="close-modal" className="col s1 right  " onClick={this.showModal}>&Chi;</button>
@@ -241,6 +290,15 @@ class EventPayment extends Component {
               </Link>
             </div>
           </div>
+					<div id="modal2" class="modal">
+    				<div class="modal-content">
+      				<h4>Modal Header</h4>
+      				<p>A bunch of text</p>
+    				</div>
+    				<div class="modal-footer">
+      				<a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+    				</div>
+  				</div>
         </div>
       </div>
     );

@@ -45,8 +45,9 @@ class Dashboard extends Component {
             console.log(event.time)
             if (event.host_id === this.props.auth.user_id) {
                 hostingEvents.push(<EventCard key={i} event={event} event_id={event.event_id} />)
-            } else if (event.time > moment()) {
-                attendingEvents.push(<EventCard key={i} event={event} event_id={event.event_id} />)
+
+            } else if (moment(event.time) > moment()){
+                attendingEvents.push(<EventCard key={i} event={event} event_id={event.event_id}  />)
             } else {
                 eventsAttended.push(<EventCard key={i} event={event} event_id={event.event_id} />)
             }
