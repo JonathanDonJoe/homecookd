@@ -75,14 +75,14 @@ router.post("*", checkJwt, (req, res, next) => {
 })
 
 router.post('/MessageEvents', (req, res) => {
-    console.log(res.locals.uid);
+    console.log(`using id of ${req.body.user_id}`);
     const getUserMessageEventsQuery = `
-        select events.title, events.picture
+        select events.title, events.picture, events.id
         from events, attendances
         where events.id = attendances.event_id and attendances.user_id = ? 
     `
 
-    db.query(getUserMessageEventsQuery, [res.locals.uid], (err, result) => {
+    db.query(getUserMessageEventsQuery, [req.body.user_id], (err, result) => {
         if (err) throw err;
         console.log('result')
         console.log(result)
@@ -91,7 +91,9 @@ router.post('/MessageEvents', (req, res) => {
 })
 
 router.post('/Messages', (req, res) => {
-    console.log(res.locals.uid);
+    
+    console.log(`using id of ${req.body.user_id}`);
+
     const getUserMessagesQuery = `
         select messages.sender_id, messages.event_id, messages.sent_time, 
         messages.content, events.title, events.picture AS event_picture,
@@ -102,7 +104,7 @@ router.post('/Messages', (req, res) => {
         order by messages.event_id desc
     `
 
-    db.query(getUserMessagesQuery, [res.locals.uid], (err, result) => {
+    db.query(getUserMessagesQuery, [req.body.user_id], (err, result) => {
         if (err) throw err;
         console.log('result')
         console.log(result)

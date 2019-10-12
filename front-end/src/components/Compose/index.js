@@ -2,7 +2,11 @@ import './Compose.css';
 import React, { Component } from 'react'
 
 export class Compose extends Component {
+  postMessage = ()=> {
+
+  }
   render() {
+    console.log(this.props);
     return (
       <div className="compose">
         <input
