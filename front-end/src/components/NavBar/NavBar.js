@@ -27,6 +27,7 @@ class NavBar extends Component {
                             <ul id='nav-mobile' className='right'>
                                 <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events/search'>Events</Link></li>
+                                <li><Link to='/Messenger'>Messenger</Link></li>
                                 {
                                     auth0Client.isAuthenticated() &&
                                     <li><Link to='/dashboard'>Dashboard</Link></li>

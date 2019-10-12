@@ -54,6 +54,43 @@ router.post("*", checkJwt, (req, res, next) => {
     })
 })
 
+router.post('/MessageEvents', (req, res) => {
+    console.log(res.locals.uid);
+    const getUserMessageEventsQuery = `
+        select events.title, events.picture
+        from events, attendances
+        where events.id = attendances.event_id and attendances.user_id = ? 
+    `
+
+    db.query(getUserMessageEventsQuery, [res.locals.uid], (err, result) => {
+        if (err) throw err;
+        console.log('result')
+        console.log(result)
+        res.json(result)
+    })
+})
+
+router.post('/Messages', (req, res) => {
+    console.log(res.locals.uid);
+    const getUserMessagesQuery = `
+        select messages.sender_id, messages.event_id, messages.sent_time, 
+        messages.content, events.title, events.picture AS event_picture,
+        users.first_name AS sender_name, users.picture AS sender_picture
+        from messages, events, users, attendances
+        where events.id = attendances.event_id and messages.event_id=events.id
+        and users.id = messages.sender_id and attendances.user_id = ?
+        order by messages.event_id desc
+    `
+
+    db.query(getUserMessagesQuery, [res.locals.uid], (err, result) => {
+        if (err) throw err;
+        console.log('result')
+        console.log(result)
+        res.json(result)
+    })
+})
+
+
 /* GET home page. */
 router.get("/", function(req, res, next) {
   res.send("Get Request");
