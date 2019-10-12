@@ -10,14 +10,29 @@ export class Messenger extends Component{
     conversations: [],
     messages: []
   }
-
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevProps.auth !== this.props.auth) {
+      const messagesUrl = `${window.apiHost}/Messages`
+      const eventsUrl = `${window.apiHost}/MessageEvents`
+      console.log('asking for response');
+      const messages = await axios.post(messagesUrl, this.props.auth)
+      const messageEvents = await axios.post(eventsUrl, this.props.auth)
+      console.log(messages);
+      this.setState({
+          conversations: messageEvents.data,
+          messages: messages.data
+      })
+    }
+}
   async componentDidMount(){
+    console.log(this.props.conversation);
     console.log('mounted');
     const messagesUrl = `${window.apiHost}/Messages`
     const eventsUrl = `${window.apiHost}/MessageEvents`
     console.log('asking for response');
     const messages = await axios.post(messagesUrl, this.props.auth)
     const messageEvents = await axios.post(eventsUrl, this.props.auth)
+    console.log(messages);
     this.setState({
         conversations: messageEvents.data,
         messages: messages.data
@@ -27,13 +42,14 @@ export class Messenger extends Component{
     render(){
       return (
         <div className="messenger">
-
+          <h1>{this.props.conversation.conversationId}</h1>
           <div className="scrollable sidebar">
             <ConversationList conversations={this.state.conversations}/>
           </div>
 
           <div className="scrollable content">
-            <MessageList messages={this.state.messages}/>
+            <MessageList messenger={this.state}
+            />
           </div>
         </div>
       )
@@ -59,7 +75,9 @@ export class Messenger extends Component{
 }
 function mapStateToProps(state) {
     return ({
-        auth: state.auth
+        auth: state.auth,
+        conversation: state.conversation
+
     })
 }
 export default connect(mapStateToProps)(Messenger);
