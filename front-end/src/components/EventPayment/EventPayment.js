@@ -174,6 +174,7 @@ class EventPayment extends Component {
       <div>
         <div>
           <button
+          disabled=""
             onClick={this.showModal}
             data-target="modal1"
             className="btn modal-trigger"
