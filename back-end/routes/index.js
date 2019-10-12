@@ -55,7 +55,16 @@ router.post("*", checkJwt, (req, res, next) => {
                 console.log(res.locals.loggedIn)
 
                 // UPDATE THE TOKEN IN THE DATABASE HERE
-
+                const updateUserTokenQuery = `
+                    UPDATE users
+                    SET token = ?
+                    WHERE email = ?
+                    `
+                console.log(req.body.token)
+                db.query(updateUserTokenQuery, [req.body.token, email], (err2) => {
+                    if (err2) throw err2
+                    console.log('Updated Token')
+                })
             }
             next();
         })

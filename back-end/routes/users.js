@@ -35,7 +35,7 @@ router.post('/login', function (req, res) {
                 throw err2
             }
             console.log(results)
-            let reviewQueryArray =[
+            let reviewQueryArray = [
                 results.insertId,
                 5,
                 `Thank You!`,
@@ -64,15 +64,25 @@ router.post('/tokenLogin', (req, res, next) => {
     const getUserIdQuery = `SELECT * FROM users WHERE token = ?`;
 
     db.query(getUserIdQuery, [req.body.token], (err, results) => {
-        res.json({
-            msg: 'tokenLoggedIn',
-            user_id: results[0].id,
-            first: results[0].first_name,
-            last: results[0].last_name,
-            email: results[0].email,
-            picture: results[0].picture,
-            token: results[0].token
-        })
+        if (err) throw err
+        console.log(results.length)
+        console.log('!results.length')
+        console.log(!results.length)
+        if (!results.length) {
+            res.json({
+                msg: 'tokenInvalid'
+            })
+        } else {
+            res.json({
+                msg: 'tokenLoggedIn',
+                user_id: results[0].id,
+                first: results[0].first_name,
+                last: results[0].last_name,
+                email: results[0].email,
+                picture: results[0].picture,
+                token: results[0].token
+            })
+        }
     })
 })
 
