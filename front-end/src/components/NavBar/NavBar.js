@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './NavBar.css';
 import tokenLoginAction from '../../actions/tokenLoginAction'
+import logOutAction from '../../actions/logoutAction';
 
 class NavBar extends Component {
 
     signOut = () => {
         auth0Client.signOut();
+        this.props.logOut()
         this.props.history.replace('/');
     };
 
@@ -37,19 +39,19 @@ class NavBar extends Component {
                                 <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events/search'>Events</Link></li>
                                 {
-                                    auth0Client.isAuthenticated() &&
+                                    (auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
                                     <li><Link to='/dashboard'>Dashboard</Link></li>
                                 }
                                 {
-                                    !auth0Client.isAuthenticated() &&
+                                    !(auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
                                     <li className='nav-non-link' onClick={async ()=>{
                                         const result = await auth0Client.signIn()
                                         console.log(result)
                                     }}>Log In</li>
                                 }
                                 {
-                                    !auth0Client.isAuthenticated() &&
-                                <li className='nav-non-link' onClick={auth0Client.signIn}>Register</li>
+                                    (auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
+                                <li className='nav-non-link' onClick={this.signOut}>LogOut</li>
                                 }
                             </ul>
                         </div>
@@ -69,7 +71,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        tokenLogin: tokenLoginAction
+        tokenLogin: tokenLoginAction,
+        logOut: logOutAction
     }, dispatch)
 }
 
