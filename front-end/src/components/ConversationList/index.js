@@ -26,19 +26,20 @@ export class ConversationList extends Component {
     });
   }
   render(){
+    console.log(this.props);
     return (
       <div className="conversation-list">
         <Toolbar
           title="Messenger"
         />
-        {/* {
-          conversations.map(conversation =>
+        {
+          this.props.conversations.map(conversation =>
             <ConversationListItem
-              key={conversation.name}
+              key={conversation.title}
               data={conversation}
             />
           )
-        } */}
+        }
       </div>
     );
   }

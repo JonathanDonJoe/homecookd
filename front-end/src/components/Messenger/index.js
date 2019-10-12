@@ -29,11 +29,11 @@ export class Messenger extends Component{
         <div className="messenger">
 
           <div className="scrollable sidebar">
-            <ConversationList />
+            <ConversationList conversations={this.state.conversations}/>
           </div>
 
           <div className="scrollable content">
-            <MessageList />
+            <MessageList messages={this.state.messages}/>
           </div>
         </div>
       )

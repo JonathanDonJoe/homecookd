@@ -8,6 +8,8 @@ import React, { Component } from 'react'
 import './MessageList.css';
 export class MessageList extends Component {
   render() {
+    console.log(this.props);
+
     return (
       <div className="message-list">
          <Toolbar
