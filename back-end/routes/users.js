@@ -21,8 +21,8 @@ router.post('/login', function (req, res) {
     } else if (!res.locals.loggedIn) {
         const insertUserQuery = `
         INSERT INTO users 
-            (first_name, last_name, email, picture)
-        VALUES (?, ?, ?, ?)
+            (first_name, last_name, email, picture, token)
+        VALUES (?, ?, ?, ?, ?)
         `
         const gimmeReviewQuery = `
         INSERT INTO host_reviews
@@ -30,12 +30,12 @@ router.post('/login', function (req, res) {
         VALUES (?, ?, ?, ?)
         `
 
-        db.query(insertUserQuery, [first, last, email, picture], (err2, results, fields) => {
+        db.query(insertUserQuery, [first, last, email, picture, token], (err2, results, fields) => {
             if (err2) {
                 throw err2
             }
             console.log(results)
-            let reviewQueryArray =[
+            let reviewQueryArray = [
                 results.insertId,
                 5,
                 `Thank You!`,
@@ -57,6 +57,33 @@ router.post('/login', function (req, res) {
             })
         })
     }
+})
+router.post('/tokenLogin', (req, res, next) => {
+    console.log(req.body)
+
+    const getUserIdQuery = `SELECT * FROM users WHERE token = ?`;
+
+    db.query(getUserIdQuery, [req.body.token], (err, results) => {
+        if (err) throw err
+        console.log(results.length)
+        console.log('!results.length')
+        console.log(!results.length)
+        if (!results.length) {
+            res.json({
+                msg: 'tokenInvalid'
+            })
+        } else {
+            res.json({
+                msg: 'tokenLoggedIn',
+                user_id: results[0].id,
+                first: results[0].first_name,
+                last: results[0].last_name,
+                email: results[0].email,
+                picture: results[0].picture,
+                token: results[0].token
+            })
+        }
+    })
 })
 
 
