@@ -5,7 +5,8 @@ create table users (
     first_name VARCHAR(30) not null,
     last_name VARCHAR(30) not null,
     email varchar(100) not null,
-    picture VARCHAR(200) DEFAULT '/images/users/default.png'
+    picture VARCHAR(200) DEFAULT '/images/users/default.png',
+    token VARCHAR(2047) DEFAULT null
 );
 
 DROP TABLE events;

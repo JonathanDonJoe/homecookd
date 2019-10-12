@@ -22,7 +22,8 @@ class NavBar extends Component {
     }
 
     render() {
-        // console.log(this.props.auth.modal)
+        console.log('this.props.auth')
+        console.log(this.props.auth)
         // console.log(this.state.showModal);
         // console.log(auth0Client.getIdToken())
         // console.log(auth0Client.getProfile())

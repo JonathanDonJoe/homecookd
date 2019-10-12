@@ -53,6 +53,9 @@ router.post("*", checkJwt, (req, res, next) => {
                 console.log(res.locals.uid)
                 console.log('res.locals.loggedIn: ')
                 console.log(res.locals.loggedIn)
+
+                // UPDATE THE TOKEN IN THE DATABASE HERE
+
             }
             next();
         })
@@ -60,10 +63,6 @@ router.post("*", checkJwt, (req, res, next) => {
         console.log('no email')
         next()
     }
-})
-
-router.post('/', (req, res, next) => {
-    res.json({msg: 'test works'})
 })
 
 /* GET home page. */
