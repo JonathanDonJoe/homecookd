@@ -40,15 +40,15 @@ class NavBar extends Component {
                                 <li><Link to='/events/search'>Events</Link></li>
                                 <li><Link to='/Messenger'>Messenger</Link></li>
                                 {
-                                    (auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
+                                    (auth0Client.isAuthenticated() || this.props.auth.loggedIn) &&
                                     <li><Link to='/dashboard'>Dashboard</Link></li>
                                 }
                                 {
-                                    !(auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
+                                    !(auth0Client.isAuthenticated() || this.props.auth.loggedIn) &&
                                     <li className='nav-non-link' onClick={auth0Client.signIn}>Log In</li>
                                 }
                                 {
-                                    (auth0Client.isAuthenticated() || this.props.auth.msg==='tokenLoggedIn') &&
+                                    (auth0Client.isAuthenticated() || this.props.auth.loggedIn) &&
                                 <li className='nav-non-link' onClick={this.signOut}>Log Out</li>
                                 }
                             </ul>
