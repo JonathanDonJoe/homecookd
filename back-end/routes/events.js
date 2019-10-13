@@ -114,6 +114,7 @@ router.post('/getUserEvents', (req, res) => {
     })
 })
 
+
 router.get('/:eventId', (req, res) => {
     const eventId = req.params.eventId;
     const getEventQuery = `
@@ -128,14 +129,34 @@ router.get('/:eventId', (req, res) => {
     `
     db.query(getEventQuery, [eventId], (err, result) => {
         if (err) throw err;
+        // console.log('result')
         // console.log(result)
         res.json(result)
     })
 })
 
+router.get('/:eventId/attendances', (req, res) => {
+    getAttendancesQuery = `
+            SELECT attendances.user_id  FROM events, attendances
+            WHERE events.id = attendances.event_id
+                AND events.id = ?;
+        `
+    db.query(getAttendancesQuery, [req.params.eventId], (err, result) => {
+        if (err) throw err;
+        console.log('result')
+        const attending = result.map(item => item.user_id)
+        // console.log(attending)
+        // result['attending'] = attending
+        // console.log(result)
+        const returnObj = {attending}
+        console.log(returnObj)
+        res.json(returnObj)
+    })
+})
+
 router.post('/submit_review', (req, res) => {
     console.log(req.body);
-    
+
 })
 
 // router.get('/review/:eventId', (req, res) => {
