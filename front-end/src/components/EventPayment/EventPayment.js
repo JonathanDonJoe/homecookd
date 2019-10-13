@@ -103,9 +103,9 @@ class EventPayment extends Component {
 		);
 	}
 
-	// getEvents = async (e) => {
+	// getAttendance = async (e) => {
 	// 	e.preventDefault();
-	// 	const url = `${window.apiHost}/events/getUserEvents`
+	// 	const url = `${window.apiHost}/events/getAttendance`
 	// 	const axiosResponse = await axios.post(url, this.props.auth)
 	// 	this.setState({
 	// 		events: axiosResponse.data
@@ -171,13 +171,7 @@ class EventPayment extends Component {
 
 		// this logic determines whether the modal allows a payment or tells you to log in. 
 		let button;
-		if (this.props.auth.token) {
-			button = (
-				<button onClick={this.makePayment} className="btn">
-					Reserve {this.state.servings} Servings
-        </button>
-			);
-		} else {
+		if (!this.props.auth.token) {
 			button = (
 				<button
 					onClick={async () => {
@@ -188,6 +182,14 @@ class EventPayment extends Component {
 					className="btn"
 				>
 					Please Log In
+        		</button>
+			);
+		} else if (event.attending && event.attending.includes(this.props.auth.user_id)) {
+			button = (<button className="btn" onClick={this.showModal} >You're already attending</button>)
+		} else {
+			button = (
+				<button onClick={this.makePayment} className="btn">
+					Reserve {this.state.servings} Servings
         		</button>
 			);
 		}
