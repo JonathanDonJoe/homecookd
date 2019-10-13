@@ -128,8 +128,25 @@ router.get('/:eventId', (req, res) => {
     `
     db.query(getEventQuery, [eventId], (err, result) => {
         if (err) throw err;
-        // console.log(result)
-        res.json(result)
+        console.log('result')
+        console.log(result)
+        // res.json(result)
+
+        getAttendancesQuery = `
+            SELECT attendances.user_id  FROM events, attendances
+            WHERE events.id = attendances.event_id
+                AND events.id = ?;
+        `
+        db.query(getAttendancesQuery, [eventId], (err2, result2) => {
+            if (err2) throw err2;
+            console.log('result2')
+            const attending = result2.map( item => item.user_id)
+            console.log(attending)
+            result['attending'] = attending
+            console.log(result)
+            res.json(result)
+        })
+
     })
 })
 
