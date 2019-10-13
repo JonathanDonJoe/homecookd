@@ -15,7 +15,7 @@ import paymentAndReviewAction from "../../actions/paymentAndReviewAction";
 
 class EventPayment extends Component {
 	state = {
-		events: [],
+		// events: [],
 		servings: 0,
 		payment: 0,
 		joinModal: 0,
@@ -25,6 +25,14 @@ class EventPayment extends Component {
 		dineIn: 1,
 		pickUp: 1
 	};
+
+	componentDidMount() {
+		this.setState({
+			dineIn: this.props.event.event_dine_in,
+			pickUp: this.props.event.event_pick_up
+		})
+	}
+
 
 	changeServings = (e) => {
 		this.setState({
@@ -95,15 +103,15 @@ class EventPayment extends Component {
 		);
 	}
 
-	getEvents = async (e) => {
-		e.preventDefault();
-		const url = `${window.apiHost}/events/getUserEvents`
-		const axiosResponse = await axios.post(url, this.props.auth)
-		this.setState({
-			events: axiosResponse.data
-		})
+	// getEvents = async (e) => {
+	// 	e.preventDefault();
+	// 	const url = `${window.apiHost}/events/getUserEvents`
+	// 	const axiosResponse = await axios.post(url, this.props.auth)
+	// 	this.setState({
+	// 		events: axiosResponse.data
+	// 	})
 
-	}
+	// }
 
 	showModal = () => {
 		if (this.state.joinModal === 0 && moment(this.props.event.event_time) > moment()) {
@@ -180,7 +188,7 @@ class EventPayment extends Component {
 					className="btn"
 				>
 					Please Log In
-        </button>
+        		</button>
 			);
 		}
 
@@ -232,7 +240,7 @@ class EventPayment extends Component {
 											<br />
 											<div className="servings">
 												{event.event_portions} servings remaining
-                    </div>
+                    						</div>
 										</div>
 									</div>
 									<div className="col s12 right-details">
@@ -260,7 +268,7 @@ class EventPayment extends Component {
 												>
 													<option value="" >
 														Select your servings
-                        </option>
+													</option>
 													{howManyServings}
 												</select>
 											</div>
@@ -296,11 +304,10 @@ class EventPayment extends Component {
 									<label for="textarea1">Textarea</label>
 								</div>
 								<button className="btn submit-button waves-effect waves-light" type="submit" name="action">Submit
-          			<i className="material-icons right">send</i>
+          							<i className="material-icons right">send</i>
 								</button>
 							</form>
 						</div>
-
 					</div>
 				</div>
 			</div>
