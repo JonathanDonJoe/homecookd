@@ -46,6 +46,7 @@ export class EventCard extends Component {
         // } else {
         //     <div> SIGN UP FOR MUY EVENT! <- call you register component here </div>
         // }
+        console.log(moment(this.props.event.time).format("dddd, MMMM Do YYYY, h:mm:ss a"))
 
         return (
             <Link to={`/events/singleEvent/${this.props.event_id}`}>
@@ -73,7 +74,9 @@ export class EventCard extends Component {
                         <div className='event-card-info col s12'>
                             <div className='tag-list row'>
                                 <div className='tag-list-item-container col s3 m3'>
-                                    <div className='tag-list-item'>{this.props.event.time}</div>
+                                    {/* <h5>{moment(this.props.event.time).format("MM-DD-YY, h:mm a")}</h5> */}
+                                    {/* <h3>{moment(this.props.event.time)}</h3> */}
+                                    <div className='tag-list-item'>{moment(this.props.event.time).format("MM-DD-YY h:mm a")}</div>
                                 </div>
                                 <div className='tag-list-item-container col s3 m3'>
                                     <div className='tag-list-item'>{this.props.event.portions} Portions Remain</div>

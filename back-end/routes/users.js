@@ -16,7 +16,8 @@ router.post('/login', function (req, res) {
             last,
             email,
             picture,
-            token
+            token, 
+            loggedIn: true
         })
     } else if (!res.locals.loggedIn) {
         const insertUserQuery = `
@@ -53,7 +54,8 @@ router.post('/login', function (req, res) {
                 last,
                 email,
                 picture,
-                token
+                token, 
+                loggedIn: true
             })
         })
     }
@@ -80,7 +82,8 @@ router.post('/tokenLogin', (req, res, next) => {
                 last: results[0].last_name,
                 email: results[0].email,
                 picture: results[0].picture,
-                token: results[0].token
+                token: results[0].token,
+                loggedIn: true
             })
         }
     })
