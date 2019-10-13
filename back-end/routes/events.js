@@ -133,6 +133,11 @@ router.get('/:eventId', (req, res) => {
     })
 })
 
+router.post('/submit_review', (req, res) => {
+    console.log(req.body);
+    
+})
+
 // router.get('/review/:eventId', (req, res) => {
 //     const eventId = req.params.eventId;
 //     const eventForReviewQuery = `
