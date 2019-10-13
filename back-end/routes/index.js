@@ -39,7 +39,8 @@ router.post("*", checkJwt, (err, req, res, next) => {
             last: null,
             email: null,
             picture: null,
-            token: null
+            token: null, 
+            loggedIn: false
         })
     } else if (err) {
         console.log('Other err')
@@ -50,7 +51,8 @@ router.post("*", checkJwt, (err, req, res, next) => {
             last: null,
             email: null,
             picture: null,
-            token: null
+            token: null, 
+            loggedIn: false
         })
     } else {
         // This route never runs without an error, so this else block never runs as far as I can tell

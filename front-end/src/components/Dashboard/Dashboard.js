@@ -13,24 +13,22 @@ class Dashboard extends Component {
         events: []
     }
 
-    async componentDidUpdate(prevProps, prevState) {
-        if (prevProps.auth !== this.props.auth) {
-            console.log(this.props.auth)
-            const url = `${window.apiHost}/events/getUserEvents`
-            const axiosResponse = await axios.post(url, this.props.auth)
-            this.setState({
-                events: axiosResponse.data
-            })
-        }
-    }
-    async componentDidMount() {
+    populateEvents = async () => {
         console.log(this.props.auth)
         const url = `${window.apiHost}/events/getUserEvents`
         const axiosResponse = await axios.post(url, this.props.auth)
         this.setState({
             events: axiosResponse.data
         })
+    }
 
+    async componentDidUpdate(prevProps, prevState) {
+        if (prevProps.auth !== this.props.auth) {
+            this.populateEvents()
+        }
+    }
+    async componentDidMount() {
+        this.populateEvents()
     }
 
     render() {
