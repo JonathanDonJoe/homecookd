@@ -25,26 +25,26 @@ export class Messenger extends Component{
     }
 }
   async componentDidMount(){
-    console.log(this.props.conversation);
-    console.log('mounted');
+    // console.log(this.props.conversation);
+    // console.log('mounted');
     const messagesUrl = `${window.apiHost}/Messages`
     const eventsUrl = `${window.apiHost}/MessageEvents`
-    console.log('asking for response');
+    // console.log('asking for response');
     const messages = await axios.post(messagesUrl, this.props.auth)
     const messageEvents = await axios.post(eventsUrl, this.props.auth)
-    console.log(messages);
+    // console.log(messages);
     this.setState({
         conversations: messageEvents.data,
         messages: messages.data
     })
-    console.log(this.state)
+    // console.log(this.state)
 }
     render(){
       return (
-        <div className="messenger">
+        <div className="messenger row">
           <h1>{this.props.conversation.conversationId}</h1>
           <div className="scrollable sidebar">
-            <ConversationList conversations={this.state.conversations}/>
+            <ConversationList info={this.state}/>
           </div>
 
           <div className="scrollable content">

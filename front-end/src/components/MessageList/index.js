@@ -8,10 +8,17 @@ import React, { Component } from 'react'
 
 import './MessageList.css';
 export class MessageList extends Component {
-
+    convoTitle = ()=> {
+      if(this.props.conversation.conversation){
+        return this.props.conversation.conversation.title
+      }else{
+        return 'Select a Conversation'
+      }
+    }
     renderMessages = () => {
+      if(this.props.conversation.conversation){
       let messages = this.props.messenger.messages.filter((message) =>{
-        return message.event_id == this.props.conversation.conversationId
+        return message.event_id == this.props.conversation.conversation.id
       })
 
       let i = 0;
@@ -71,12 +78,15 @@ export class MessageList extends Component {
 
     return tempMessages;
   }
+  }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="message-list">
          <Toolbar
-          title="Conversation Title"
+          title={
+            this.convoTitle()
+          }
         />
         <div className="message-list-container">{this.renderMessages()}</div>
 
