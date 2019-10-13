@@ -26,6 +26,7 @@ export class ConversationList extends Component {
     });
   }
   render(){
+
     console.log(this.props);
     return (
       <div className="conversation-list">
@@ -33,10 +34,11 @@ export class ConversationList extends Component {
           title="Messenger"
         />
         {
-          this.props.conversations.map(conversation =>
+          this.props.info.conversations.map(conversation =>
             <ConversationListItem
               key={conversation.title}
               data={conversation}
+              messages={this.props.info.messages}
             />
           )
         }
