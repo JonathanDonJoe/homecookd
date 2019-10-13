@@ -19,7 +19,7 @@ class NavBar extends Component {
         // console.log('componentDidMount')
         if(localStorage['access_token']) {
             // console.log(localStorage['access_token'])
-            console.log('this ran')
+            // console.log('tokenLoginCheck')
             this.props.tokenLogin({token:localStorage['access_token']})
         }
     }

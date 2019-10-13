@@ -7,7 +7,7 @@ import axios from 'axios'
 
 export class Event extends Component {
     state = {
-        event: [],
+        event: {},
         stars: 0,
         reviews: []
     }
@@ -24,14 +24,22 @@ export class Event extends Component {
         })
         starCount = starCount/axiosResponse.data.length
         var rounded = (Math.round( starCount * 10 ) / 10).toFixed(1)
+
+        const url2 = `${window.apiHost}/events/${eventId}/attendances`
+        const attendingAxiosResponse = await axios.get(url2)
+        
+        const eventData = axiosResponse.data[0]
+        eventData['attending'] = attendingAxiosResponse.data.attending
+
         this.setState({
-            event: axiosResponse.data[0],
+            event: eventData,
             stars: rounded,
             reviews: reviews
         })
     }
     render() {
-        console.log(this.props.match.params.eventId)
+        // console.log(this.props.match.params.eventId)
+        console.log(this.state.event)
         return (
             <div className='event-page container-fluid'>
                 <EventImgTitle event={this.state.event} history={this.props.history} />
