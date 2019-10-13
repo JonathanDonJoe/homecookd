@@ -9,3 +9,7 @@
     background-color: transparent;
     border: none;
 }
+
+#modal-fixed-footer{
+    height: auto;
+}
