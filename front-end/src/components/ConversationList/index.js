@@ -36,7 +36,7 @@ export class ConversationList extends Component {
         {
           this.props.info.conversations.map(conversation =>
             <ConversationListItem
-              key={conversation.title}
+              key={conversation.id}
               data={conversation}
               messages={this.props.info.messages}
             />

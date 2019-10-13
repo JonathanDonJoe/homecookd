@@ -156,6 +156,25 @@ router.post('/Messages', (req, res) => {
 })
 
 
+router.post('/postMessage', (req, res) => {
+    let content = req.body.message
+    let eventId = req.body.eventId
+    let userId = req.body.auth.user_id
+
+    const postMessageQuery = `
+    INSERT INTO messages 
+        (sender_id, event_id, content)
+    VALUES
+        (?, ?, ?)
+    `
+
+    db.query(postMessageQuery, [userId, eventId, content], (err, result) => {
+        if (err) throw err;
+        res.json(result)
+    })
+})
+
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
     res.send("Get Request");
