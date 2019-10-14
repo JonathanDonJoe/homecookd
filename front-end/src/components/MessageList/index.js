@@ -20,6 +20,8 @@ export class MessageList extends Component {
       let messages = this.props.messenger.messages.filter((message) =>{
         return message.event_id == this.props.conversation.conversation.id
       })
+      messages.sort( (a,b) => moment(a.sent_time).valueOf() - moment(b.sent_time).valueOf())
+
 
       let i = 0;
       let messageCount = messages.length;

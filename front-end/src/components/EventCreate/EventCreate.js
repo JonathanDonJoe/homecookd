@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Redirect } from 'react-router-dom';
 import { DatePicker, TimePicker } from 'react-materialize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -156,6 +157,8 @@ export class EventCreate extends Component {
             // console.log(this.props.auth.token);
             // console.log(data);
             this.props.hostMeal(data, this.props.auth.token)
+            // console.log('should be pushing');
+            this.props.history.push('/dashboard')
 
         })
 
@@ -186,7 +189,7 @@ export class EventCreate extends Component {
         // console.log(this.state.time);
         // console.log(this.state.date);
         // console.log(this.state.portions);
-        // console.log(this.props.auth);
+        console.log(this.props.history);
 
         return (
             <div id="host-form" className="row">
