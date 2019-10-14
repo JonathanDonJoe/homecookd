@@ -112,6 +112,9 @@ class EventPayment extends Component {
 				token: this.props.auth.token
 			}
 		);
+		this.setState({
+			reviewModal: 0
+		})
 	}
 
 	// getAttendance = async (e) => {

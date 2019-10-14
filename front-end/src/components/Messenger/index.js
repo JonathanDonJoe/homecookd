@@ -23,6 +23,18 @@ export class Messenger extends Component{
           messages: messages.data
       })
     }
+    if (prevProps.refresh !== this.props.refresh) {
+      const messagesUrl = `${window.apiHost}/Messages`
+      const eventsUrl = `${window.apiHost}/MessageEvents`
+      console.log('asking for response');
+      const messages = await axios.post(messagesUrl, this.props.auth)
+      const messageEvents = await axios.post(eventsUrl, this.props.auth)
+      console.log(messages);
+      this.setState({
+          conversations: messageEvents.data,
+          messages: messages.data
+      })
+    }
 }
   async componentDidMount(){
     // console.log(this.props.conversation);
@@ -76,7 +88,8 @@ export class Messenger extends Component{
 function mapStateToProps(state) {
     return ({
         auth: state.auth,
-        conversation: state.conversation
+        conversation: state.conversation,
+        refresh: state.refresh
 
     })
 }
