@@ -7,12 +7,13 @@ const db = require('../db');
 /* POST events listing. */
 router.post('/hostMeal', function (req, res, next) {
     // console.log(req.body)
-    // console.log(req.file)
+    console.log(req.file)
     const newFilePath = req.file.destination + Date.now() + req.file.originalname;
-    // console.log(newFilePath);
-    const picture = newFilePath.slice(8);
-    // console.log(picture);
-    fs.rename(req.file.path, newFilePath, (err) => { if (err) throw err });
+    console.log('newFilePath');
+    console.log(`${newFilePath.slice(0,8)}/api${newFilePath.slice(8)}`);
+    const picture = `${newFilePath.slice(8)}`;
+    console.log(picture);
+    fs.rename(req.file.path, `${newFilePath.slice(0,8)}/api${newFilePath.slice(8)}`, (err) => { if (err) throw err });
 
     const { time, lat, lng, date, realAddress, title, description, user_id, portions, price, dineIn, pickUp } = req.body
     // const dbTime ='2019-10-07 23:04:53'
