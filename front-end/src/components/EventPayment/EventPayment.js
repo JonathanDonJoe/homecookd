@@ -20,10 +20,11 @@ class EventPayment extends Component {
 		payment: 0,
 		joinModal: 0,
 		reviewModal: 0,
-		value: 0,
+		stars: 0,
 		reviewText: "",
 		dineIn: 1,
-		pickUp: 1
+		pickUp: 1, 
+		reviewTitle: ''
 	};
 
 	componentDidMount() {
@@ -46,10 +47,16 @@ class EventPayment extends Component {
 			reviewText: e.target.value
 		})
 	}
-
-	changeValue = (rating) => {
+	changeReviewTitle = (e) => {
+		e.preventDefault();
 		this.setState({
-			value: rating
+			reviewTitle: e.target.value
+		})
+	}
+
+	changeStars = (rating) => {
+		this.setState({
+			stars: rating
 		})
 	}
 
@@ -96,9 +103,13 @@ class EventPayment extends Component {
 	onSubmit = (e) => {
 		e.preventDefault();
 		this.props.paymentAndReview(
-			{
-				value: this.state.value,
+			{	user_id: this.props.auth.user_id,
+				host_id: this.props.event.host_id,
+				event_id: this.props.event.event_id,
+				stars: this.state.stars,
 				reviewText: this.state.reviewText,
+				reviewTitle: this.state.reviewTitle,
+				token: this.props.auth.token
 			}
 		);
 	}
@@ -160,14 +171,14 @@ class EventPayment extends Component {
 
 		// this logic is what makes the modal appear and close.
 		let modalShowJoin = "none";
-		if (this.state.joinModal === 1) {
-			modalShowJoin = "block";
-		}
+		// if (this.state.joinModal === 1) {
+		// 	modalShowJoin = "block";
+		// }
 
 		let modalShowReview = "none";
-		if (this.state.reviewModal === 1) {
+		// if (this.state.reviewModal === 1) {
 			modalShowReview = "block"
-		}
+		// }
 
 		// this logic determines whether the modal allows a payment or tells you to log in. 
 		let button;
@@ -300,7 +311,8 @@ class EventPayment extends Component {
 							<form onSubmit={this.onSubmit} className="col s12">
 								<div className="row">
 								</div>
-								<BeautyStars value={this.state.value} onChange={this.changeValue} />
+									<textarea value={this.state.reviewTitle} onChange={this.changeReviewTitle} id="textarea0" className="materialize-textarea"></textarea>
+								<BeautyStars value={this.state.stars} onChange={this.changeStars} />
 								<div className="input-field col s12">
 									<textarea value={this.state.reviewText} onChange={this.changeReviewText} id="textarea1" className="materialize-textarea"></textarea>
 									<label for="textarea1">Textarea</label>

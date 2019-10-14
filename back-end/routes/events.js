@@ -156,7 +156,18 @@ router.get('/:eventId/attendances', (req, res) => {
 
 router.post('/submit_review', (req, res) => {
     console.log(req.body);
-
+    const { user_id, host_id, event_id, stars, reviewText, reviewTitle } = req.body
+    const insertReviewQuery = `
+        INSERT INTO host_reviews (reviewer_id, reviewed_id, event_id, stars, title, review)
+        VALUES (?, ?, ?, ?, ?, ?)
+        `
+        const reviewQueryParams = [user_id, host_id, event_id, stars, reviewTitle, reviewText]
+    db.query(insertReviewQuery, reviewQueryParams, (err, result) => {
+        if (err) throw err
+        res.json({
+            msg: 'reviewAdded'
+        })
+    })
 })
 
 // router.get('/review/:eventId', (req, res) => {
