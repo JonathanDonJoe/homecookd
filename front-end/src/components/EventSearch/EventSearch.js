@@ -92,13 +92,12 @@ class EventSearch extends Component {
         const eventCards = this.makeCards(sortedCards);
 
         return (
-            <div className="container dash-container green lighten-3">
-                <div className='row'>
-                    <div className='col s8 offset-s2'>
-                    <section >
-                        <h3>Search for an event!</h3>
+                <div className='row green lighten-3'>
+                    <div className='col'>
+                    <section>
+                        <h3 className="move-content-down">Search for an event!</h3>
                         <SearchBar />
-                        <div className="input-field col s12">
+                        <div className="input-field col s8 offset-s2" >
                             <select className='browser-default' value={this.state.sortMethod} onChange={this.changeSortMethod}>
                                     <option value="soonest">Date-Ascending</option>
                                     <option value="latest">Date-Descending</option>
@@ -107,17 +106,15 @@ class EventSearch extends Component {
                                     <option value="cheapest">Price-Ascending</option>
                                     <option value="priciest">Price-Descending</option>
                             </select>
-                            <label className='active' id='event-search-label'>Sort by:</label>
+                            <label className='active' id='event-search-label'>Sort by:</label>                        
+                            <h5>Filtering by: "{this.props.search.searching}"</h5>
                         </div>
-                        <h5>Filtering by: "{this.props.search.searching}"</h5>
-                        <div className="divider"></div>
-                        <div className="section">
+                        <div className="section col s12 m12">
                             {eventCards}
                         </div>
                         </section>
                     </div>
                 </div>
-            </div>
         );
     }
 }

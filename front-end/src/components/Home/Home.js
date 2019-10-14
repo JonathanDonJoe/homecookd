@@ -81,7 +81,7 @@ class Home extends Component {
 
             <div className="container-fluid">
                 <div className="row">
-                    <div className="events col s12 offset-s1">
+                    <div className="events col s12 ">
                             {events}
                         </div>
                     </div>

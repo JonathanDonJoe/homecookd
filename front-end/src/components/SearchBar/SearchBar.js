@@ -46,7 +46,7 @@ export class SearchBar extends Component {
             //     </form>
             // </div>
 
-            <nav className='green'>
+            <nav id="searchbar-style" className='green col s8 offset-s2'>
                 <div className="nav-wrapper">
                     <form onSubmit={this.onSubmit}>
                         <div className="input-field">
