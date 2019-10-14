@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EventReview from './EventReview/EventReview'
+import './EventReviews.css'
 
 export class EventReviews extends Component {
     render() {

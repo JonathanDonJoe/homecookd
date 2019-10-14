@@ -47,7 +47,7 @@ export class EventCard extends Component {
         //     <div> SIGN UP FOR MUY EVENT! <- call you register component here </div>
         // }
         console.log(moment(this.props.event.time).format("dddd, MMMM Do YYYY, h:mm:ss a"))
-
+        let imageLink = encodeURI(`${window.apiHost}${this.props.event.picture}`)
         return (
             <Link to={`/events/singleEvent/${this.props.event_id}`}>
                 <div id="event-card-style" className='event-card card col s12 m4 l3 '>
