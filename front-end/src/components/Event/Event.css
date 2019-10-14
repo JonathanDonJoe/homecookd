@@ -1,3 +1,7 @@
+body{
+    background-color: gray
+}
 .event-page{
-    margin-top: 56px;
+    margin-top: 65px;
+    height: 90vh;
 }

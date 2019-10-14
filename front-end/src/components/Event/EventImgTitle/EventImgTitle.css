@@ -3,5 +3,13 @@
     height: 35vh;
     background-color: black;
     background-position: center;
+    border-radius: 10px;
 
+
+}
+
+.event-text{
+    background-color: lightgray;
+    border-radius: 10px;
+    height: 35vh;
 }

@@ -315,7 +315,7 @@ class EventPayment extends Component {
 								<BeautyStars value={this.state.stars} onChange={this.changeStars} />
 								<div className="input-field col s12">
 									<textarea value={this.state.reviewText} onChange={this.changeReviewText} id="textarea1" className="materialize-textarea"></textarea>
-									<label for="textarea1">Textarea</label>
+									<label htmlFor="textarea1">Textarea</label>
 								</div>
 								<button className="btn submit-button waves-effect waves-light" type="submit" name="action">Submit
           							<i className="material-icons right">send</i>

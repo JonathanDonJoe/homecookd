@@ -24,6 +24,7 @@ export class Compose extends Component {
         this.setState({
           message: ''
         })
+        this.render()
 
 
   }
