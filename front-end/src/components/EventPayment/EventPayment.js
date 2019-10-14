@@ -171,14 +171,14 @@ class EventPayment extends Component {
 
 		// this logic is what makes the modal appear and close.
 		let modalShowJoin = "none";
-		// if (this.state.joinModal === 1) {
-		// 	modalShowJoin = "block";
-		// }
+		if (this.state.joinModal === 1) {
+			modalShowJoin = "block";
+		}
 
 		let modalShowReview = "none";
-		// if (this.state.reviewModal === 1) {
+		if (this.state.reviewModal === 1) {
 			modalShowReview = "block"
-		// }
+		}
 
 		// this logic determines whether the modal allows a payment or tells you to log in. 
 		let button;
