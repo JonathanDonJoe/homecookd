@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Home.css'
 import axios from 'axios'
-
+import logo from '../../LogoMakr.png';
 
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
@@ -61,10 +61,11 @@ class Home extends Component {
             )
         })
         return (<>
-            <div className="container-fluid ">
+            <div className="container-fluid  green lighten-2">
                 <div className="row">
                     <div className="home col s12">
-                        <div className="upper-fold row" style={{ backgroundImage: `url(${this.state.imageLink})` }}>
+                        <div className="upper-fold row  valign-wrapper" >
+                        <img className="col s4 offset-s4"  src={logo} />
                             {/* <div className='upper-fold-content row'>
                                 <div className='upper-fold-text s12'>
                                     <strong>{this.state.text}</strong>
@@ -80,13 +81,11 @@ class Home extends Component {
 
             <div className="container-fluid">
                 <div className="row">
-                    <div className="events col s12">
-                        <div className='row'>
+                    <div className="events col s12 offset-s1">
                             {events}
                         </div>
                     </div>
                 </div>
-            </div>
         </>
         )
     }

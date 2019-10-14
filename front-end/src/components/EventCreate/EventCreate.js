@@ -152,7 +152,7 @@ export class EventCreate extends Component {
             data.append('lat', lat);
             data.append('lng', lng);
             data.append('user_id', this.props.auth.user_id);
-            data.append('token', this.props.auth.token);
+            data.append('token', this.props.auth.loggedIn);
             // console.log(this.props.auth.token);
             // console.log(data);
             this.props.hostMeal(data, this.props.auth.token)
