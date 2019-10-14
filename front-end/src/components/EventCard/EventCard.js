@@ -50,33 +50,40 @@ export class EventCard extends Component {
         let imageLink = encodeURI(`${window.apiHost}${this.props.event.picture}`)
         return (
             <Link to={`/events/singleEvent/${this.props.event_id}`}>
-                <div id="event-card-style" className='event-card card col s12 m4 l3 '>
-                    <div className='event-card-content card-image'>
+                <div id="event-card-style" className='event-card card col s12 m5 l3'>
+                    <div className='event-card-content card-image'><br></br>
                         <img className='food-hero'
                         src={`${window.apiHost}${this.props.event.picture}`}>
                         </img>
-                    </div>
+                    </div><hr></hr>
                     <span className='card-title'>
                             {this.props.event.title}
-                        </span>
+                        </span><hr></hr>
                         <div className='event-card-info col s12'>
                             <div className='tag-list row'>
-                                <div className='tag-list-item-container col s3 m3'>
+                                <div className='tag-list-item-container col s12'>
                                     {/* <h5>{moment(this.props.event.time).format("MM-DD-YY, h:mm a")}</h5> */}
                                     {/* <h3>{moment(this.props.event.time)}</h3> */}
                                     <div className='tag-list-item'>{moment(this.props.event.time).format("MM-DD-YY h:mm a")}</div>
                                 </div>
-                                <div className='tag-list-item-container col s3 m3'>
+                                </div>
+                                <div className="row">
+                                <div className='tag-list-item-container col s12'>
                                     <div className='tag-list-item'>{this.props.event.portions} Portions Remain</div>
                                 </div>
-                                <div className='tag-list-item-container col s3 m3'>
+                                </div>
+                                <div className="row">
+                                <div className='tag-list-item-container col s12'>
                                     <div className='tag-list-item'><NumberFormat value={this.props.event.price} displayType={'text'} fixedDecimalScale={true} decimalScale={'2'} prefix={'$'} /></div>
                                     
                                 </div>
-                                <div className='tag-list-item-container col s3 m3'>
+                                </div>
+                                <div className="row">
+                                <div className='tag-list-item-container  col s12'>
                                     <div className='tag-list-item'>Dine-In? {answer}</div>
                                 </div>
-                            </div>
+                                </div>
+                            
                         </div>
                 </div>
 

@@ -192,11 +192,11 @@ export class EventCreate extends Component {
         console.log(this.props.history);
 
         return (
-            <div id="host-form" className="row">
-                <form onSubmit={this.onSubmit} className="col s12">
+            <div  id="host-form-style" className="row green lighten-3">
+                <form id="host-form" onSubmit={this.onSubmit} className="col s12">
                     <div className="row">
                         <div className="input-field col s6 offset-s3">
-                            <input value={this.state.title} onChange={this.changeTitle} maxLength={100} id="input_text" type="text" className="validate" />
+                            <input  value={this.state.title} onChange={this.changeTitle} maxLength={100} id="input_text" type="text" className="validate" />
                             <label htmlFor="input_text">Give your dish or party a name!</label>
                         </div>
 
