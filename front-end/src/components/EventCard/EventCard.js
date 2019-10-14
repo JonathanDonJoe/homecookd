@@ -50,27 +50,15 @@ export class EventCard extends Component {
         let imageLink = encodeURI(`${window.apiHost}${this.props.event.picture}`)
         return (
             <Link to={`/events/singleEvent/${this.props.event_id}`}>
-                <div className='event-card col s6 m4 l4'>
-                    <div className='event-card-content'>
-                        <div className='food-hero col s12'
-                        style={{backgroundImage: `url(${imageLink})`}}>
-                        </div>
-                        <div className='event-card-title col s12'>
-                            <strong>{this.props.event.title}</strong>
-                        </div>
-                        <div className='tags-container col s12'>
-                            <div className='tag-list row'>
-                                <div className='tag-list-item-container col s6 m4'>
-                                    <div className='tag-list-item'>Burgers</div>
-                                </div>
-                                <div className='tag-list-item-container col s6 m4'>
-                                    <div className='tag-list-item'>Outdoors</div>
-                                </div>
-                                <div className='tag-list-item-container col s6 m4'>
-                                    <div className='tag-list-item'></div>
-                                </div>
-                            </div>
-                        </div>
+                <div id="event-card-style" className='event-card card col s12 m4 l3 '>
+                    <div className='event-card-content card-image'>
+                        <img className='food-hero'
+                        src={`${window.apiHost}${this.props.event.picture}`}>
+                        </img>
+                    </div>
+                    <span className='card-title'>
+                            {this.props.event.title}
+                        </span>
                         <div className='event-card-info col s12'>
                             <div className='tag-list row'>
                                 <div className='tag-list-item-container col s3 m3'>
@@ -90,8 +78,8 @@ export class EventCard extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
+
             </Link>
         )
     }

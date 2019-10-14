@@ -92,9 +92,10 @@ class EventSearch extends Component {
         const eventCards = this.makeCards(sortedCards);
 
         return (
-            <section className="container dash-container green lighten-3">
+            <div className="container dash-container green lighten-3">
                 <div className='row'>
-                    <section className='col s8 offset-s2'>
+                    <div className='col s8 offset-s2'>
+                    <section >
                         <h3>Search for an event!</h3>
                         <SearchBar />
                         <div className="input-field col s12">
@@ -113,9 +114,10 @@ class EventSearch extends Component {
                         <div className="section">
                             {eventCards}
                         </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
-            </section>
+            </div>
         );
     }
 }

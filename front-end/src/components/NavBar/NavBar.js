@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import './NavBar.css';
 import tokenLoginAction from '../../actions/tokenLoginAction'
 import logOutAction from '../../actions/logoutAction';
+import logo from '../../LogoMakr.png';
 
 class NavBar extends Component {
 
@@ -32,9 +33,9 @@ class NavBar extends Component {
         return (
             <div className='container-fluid nav'>
                 <div className='row nav-row'>
-                    <nav className='green'>
+                    <nav className='green lighten-2'>
                         <div className='nav-wrapper'>
-                            <Link to='/' className='left site-title'>HomeCookd</Link>
+                            <Link to='/' className='left site-title'><img className="col s4" src={logo}></img></Link>
                             <ul id='nav-mobile' className='right'>
                                 <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events/search'>Events</Link></li>
