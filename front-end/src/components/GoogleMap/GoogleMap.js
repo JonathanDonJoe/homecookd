@@ -1,20 +1,28 @@
 import React, { Component, createRef } from 'react'
 import { googleApiKey } from '../../config'
+import { connect } from 'react-redux';
+
 
 
 class GoogleMap extends Component {
+
   googleMapRef = createRef()
+
   componentDidUpdate(){
-    this.googleMap = this.createGoogleMap()
-    this.infoWindow = this.createIW()
-    console.log(this.googleMap);
-    console.log(this.infoWindow);
-    // console.log(this.marker);
-    this.marker = this.createMarker()
-    this.marker.addListener('click', ()=> {
-      this.infoWindow.open(this.map, this.marker);
-    });
-    this.circle = this.createCircle()
+    if(this.props.event.event.attending){
+      console.log(this.props.event.event.attending);
+      console.log(this.props.auth.user_id);
+      this.googleMap = this.createGoogleMap()
+      if(this.props.event.event.attending.includes(this.props.auth.user_id)){
+        this.infoWindow = this.createIW()
+        this.marker = this.createMarker()
+        this.marker.addListener('click', ()=> {
+          this.infoWindow.open(this.map, this.marker);
+        });
+      }else{
+        this.circle = this.createCircle()
+      }
+    }
   }
   // componentDidMount() {
   //   this.googleMap = this.createGoogleMap()
@@ -27,7 +35,6 @@ class GoogleMap extends Component {
   // }
 
   createGoogleMap = () => {
-    console.log(this.props.event.event.lat);
     return(
       new window.google.maps.Map(this.googleMapRef.current, {
         zoom: 16,
@@ -65,7 +72,6 @@ class GoogleMap extends Component {
 
   createIW = () => {
     let urlAddress = this.props.event.event.event_address.replace(/\s/g, '+');
-    console.log(urlAddress);
     let directionUrl = `https://www.google.com/maps/dir//${urlAddress}/`
     return(
       new window.google.maps.InfoWindow({
@@ -87,4 +93,10 @@ class GoogleMap extends Component {
   }
 }
 
-export default GoogleMap
+function mapStateToProps(state) {
+  return ({
+      auth: state.auth
+  })
+}
+
+export default connect(mapStateToProps)(GoogleMap);

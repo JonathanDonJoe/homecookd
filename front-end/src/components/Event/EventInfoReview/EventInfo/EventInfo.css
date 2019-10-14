@@ -2,3 +2,8 @@
     border-radius: 50%;
     width:50%;
 }
+.event-info{
+    height: 55vh;
+    background-color: lightgray;
+    border-radius: 10px;
+}

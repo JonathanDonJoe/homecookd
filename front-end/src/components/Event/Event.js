@@ -40,13 +40,15 @@ export class Event extends Component {
     render() {
         // console.log(this.props.match.params.eventId)
         console.log(this.state.event)
-        return (
+        return (<>
             <div className='event-page container-fluid'>
                 <EventImgTitle event={this.state.event} history={this.props.history} />
                 <EventInfoReviews event={this.state}/>
-                {/* <GoogleMap event={this.state}/>                         */}
             </div>
-        )
+            <div className='map-container'>
+                <GoogleMap event={this.state}/>                        
+            </div>
+        </>)
     }
 }
 
