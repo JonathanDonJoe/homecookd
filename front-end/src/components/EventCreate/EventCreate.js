@@ -154,12 +154,12 @@ export class EventCreate extends Component {
                 <form id="host-form" onSubmit={this.onSubmit} className="col blue-grey lighten-3 s10 offset-s1">
                     <div className="row">
                         <div  className="input-field col s8 offset-s2">
-                            <input  id="host-form-style" value={this.state.title} onChange={this.changeTitle} maxLength={100} type="text" className="validate white" placeholder="Name of dish/party" />
+                            <input  id="host-form-style" value={this.state.title} onChange={this.changeTitle} maxLength={100} type="text" className="validate white" required placeholder="Name of dish/party" />
                             <label htmlFor="input_text"></label>
                         </div>
 
                         <div className="input-field col s8 offset-s2">
-                            <textarea id="host-form-style" value={this.state.description} onChange={this.changeDescription} maxLength={300} className="materialize-textarea white" placeholder="Event Description"></textarea>
+                            <textarea id="host-form-style" value={this.state.description} onChange={this.changeDescription} maxLength={300} required className="materialize-textarea white" placeholder="Event Description"></textarea>
                             <label htmlFor="textarea1"></label>
                         </div>
                         <div id="host-form-style" className="input-field col s8 offset-s2 white">
@@ -168,7 +168,7 @@ export class EventCreate extends Component {
                     </div>
                     <div className="row">
                         <div className="input-field col s4 offset-s2">
-                            <select id="host-form-style" className="browser-default" value={this.state.portions} onChange={this.changePortions}>
+                            <select id="host-form-style" className="browser-default" required value={this.state.portions} onChange={this.changePortions}>
                                 <option value="">Servings</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -189,7 +189,7 @@ export class EventCreate extends Component {
                             </select>
                         </div>
                         <div className="input-field col s4">
-                            <select id="host-form-style" className="browser-default" value={this.state.price} onChange={this.changePrice}>
+                            <select id="host-form-style" required className="browser-default" value={this.state.price} onChange={this.changePrice}>
                                 <option value="">Price</option>
                                 <option value="1">$1.00</option>
                                 <option value="1.50">$1.50</option>
@@ -242,18 +242,18 @@ export class EventCreate extends Component {
                     </div>
                     <div className="row">
                         <div className="file-field input-field col s4 offset-s2">
-                            <TimePicker  type="text" className="timepicker white" placeholder="Time" id="time"/>
+                            <TimePicker  type="text" className="timepicker white" required placeholder="Time" id="time"/>
                         </div>
                         <div className="file-field input-field col s4 offset-s1">
                             <label htmlFor='date' ></label>
-                            <DatePicker id="date" type='text' placeholder='Date' className='datepicker white' onChange={this.changeDate} />
+                            <DatePicker id="date" type='text' placeholder='Date' required className='datepicker white' onChange={this.changeDate} />
                         </div>
                     </div>
                     <div className="row">
                         <div className="file-field input-field col s8 offset-s2">
                             <div id="host-form-style" className="btn">
                                 <span>File</span>
-                                <input id='picture-location' type="file" value={this.state.picture} onChange={this.changePicture} />
+                                <input id='picture-location' required type="file" value={this.state.picture} onChange={this.changePicture} />
                             </div>
                             <div className="file-path-wrapper">
                                 <input id="host-form-style" className="file-path validate white" type="text" placeholder="Upload a food pic" />
