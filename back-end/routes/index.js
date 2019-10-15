@@ -135,7 +135,6 @@ router.post('/MessageEvents', (req, res) => {
 
 router.post('/Messages', (req, res) => {
     
-    console.log(`using id of ${req.body.user_id}`);
 
     const getUserMessagesQuery = `
         select messages.sender_id, messages.event_id, messages.sent_time, 
@@ -189,7 +188,7 @@ router.post('/payment/stripe', (req, res) => {
         })
         return;
     }
-    const { stripeToken, amount, email, event_id, num_servings } = req.body;
+    const { stripeToken, amount, email, event_id, num_servings, dine_in, pick_up } = req.body;
     stripe.charges.create({
         amount,
         currency: 'usd',
@@ -206,7 +205,12 @@ router.post('/payment/stripe', (req, res) => {
                     (user_id, event_id, paid, dine_in, pick_up)
                 VALUES
                     (?, ?, ?, ?, ?)`
-            db.query(insertAttendingQuery, [res.locals.uid, event_id, num_servings, 1, 1]);
+            db.query(insertAttendingQuery, [res.locals.uid, event_id, num_servings, dine_in, pick_up]);
+            const updateEventQuery = `
+                UPDATE events 
+                SET portions  = portions - ?
+                WHERE id = ?`
+            db.query(updateEventQuery, [num_servings, event_id]);
             res.json({
                 msg: 'paymentSuccess'
             })

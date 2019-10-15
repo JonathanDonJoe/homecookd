@@ -19,7 +19,7 @@ export class EventCard extends Component {
                 <div id="event-card-style" className='event-card card col s12 m5 l3 blue-grey lighten-5'>
                     <div className='event-card-content card-image'><br></br>
                         <img className='food-hero'
-                        src={`${window.apiHost}${this.props.event.picture}`} alt='event_picture'>
+                        src={imageLink} alt='event_picture'>
                         </img>
                     </div><hr></hr>
                     <span className='card-title'>
