@@ -45,8 +45,8 @@ class Dashboard extends Component {
         })
 
         return (                
-            <div className='row'>
-            <div className="container dash-container col s12 green lighten-2">
+            <div className='row col s12 green lighten-2'>
+            <div className="container dash-container ">
                         <h1 className='dashboard-style col s12'>Dashboard</h1>
                         <p className="flow-text">Welcome {this.props.auth.first} to your dashboard!  Here, you can view all of your saved events.</p>
                         <p className="dash-buttons">

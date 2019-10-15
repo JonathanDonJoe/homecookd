@@ -150,8 +150,8 @@ export class EventCreate extends Component {
 
     render() {
         return (
-            <div className="row green lighten-2">
-                <form id="host-form" onSubmit={this.onSubmit} className="col blue-grey lighten-5 s10 offset-s1">
+            <div id="host-body-style" className="row green lighten-2">
+                <form id="host-form" onSubmit={this.onSubmit} className="col blue-grey lighten-3 s10 offset-s1">
                     <div className="row">
                         <div  className="input-field col s8 offset-s2">
                             <input  id="host-form-style" value={this.state.title} onChange={this.changeTitle} maxLength={100} type="text" className="validate white" placeholder="Name of dish/party" />
