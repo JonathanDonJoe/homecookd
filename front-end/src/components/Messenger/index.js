@@ -45,11 +45,11 @@ export class Messenger extends Component{
     render(){
       return (
         <div className="messenger row">
-          <div className="scrollable sidebar">
+          <div className="scrollable sidebar col m4 s12">
             <ConversationList info={this.state}/>
           </div>
 
-          <div className="scrollable content">
+          <div className="scrollable content col m8 s12">
             <MessageList messenger={this.state}
             />
           </div>

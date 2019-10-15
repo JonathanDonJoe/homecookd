@@ -4,9 +4,9 @@
   align-items: center;
   background: white;
   border-top: 1px solid #eeeef1;
-  position: fixed;
-  width: calc(100% - 20px);
+  position: absolute;
   bottom: 0px;
+  padding-left: 0px !important ;
 }
 
 @supports (backdrop-filter: blur(20px)) {
@@ -31,9 +31,12 @@
 
 .compose .toolbar-button {
   color: #bbbbbf;
-  margin-left: 15px;
 }
 
 .compose .toolbar-button:hover {
   color: #99999c;
+}
+
+.btn{
+  margin: 10px;
 }

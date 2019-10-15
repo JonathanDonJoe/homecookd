@@ -5,7 +5,7 @@
 }
 
 .conversation-list-item:hover {
-  background: #eeeef1;
+  background: gray;
   cursor: pointer;
 }
 

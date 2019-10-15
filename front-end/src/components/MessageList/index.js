@@ -83,7 +83,7 @@ export class MessageList extends Component {
   }
   render() {
     return (
-      <div className="message-list">
+      <div className="message-list row">
          <Toolbar
           title={
             this.convoTitle()
