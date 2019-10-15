@@ -44,34 +44,30 @@ class Dashboard extends Component {
             }
         })
 
-        return (
-            <section className="container dash-container green lighten-3">
-                <div className='row'>
-                    <section className='col s8 offset-s2'>
-                        <h1>Dashboard</h1>
+        return (                
+            <div className='row'>
+            <div className="container dash-container col s12 green lighten-2">
+                        <h1 className='dashboard-style col s12'>Dashboard</h1>
                         <p className="flow-text">Welcome {this.props.auth.first} to your dashboard!  Here, you can view all of your saved events.</p>
                         <p className="dash-buttons">
-                            <Link className="btn" to="/host" role="button">Host a new Event</Link>
+                            <Link id="dashboard-btn-style" className="btn" to="/host" role="button">Host a new Event</Link>
                         </p>
-                        <div className="divider"></div>
                         <div className="section row">
-                            <h2>Hosted Events</h2>
+                            <h2 className='dashboard-style col s8 offset-s2'>Hosted Events</h2>
                             {hostingEvents}
                         </div>
 
-                        <div className="divider"></div>
                         <div className="section">
-                            <h2>Attending Events</h2>
+                            <h2 className='dashboard-style col s8 offset-s2'>Attending Events</h2>
                             {attendingEvents}
                         </div>
-                        <div className="divider"></div>
                         <div className="section row">
-                            <h2>Events Attended</h2>
+                            <h2 className='dashboard-style col s8 offset-s2'>Events Attended</h2>
                             {eventsAttended}
                         </div>
-                    </section>
-                </div>
-            </section>
+                    </div>
+                
+            </div>
         );
     }
 }

@@ -33,7 +33,7 @@ class NavBar extends Component {
         return (
             <div className='container-fluid nav'>
                 <div className='row nav-row'>
-                    <nav className='green lighten-3 col s12'>
+                    <nav className='green lighten-2 col s12 menu-hover-lines'>
                         <div className='nav-wrapper'>
                             <Link to='/' className='left site-title'><img className="col s2" src={icon} alt='site_home' ></img></Link>
                             <ul id='nav-mobile' className='right'>

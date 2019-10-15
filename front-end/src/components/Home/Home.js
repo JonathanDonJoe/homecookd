@@ -35,7 +35,7 @@ class Home extends Component {
                             <img className="col s4 offset-s4" src={logo} alt='homecookd_logo' />
                         </div>
                     </div>
-                </div>
+                </div>         
             </div>
 
             <div className="container-fluid">
