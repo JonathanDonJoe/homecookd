@@ -15,7 +15,7 @@ export class Compose extends Component {
 
   refreshMessages = (e)=> {
     e.preventDefault()
-    if(this.props.refresh == 0){
+    if(this.props.refresh === 0){
       this.props.refreshMessages(1)
     }else{this.props.refreshMessages(0)}
   }
@@ -30,7 +30,8 @@ export class Compose extends Component {
         auth: this.props.auth,
         eventId: this.props.conversation.conversation.id
       }
-      const messageSent = await axios.post(url, requestData)
+      await axios.post(url, requestData)
+      // const messageSent = await axios.post(url, requestData)
       this.setState({
         message: ''
       })

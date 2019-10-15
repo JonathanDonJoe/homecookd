@@ -1,6 +1,6 @@
 import Compose from '../Compose';
 import Toolbar from '../Toolbar';
-import ToolbarButton from '../ToolbarButton';
+// import ToolbarButton from '../ToolbarButton';
 import Message from '../Message';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ export class MessageList extends Component {
     renderMessages = () => {
       if(this.props.conversation.conversation){
       let messages = this.props.messenger.messages.filter((message) =>{
-        return message.event_id == this.props.conversation.conversation.id
+        return message.event_id === this.props.conversation.conversation.id
       })
       messages.sort( (a,b) => moment(a.sent_time).valueOf() - moment(b.sent_time).valueOf())
 

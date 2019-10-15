@@ -1,5 +1,4 @@
 import React, { Component, createRef } from 'react'
-import { googleApiKey } from '../../config'
 import { connect } from 'react-redux';
 
 

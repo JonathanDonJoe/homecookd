@@ -7,8 +7,6 @@ import React, { Component } from 'react'
 export class ConversationList extends Component {
 
   render(){
-
-    console.log(this.props);
     return (
       <div className="conversation-list">
         <Toolbar

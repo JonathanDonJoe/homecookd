@@ -6,7 +6,6 @@ import auth0Client from "../Auth/Auth";
 import axios from "axios";
 import moment from 'moment';
 import BeautyStars from 'beauty-stars';
-import EventCard from '../EventCard/EventCard';
 import "./EventPayment.css";
 import NumberFormat from 'react-number-format';
 import paymentAndReviewAction from "../../actions/paymentAndReviewAction";
@@ -209,6 +208,11 @@ class EventPayment extends Component {
 			pickUpOption = "disabled"
 		}
 
+		let eventPicture = ""
+		if(event.event_picture) {
+			eventPicture = event.event_picture
+		}
+
 		return (
 			<div>
 				<div>
@@ -226,7 +230,7 @@ class EventPayment extends Component {
 									<div className="row">
 										<div className="col s12 ">
 											<div className="modal-picture">
-												<img className="image" src={`${window.apiHost}${event.event_picture}`} alt='event_image'></img>
+												<img className="image" src={`${window.apiHost}${eventPicture}`} alt='event_image'></img>
 											</div>
 
 											<div className="title">{event.event_title}</div>
