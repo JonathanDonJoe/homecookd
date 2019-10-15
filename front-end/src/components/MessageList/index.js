@@ -83,6 +83,7 @@ export class MessageList extends Component {
   }
   render() {
     return (
+      <>
       <div className="message-list row">
          <Toolbar
           title={
@@ -91,9 +92,9 @@ export class MessageList extends Component {
         />
         <div className="message-list-container">{this.renderMessages()}</div>
 
-        <Compose data={this.props} />
       </div>
-    )
+      <Compose data={this.props} />
+    </>)
   }
 }
 
