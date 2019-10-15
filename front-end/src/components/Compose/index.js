@@ -50,8 +50,9 @@ export class Compose extends Component {
     })
 }
   render() {
-    return (<>
-      <form onSubmit={this.postMessage} className="col s12">
+    return (
+    <div className='col s12'>
+      <form onSubmit={this.postMessage} className="compose col s12">
           <div className="input-field col s12">
               <textarea placeholder='Type your message' id="textarea1" value={this.state.message} onChange={this.changeMessage} maxLength={300} className="materialize-textarea"></textarea>
               <button className="btn waves-effect waves-light" type="submit" name="action">Submit
@@ -62,8 +63,8 @@ export class Compose extends Component {
               </button>
           </div>
       </form>
-
-    </>);
+    </div>
+    );
   }
 }
 

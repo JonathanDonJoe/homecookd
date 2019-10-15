@@ -86,7 +86,7 @@ class EventSearch extends Component {
         const eventCards = this.makeCards(sortedCards);
 
         return (
-                <div className='row green lighten-2'>
+                <div className='row green lighten-2 search-page'>
                     <div className='col'>
                     <section>
                         <h3 className="move-content-down col s10 offset-s1">Search for an event!</h3> 
