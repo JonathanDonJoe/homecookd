@@ -2,3 +2,8 @@
     min-height: 60.5vh !important;
     margin-bottom: 1vh;;
 }
+
+#review-title-style{
+    display: flex;
+    justify-content: space-around;
+}
