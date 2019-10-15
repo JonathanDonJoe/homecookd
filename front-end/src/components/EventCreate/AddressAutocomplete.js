@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { googleApiKey } from '../../config'
-
 
 export class AddressAutocomplete extends Component {
     
@@ -15,7 +13,6 @@ export class AddressAutocomplete extends Component {
     }  
     componentDidMount() {
         this.googleAuto = this.createGoogleAuto()
-        // console.log(this.googleAuto);
         this.googleAuto.setFields(['address_component']);
         this.googleAuto.addListener('place_changed', this.fillInAddress);
     }
@@ -31,7 +28,6 @@ export class AddressAutocomplete extends Component {
         this.place = this.googleAuto.getPlace();
     } 
     render() {
-        console.log(this.state.address);
         return (<>
             <div id="locationField" className="col s12">
                 <input
@@ -42,8 +38,6 @@ export class AddressAutocomplete extends Component {
                 onClick={this.changeAddress}
                 />
             </div>
-
-
         </>)
     }
 }

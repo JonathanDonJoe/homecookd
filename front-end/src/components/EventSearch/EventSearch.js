@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -41,13 +40,8 @@ class EventSearch extends Component {
     filterCards = (events) => {
 
         return events.filter((event) => {
-            // console.log(event)
-            // console.log(this.props.search.searching)
-            // console.log(event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching))
-            return event.title.toLowerCase().includes(this.props.search.searching) || event.description.toLowerCase().includes(this.props.search.searching)
+            return event.title.toLowerCase().includes(this.props.search.searching.toLowerCase()) || event.description.toLowerCase().includes(this.props.search.searching.toLowerCase())
         })
-        // console.log('filterCards')
-        // return events
     }
     sortCards = (events) => {
         if (this.state.sortMethod === 'soonest' || this.state.sortMethod === '') {
@@ -126,13 +120,4 @@ function mapStateToProps(state) {
     })
 }
 
-// function mapDispatchToProps(dispatch){
-//     return bindActionCreators({
-
-//     })
-// }
-
-export default connect(mapStateToProps,
-    // mapDispatchToProps
-    null
-)(EventSearch);
+export default connect(mapStateToProps, null)(EventSearch);

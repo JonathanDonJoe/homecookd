@@ -14,10 +14,8 @@ export class Messenger extends Component{
     if (prevProps.auth !== this.props.auth) {
       const messagesUrl = `${window.apiHost}/Messages`
       const eventsUrl = `${window.apiHost}/MessageEvents`
-      console.log('asking for response');
       const messages = await axios.post(messagesUrl, this.props.auth)
       const messageEvents = await axios.post(eventsUrl, this.props.auth)
-      console.log(messages);
       this.setState({
           conversations: messageEvents.data,
           messages: messages.data
@@ -26,10 +24,8 @@ export class Messenger extends Component{
     if (prevProps.refresh !== this.props.refresh) {
       const messagesUrl = `${window.apiHost}/Messages`
       const eventsUrl = `${window.apiHost}/MessageEvents`
-      console.log('asking for response');
       const messages = await axios.post(messagesUrl, this.props.auth)
       const messageEvents = await axios.post(eventsUrl, this.props.auth)
-      console.log(messages);
       this.setState({
           conversations: messageEvents.data,
           messages: messages.data
@@ -37,24 +33,18 @@ export class Messenger extends Component{
     }
 }
   async componentDidMount(){
-    // console.log(this.props.conversation);
-    // console.log('mounted');
     const messagesUrl = `${window.apiHost}/Messages`
     const eventsUrl = `${window.apiHost}/MessageEvents`
-    // console.log('asking for response');
     const messages = await axios.post(messagesUrl, this.props.auth)
     const messageEvents = await axios.post(eventsUrl, this.props.auth)
-    // console.log(messages);
     this.setState({
         conversations: messageEvents.data,
         messages: messages.data
     })
-    // console.log(this.state)
 }
     render(){
       return (
         <div className="messenger row">
-          <h1>{this.props.conversation.conversationId}</h1>
           <div className="scrollable sidebar">
             <ConversationList info={this.state}/>
           </div>
@@ -66,24 +56,6 @@ export class Messenger extends Component{
         </div>
       )
     }
-    /* <Toolbar
-      title="Messenger"
-      leftItems={[
-        <ToolbarButton key="cog" icon="ion-ios-cog" />
-      ]}
-      rightItems={[
-        <ToolbarButton key="add" icon="ion-ios-add-circle-outline" />
-      ]}
-    /> */
-
-    /* <Toolbar
-      title="Conversation Title"
-      rightItems={[
-        <ToolbarButton key="info" icon="ion-ios-information-circle-outline" />,
-        <ToolbarButton key="video" icon="ion-ios-videocam" />,
-        <ToolbarButton key="phone" icon="ion-ios-call" />
-      ]}
-    /> */
 }
 function mapStateToProps(state) {
     return ({

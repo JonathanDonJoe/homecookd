@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Redirect } from 'react-router-dom';
 import { DatePicker, TimePicker } from 'react-materialize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddressAutocomplete from './AddressAutocomplete'
-import { googleApiKey } from '../../config'
-import axios from 'axios'
-
 import './EventCreate.css';
 import hostMealAction from '../../actions/hostMealAction';
 
@@ -80,9 +76,6 @@ export class EventCreate extends Component {
     }
 
     changeTags = (e) => {
-        //    var chip = {
-        //        tag: e.target.value
-        //    }
         this.setState({
             tags: e.target.value
         })
@@ -129,68 +122,33 @@ export class EventCreate extends Component {
         e.preventDefault();
         const file = document.getElementById('picture-location').files[0];
         let geocodeData = await this.getGeocode()
-        console.log(geocodeData[0]);
         let address = geocodeData[0].formatted_address
         let lat = geocodeData[0].geometry.location.lat()
         let lng = geocodeData[0].geometry.location.lng()
-        console.log(`address is ${address}
-        lat is ${lat}
-        lng is ${lng}`)
         const timepickerEl = document.querySelector('.timepicker').value
-        // console.log(timepickerEl.value)
         this.setState({
             time: timepickerEl
         }, () => {
             const data = new FormData()
             data.append('locationImage', file);
-            // data.append('coordinates', coordinates)
             // eslint-disable-next-line no-unused-vars
             for (let key in this.state) {
                 data.append(key, this.state[key])
             }
-            console.log(address);
             data.append('realAddress', address);
             data.append('lat', lat);
             data.append('lng', lng);
             data.append('user_id', this.props.auth.user_id);
             data.append('token', this.props.auth.loggedIn);
-            // console.log(this.props.auth.token);
-            // console.log(data);
             this.props.hostMeal(data, this.props.auth.token)
-            // console.log('should be pushing');
             this.props.history.push('/dashboard')
 
         })
-
-        // if (status == google.maps.GeocoderStatus.OK) {
-        //   loc[0]=results[0].geometry.location.lat();
-        //   loc[1]=results[0].geometry.location.lng();
-
-        //   alert( loc ); // the place where loc contains geocoded coordinates
-
-        // } else {
-        //   alert("Geocode was not successful for the following reason: " + status);
-        // }
-
-
-
-        // let urlAddress = address.replace(/\s/g, '+');
-        // console.log(urlAddress);
-        // let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${urlAddress}&key=${googleApiKey}`
-        // const axiosResponse = await axios.get(url)
-        // console.log(axiosResponse);
-
     }
 
 
 
     render() {
-        // console.log(this.state);
-        // console.log(this.state.time);
-        // console.log(this.state.date);
-        // console.log(this.state.portions);
-        console.log(this.props.history);
-
         return (
             <div  id="host-form-style" className="row green lighten-3">
                 <form id="host-form" onSubmit={this.onSubmit} className="col s12">

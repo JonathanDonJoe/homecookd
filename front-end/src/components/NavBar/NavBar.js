@@ -37,8 +37,11 @@ class NavBar extends Component {
                         <div className='nav-wrapper'>
                             <Link to='/' className='left site-title'><img className="col s2" src={icon}></img></Link>
                             <ul id='nav-mobile' className='right'>
-                                <li><Link to='/host'>Host a Meal</Link></li>
                                 <li><Link to='/events/search'>Events</Link></li>
+                                {
+                                    (auth0Client.isAuthenticated() || this.props.auth.loggedIn) &&
+                                    <li><Link to='/host'>Host a Meal</Link></li>
+                                }
                                 {
                                     (auth0Client.isAuthenticated() || this.props.auth.loggedIn) &&
                                     <li><Link to='/Messenger'>Messenger</Link></li>
@@ -79,7 +82,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // export default NavBar;
-export default withRouter(connect(mapStateToProps, 
-    // null
-    mapDispatchToProps
-    )(NavBar));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

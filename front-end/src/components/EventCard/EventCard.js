@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
-import UserReview from '../UserReview/UserReview';
 
 
 export class EventCard extends Component {

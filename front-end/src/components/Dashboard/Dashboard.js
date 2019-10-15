@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom'
-// import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import moment from 'moment';
 
@@ -14,7 +13,6 @@ class Dashboard extends Component {
     }
 
     populateEvents = async () => {
-        console.log(this.props.auth)
         const url = `${window.apiHost}/events/getUserEvents`
         const axiosResponse = await axios.post(url, this.props.auth)
         this.setState({
@@ -32,15 +30,10 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log(this.state.events)
-        const eventId = this.props.match.params.eventId;
         const hostingEvents = []
         const attendingEvents = []
         const eventsAttended = []
-        console.log(this.props.auth.user_id)
         this.state.events.forEach((event, i) => {
-            console.log(event.host_id)
-            console.log(event.time)
             if (event.host_id === this.props.auth.user_id) {
                 hostingEvents.push(<EventCard key={i} event={event} event_id={event.event_id} />)
 
@@ -50,16 +43,6 @@ class Dashboard extends Component {
                 eventsAttended.push(<EventCard key={i} event={event} event_id={event.event_id} />)
             }
         })
-
-
-        // const hostedEvents = this.state.events.map((event, i) => {
-        //     return (
-        //         <EventCard key={i} event={event} />
-        //     )
-        // })
-        // This anchor tag is set aside to remove errors thrown. It belongs right after dash-button below. 
-        // When added change to a Link tag for React.
-        // {/* <a className="btn " href="/update-profile" role="button">Update Profile</a> */}
 
         return (
             <section className="container dash-container green lighten-3">
@@ -99,13 +82,5 @@ function mapStateToProps(state) {
     })
 }
 
-// function mapDispatchToProps(dispatch){
-//     return bindActionCreators({
 
-//     })
-// }
-
-export default connect(mapStateToProps,
-    // mapDispatchToProps
-    null
-)(Dashboard);
+export default connect(mapStateToProps,null)(Dashboard);
