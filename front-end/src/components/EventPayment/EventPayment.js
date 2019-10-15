@@ -63,6 +63,7 @@ class EventPayment extends Component {
 	}
 
 	makePayment = () => {
+		document.querySelector('body').className = '';
 		const pKey = "pk_test_zJ0gtox1Nw0DYJKIoBJgX7KU00Kn0LhNV5";
 		const numServings = this.state.servings;
 		const amount = numServings * this.state.payment;
