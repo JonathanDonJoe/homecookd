@@ -38,9 +38,9 @@ router.post('/hostMeal', function (req, res, next) {
     let datetimeHour = time.slice(0, 2)
     let datetimeMinute = time.slice(3, 5)
 
-    if (time.slice(6, 8) === 'PM' && datetimeHour !== 12) {
+    if (time.slice(6, 8) === 'PM' && datetimeHour !== '12') {
         newDatetimeHour = parseInt(datetimeHour) + 12
-    } else if (time.slice(6, 8) === 'AM' && datetimeHour === 12) {
+    } else if (time.slice(6, 8) === 'AM' && datetimeHour === '12') {
         newDatetimeHour = parseInt(datetimeHour) - 12
     } else {
         newDatetimeHour = datetimeHour

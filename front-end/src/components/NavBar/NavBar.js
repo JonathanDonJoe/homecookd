@@ -25,13 +25,14 @@ class NavBar extends Component {
         }
         document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.sidenav');
+        // eslint-disable-next-line no-unused-vars
         var instances = window.M.Sidenav.init(elems);
         });
     }
 
     render() {
         // console.log('this.props.auth:')
-        console.log(this.props.auth)
+        // console.log(this.props.auth)
         // console.log(auth0Client.getIdToken())
         // console.log(auth0Client.getProfile())
         let hostEl;
@@ -54,7 +55,6 @@ class NavBar extends Component {
         if (!(auth0Client.isAuthenticated() || this.props.auth.loggedIn) ){
             loginEl = <li className='nav-non-link' onClick={auth0Client.signIn}>Log In</li>
         }
-console.log(hostEl)
 
         return (
             <div className='container-fluid nav'>
