@@ -74,9 +74,10 @@ class Home extends Component {
                                     <SearchBar />
                                 </div>
                             </div> */}
+
                         </div>
                     </div>
-                </div>
+                </div>         
             </div>
 
             <div className="container-fluid">

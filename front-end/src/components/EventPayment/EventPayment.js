@@ -9,7 +9,6 @@ import BeautyStars from 'beauty-stars';
 import EventCard from '../EventCard/EventCard';
 import "./EventPayment.css";
 import NumberFormat from 'react-number-format';
-import UserReview from '../UserReview/UserReview';
 import paymentAndReviewAction from "../../actions/paymentAndReviewAction";
 
 

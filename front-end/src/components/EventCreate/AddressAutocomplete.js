@@ -39,7 +39,8 @@ export class AddressAutocomplete extends Component {
                 placeholder="Enter your address"
                 type="text"
                 onChange={this.changeAddress}
-                onClick={this.changeAddress}
+                onClick={this.changeAddress} 
+                style={{textAlign: 'center'}}
                 />
             </div>
 

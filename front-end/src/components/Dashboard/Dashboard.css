@@ -1,5 +1,13 @@
 .dash-container {
-    margin-top: 100px;
+    margin-top: 8vh;
     /* background-color: lightgreen; */
-    border-radius: 20px;
+}
+.dashboard-style{
+    background: #eeeeee;
+    border-radius: 50px;
+    -webkit-box-shadow: 0px 10px 22px 3px #000000; 
+    box-shadow: 0px 10px 22px 3px #000000;
+}
+#dashboard-btn-style{
+    border-radius: 50px;
 }

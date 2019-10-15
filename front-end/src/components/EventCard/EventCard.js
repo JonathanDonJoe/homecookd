@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
-import UserReview from '../UserReview/UserReview';
 
 
 export class EventCard extends Component {
@@ -50,7 +49,7 @@ export class EventCard extends Component {
         let imageLink = encodeURI(`${window.apiHost}${this.props.event.picture}`)
         return (
             <Link to={`/events/singleEvent/${this.props.event_id}`}>
-                <div id="event-card-style" className='event-card card col s12 m5 l3'>
+                <div id="event-card-style" className='event-card card col s12 m5 l3 blue-grey lighten-5'>
                     <div className='event-card-content card-image'><br></br>
                         <img className='food-hero'
                         src={`${window.apiHost}${this.props.event.picture}`}>
@@ -64,7 +63,7 @@ export class EventCard extends Component {
                                 <div className='tag-list-item-container col s12'>
                                     {/* <h5>{moment(this.props.event.time).format("MM-DD-YY, h:mm a")}</h5> */}
                                     {/* <h3>{moment(this.props.event.time)}</h3> */}
-                                    <div className='tag-list-item'>{moment(this.props.event.time).format("MM-DD-YY h:mm a")}</div>
+                                    <div className='tag-list-item'>{moment(this.props.event.time).format("MM-DD-YY | h:mm a")}</div>
                                 </div>
                                 </div>
                                 <div className="row">

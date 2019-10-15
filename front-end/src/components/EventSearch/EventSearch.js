@@ -92,24 +92,24 @@ class EventSearch extends Component {
         const eventCards = this.makeCards(sortedCards);
 
         return (
-                <div className='row green lighten-3'>
+                <div className='row green lighten-2'>
                     <div className='col'>
                     <section>
-                        <h3 className="move-content-down">Search for an event!</h3>
+                        <h3 className="move-content-down col s10 offset-s1">Search for an event!</h3> 
                         <SearchBar />
-                        <div className="input-field col s8 offset-s2" >
-                            <select className='browser-default' value={this.state.sortMethod} onChange={this.changeSortMethod}>
-                                    <option value="soonest">Date-Ascending</option>
-                                    <option value="latest">Date-Descending</option>
-                                    <option value="newest">Created-Ascending</option>
-                                    <option value="oldest">Created-Descending</option>
-                                    <option value="cheapest">Price-Ascending</option>
-                                    <option value="priciest">Price-Descending</option>
+                        <div className="input-field col s4 offset-s4" >
+                            <select className='browser-default grey lighten-3' value={this.state.sortMethod} onChange={this.changeSortMethod}>
+                                    <option value="soonest">Date: Ending Soon</option>
+                                    <option value="latest">Date: Farthest Away</option>
+                                    <option value="newest">Newly Added</option>
+                                    <option value="oldest">Oldest Added</option>
+                                    <option value="cheapest">Price: Low to High</option>
+                                    <option value="priciest">Price: High to Low</option>
                             </select>
-                            <label className='active' id='event-search-label'>Sort by:</label>                        
+                            <label className='active' id='event-search-label'></label>                        
                             <h5>Filtering by: "{this.props.search.searching}"</h5>
                         </div>
-                        <div className="section col s12 m12">
+                        <div className="section col s12 m12">  
                             {eventCards}
                         </div>
                         </section>

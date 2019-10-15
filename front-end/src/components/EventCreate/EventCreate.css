@@ -1,5 +1,26 @@
 #host-form{
-    margin-top: 10%;       
-    height: 100vh;
+    margin-top: 9vh;       
+    height: 105vh;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 10px 22px 3px #000000; 
+    box-shadow: 0px 10px 22px 3px #000000;
+}
 
+#host-form-style{
+    text-align: center;
+    border-radius: 50px;
+}
+#date{
+    text-align: center;
+    border-radius: 50px;   
+}
+#picture-location{
+    text-align: center;
+    border-radius: 50px;
+}
+#time{
+    text-align: center;
+    border-radius: 50px;  
+}
+.add-margin-style{
 }
