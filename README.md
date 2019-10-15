@@ -51,4 +51,4 @@ Authors
 
 Video
 ---
-![Video](https://i.ytimg.com/vi/yXOW7EzKjw0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAy4ZtlFAxSkmSShNPkUi1ljDTvEQ)](https://www.youtube.com/watch?v=yXOW7EzKjw0&feature=youtu.be)
+[![Video](https://i.ytimg.com/vi/yXOW7EzKjw0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAy4ZtlFAxSkmSShNPkUi1ljDTvEQ)](https://www.youtube.com/watch?v=yXOW7EzKjw0&feature=youtu.be)
