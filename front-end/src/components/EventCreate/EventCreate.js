@@ -192,26 +192,26 @@ export class EventCreate extends Component {
         console.log(this.props.history);
 
         return (
-            <div  id="host-form-style" className="row green lighten-3">
-                <form id="host-form" onSubmit={this.onSubmit} className="col s12">
+            <div className="row green lighten-2">
+                <form id="host-form" onSubmit={this.onSubmit} className="col blue-grey lighten-5 s10 offset-s1">
                     <div className="row">
-                        <div className="input-field col s6 offset-s3">
-                            <input  value={this.state.title} onChange={this.changeTitle} maxLength={100} id="input_text" type="text" className="validate" />
-                            <label htmlFor="input_text">Give your dish or party a name!</label>
+                        <div  className="input-field col s8 offset-s2">
+                            <input  id="host-form-style" value={this.state.title} onChange={this.changeTitle} maxLength={100} type="text" className="validate white" placeholder="Name of dish/party" />
+                            <label htmlFor="input_text"></label>
                         </div>
 
-                        <div className="input-field col s6 offset-s3">
-                            <textarea id="textarea1" value={this.state.description} onChange={this.changeDescription} maxLength={300} className="materialize-textarea"></textarea>
-                            <label htmlFor="textarea1">Describe your party, food, or atmosphere.</label>
+                        <div className="input-field col s8 offset-s2">
+                            <textarea id="host-form-style" value={this.state.description} onChange={this.changeDescription} maxLength={300} className="materialize-textarea white" placeholder="Event Description"></textarea>
+                            <label htmlFor="textarea1"></label>
                         </div>
-                        <div className="input-field col s6 offset-s3">
+                        <div id="host-form-style" className="input-field col s8 offset-s2 white">
                             <AddressAutocomplete changeAddress={this.changeAddress} />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s2 offset-s3">
-                            <select className="browser-default" value={this.state.portions} onChange={this.changePortions}>
-                                <option value="">How many servings?</option>
+                        <div className="input-field col s4 offset-s2">
+                            <select id="host-form-style" className="browser-default" value={this.state.portions} onChange={this.changePortions}>
+                                <option value="">Servings</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -230,9 +230,9 @@ export class EventCreate extends Component {
 
                             </select>
                         </div>
-                        <div className="input-field col s2">
-                            <select className="browser-default" value={this.state.price} onChange={this.changePrice}>
-                                <option value="">Price per plate?</option>
+                        <div className="input-field col s4">
+                            <select id="host-form-style" className="browser-default" value={this.state.price} onChange={this.changePrice}>
+                                <option value="">Price</option>
                                 <option value="1">$1.00</option>
                                 <option value="1.50">$1.50</option>
                                 <option value="2">$2.00</option>
@@ -265,42 +265,46 @@ export class EventCreate extends Component {
 
                             </select>
                         </div>
-                        <p className='col s1'>
+                        <div className="row">
+                        <div className="col s12">
+                        <p className='col s4 offset-s2'>
                             <label>
                                 <input value={this.state.dineIn} onChange={this.changeDineIn} type="checkbox" />
                                 <span>Dine In</span>
                             </label>
                         </p>
-                        <p className='col s1'>
+                        <p className='col s4'>
                             <label>
                                 <input value={this.state.pickUp} onChange={this.changePickUp} type="checkbox" />
                                 <span>Pick-up</span>
                             </label>
                         </p>
+                        </div>
+                    </div>
                     </div>
                     <div className="row">
-                        <div className="file-field input-field col s3 offset-s3">
-                            <TimePicker type="text" className="timepicker" placeholder="What time?" />
+                        <div className="file-field input-field col s4 offset-s2">
+                            <TimePicker  type="text" className="timepicker white" placeholder="Time" id="time"/>
                         </div>
-                        <div className="file-field input-field col s3">
+                        <div className="file-field input-field col s4 offset-s1">
                             <label htmlFor='date' ></label>
-                            <DatePicker type='text' id='date' placeholder='Date' className='datepicker' onChange={this.changeDate} />
+                            <DatePicker id="date" type='text' placeholder='Date' className='datepicker white' onChange={this.changeDate} />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="file-field input-field col s6 offset-s3">
-                            <div className="btn">
+                        <div className="file-field input-field col s8 offset-s2">
+                            <div id="host-form-style" className="btn">
                                 <span>File</span>
                                 <input id='picture-location' type="file" value={this.state.picture} onChange={this.changePicture} />
                             </div>
                             <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text" placeholder="Upload some food pics!!" />
+                                <input id="host-form-style" className="file-path validate white" type="text" placeholder="Upload a food pic" />
                             </div>
                         </div>
                     </div>
                     <div className="row">
                         <div className="file-field input-field col s6 offset-s5">
-                            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+                            <button id="host-form-style" className="btn waves-effect waves-light" type="submit" name="action">Submit
                             <i className="material-icons right">send</i>
                             </button>
                         </div>
