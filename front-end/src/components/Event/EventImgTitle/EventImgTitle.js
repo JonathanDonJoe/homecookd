@@ -18,14 +18,15 @@ export class EventImgTitle extends Component {
 
     render() {
         return (
-            <div className='row'>
+            <div id="event-title-style" className='row'>
                 <div className='event-hero col s12 m4' 
                 style={{backgroundImage: `url(${this.state.imgLink})`}}
                 >
 
                 </div>
-                <div className='event-text col s12 m8'>
+                <div id="event-title-style" className='event-text blue-grey lighten-3 col s12 m8'>
                     <h3>{this.props.event.event_title}</h3>
+                    <div className="divider"></div>
                     <p> 
                     {this.props.event.event_description}
                     </p>

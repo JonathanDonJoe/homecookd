@@ -1,6 +1,10 @@
 .nav-row {	
     margin-bottom: 0px;	
 }
+#icon-style{
+  max-height: 8vh;
+  width: auto;
+}
 
 .nav{
     position: absolute;

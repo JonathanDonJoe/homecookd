@@ -18,9 +18,9 @@ export class EventReviews extends Component {
         //     } 
         // })
         return (
-            <div className='event-reviews col m8 s12'>
-                <h3>Reviews for This Host</h3>
-                {selectedReviews}
+            <div className='event-reviews blue-grey lighten-3 col  s12 m9'>
+                <h3 >Reviews for This Host</h3>
+                <div id="review-title-style" className="col s12">{selectedReviews}</div>
             </div>
         )
     }

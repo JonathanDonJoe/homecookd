@@ -106,6 +106,7 @@ class EventPayment extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
+		document.querySelector('body').className = '';
 		this.props.paymentAndReview(
 			{	user_id: this.props.auth.user_id,
 				host_id: this.props.event.host_id,
@@ -123,12 +124,14 @@ class EventPayment extends Component {
 
 	showModal = () => {
 		if (this.state.joinModal === 0 && moment(this.props.event.event_time) > moment()) {
+			document.querySelector('body').className = 'body-modal-show';
 			this.setState({
 				joinModal: 1,
 				reviewModal: 0,
 				payment: this.props.event.event_price
 			})
 		} else if (this.state.joinModal === 0 && moment(this.props.event.event_time) < moment()) {
+			document.querySelector('body').className = 'body-modal-show';
 			this.setState({
 				joinModal: 0,
 				reviewModal: 1,
@@ -138,6 +141,7 @@ class EventPayment extends Component {
 				joinModal: 0,
 				reviewModal: 0
 			})
+		document.querySelector('body').className = '';
 		}
 	};
 
@@ -152,7 +156,7 @@ class EventPayment extends Component {
 				disabled=""
 				onClick={this.showModal}
 				data-target="modal2"
-				className="btn modal-trigger"
+				className="btn modal-trigger pulse"
 			>
 				Leave a Review
         </button>

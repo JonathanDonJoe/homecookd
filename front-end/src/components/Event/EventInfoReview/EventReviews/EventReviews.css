@@ -1,5 +1,4 @@
 .event-reviews{
-    height: 55vh;
-    background-color: lightgray;
-    border-radius: 10px;
+    min-height: 60.5vh !important;
+    margin-bottom: 1vh;;
 }

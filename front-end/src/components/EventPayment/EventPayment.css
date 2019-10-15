@@ -4,6 +4,7 @@
 
 #close-modal{
     margin-top: 20px;
+    margin-right: 15px;
     font-size: 24px;
     cursor: pointer;
     background-color: transparent;
@@ -12,4 +13,26 @@
 
 #modal-fixed-footer{
     height: auto;
+}
+
+#modal1{
+    z-index: 100;
+}
+
+.body-modal-show{
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #484848;
+
+}
+@media only screen and (max-width: 600px){
+    #modal1{
+        position: relative;
+        top: -57vh;
+    }
 }
