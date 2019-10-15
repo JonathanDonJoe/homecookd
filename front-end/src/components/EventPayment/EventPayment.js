@@ -19,18 +19,24 @@ class EventPayment extends Component {
 		reviewModal: 0,
 		stars: 0,
 		reviewText: "",
-		dineIn: 1,
-		pickUp: 1, 
+		dineIn: 0,
+		pickUp: 0, 
 		reviewTitle: ''
 	};
 
-	componentDidMount() {
-		this.setState({
-			dineIn: this.props.event.event_dine_in,
-			pickUp: this.props.event.event_pick_up
-		})
-	}
 
+	changeDineIn = (e) => {
+		let dine = e.target.checked ? 1 : 0
+		this.setState({
+			dineIn: dine
+		});
+	};
+	changePickUp = (e) => {
+		let pick = e.target.checked ? 1 : 0
+		this.setState({
+			pickUp: pick
+		});
+	};
 	changeServings = (e) => {
 		this.setState({
 			servings: e.target.value
@@ -70,7 +76,9 @@ class EventPayment extends Component {
 					token: this.props.auth.token,
 					email: this.props.auth.email,
 					event_id: this.props.event.event_id,
-					num_servings: numServings
+					num_servings: numServings,
+					dine_in: this.state.dineIn,
+					pick_up: this.state.pickUp
 				};
 				axios({
 					method: "POST",
@@ -135,6 +143,7 @@ class EventPayment extends Component {
 
 
 	render() {
+		console.log(this.state)
 		const event = this.props.event;
 
 		let modalButton = ""
@@ -201,10 +210,10 @@ class EventPayment extends Component {
 		}
 		let dineInOption = '';
 		let pickUpOption = '';
-		if (this.state.dineIn === 0) {
+		if (this.props.event.event_dine_in === 0) {
 			dineInOption = "disabled"
 		}
-		if (this.state.pickUp === 0) {
+		if (this.props.event.event_pick_up === 0) {
 			pickUpOption = "disabled"
 		}
 
