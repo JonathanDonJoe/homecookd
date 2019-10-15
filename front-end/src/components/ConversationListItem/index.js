@@ -1,4 +1,3 @@
-import shave from 'shave';
 import './ConversationListItem.css';
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
@@ -12,7 +11,7 @@ export class ConversationListItem extends Component {
   }
   render() {
     let relevantMessages = this.props.messages.filter((message)=>{
-      return message.event_id == this.props.data.id
+      return message.event_id === this.props.data.id
     })
     let string = ''
     if(relevantMessages.slice(-1)[0]){

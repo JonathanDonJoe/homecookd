@@ -1,5 +1,4 @@
 import React, { Component, createRef } from 'react'
-import { googleApiKey } from '../../config'
 import { connect } from 'react-redux';
 
 
@@ -10,8 +9,6 @@ class GoogleMap extends Component {
 
   componentDidUpdate(){
     if(this.props.event.event.attending){
-      console.log(this.props.event.event.attending);
-      console.log(this.props.auth.user_id);
       this.googleMap = this.createGoogleMap()
       if(this.props.event.event.attending.includes(this.props.auth.user_id)){
         this.infoWindow = this.createIW()
@@ -24,15 +21,6 @@ class GoogleMap extends Component {
       }
     }
   }
-  // componentDidMount() {
-  //   this.googleMap = this.createGoogleMap()
-  //   this.marker = this.createMarker()
-    // const googleMapScript = document.createElement('script')
-    // googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
-    // window.document.body.appendChild(googleMapScript)
-
-    // googleMapScript.addEventListener('load', ()=>{
-  // }
 
   createGoogleMap = () => {
     return(

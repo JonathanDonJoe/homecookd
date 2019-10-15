@@ -6,7 +6,6 @@ import auth0Client from "../Auth/Auth";
 import axios from "axios";
 import moment from 'moment';
 import BeautyStars from 'beauty-stars';
-import EventCard from '../EventCard/EventCard';
 import "./EventPayment.css";
 import NumberFormat from 'react-number-format';
 import paymentAndReviewAction from "../../actions/paymentAndReviewAction";
@@ -14,7 +13,6 @@ import paymentAndReviewAction from "../../actions/paymentAndReviewAction";
 
 class EventPayment extends Component {
 	state = {
-		// events: [],
 		servings: 0,
 		payment: 0,
 		joinModal: 0,
@@ -32,7 +30,6 @@ class EventPayment extends Component {
 			pickUp: this.props.event.event_pick_up
 		})
 	}
-
 
 	changeServings = (e) => {
 		this.setState({
@@ -116,16 +113,6 @@ class EventPayment extends Component {
 		})
 	}
 
-	// getAttendance = async (e) => {
-	// 	e.preventDefault();
-	// 	const url = `${window.apiHost}/events/getAttendance`
-	// 	const axiosResponse = await axios.post(url, this.props.auth)
-	// 	this.setState({
-	// 		events: axiosResponse.data
-	// 	})
-
-	// }
-
 	showModal = () => {
 		if (this.state.joinModal === 0 && moment(this.props.event.event_time) > moment()) {
 			this.setState({
@@ -190,7 +177,6 @@ class EventPayment extends Component {
 					onClick={async () => {
 						// eslint-disable-next-line no-unused-vars
 						const result = await auth0Client.signIn();
-						// console.log(result);
 					}}
 					className="btn"
 				>
@@ -221,12 +207,11 @@ class EventPayment extends Component {
 		if (this.state.pickUp === 0) {
 			pickUpOption = "disabled"
 		}
-		// console.log(event);
-		// console.log('servings')
-		// console.log(this.state.servings)
-		// console.log('payment')
-		// console.log(this.state.payment)
-		// console.log(this.props.event.event_price)
+
+		let eventPicture = ""
+		if(event.event_picture) {
+			eventPicture = event.event_picture
+		}
 
 		return (
 			<div>
@@ -245,7 +230,7 @@ class EventPayment extends Component {
 									<div className="row">
 										<div className="col s12 ">
 											<div className="modal-picture">
-												<img className="image" src={`${window.apiHost}${event.event_picture}`} alt='event_image'></img>
+												<img className="image" src={`${window.apiHost}${eventPicture}`} alt='event_image'></img>
 											</div>
 
 											<div className="title">{event.event_title}</div>

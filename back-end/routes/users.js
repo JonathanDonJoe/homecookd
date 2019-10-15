@@ -5,8 +5,6 @@ const db = require('../db');
 
 /* POST events listing. */
 router.post('/login', function (req, res) {
-    console.log('reached /users/login')
-    console.log(req.body)
     const { token, first, last, email, picture } = req.body;
     if (res.locals.loggedIn) {
         res.json({
@@ -61,15 +59,11 @@ router.post('/login', function (req, res) {
     }
 })
 router.post('/tokenLogin', (req, res, next) => {
-    console.log(req.body)
 
     const getUserIdQuery = `SELECT * FROM users WHERE token = ?`;
 
     db.query(getUserIdQuery, [req.body.token], (err, results) => {
         if (err) throw err
-        console.log(results.length)
-        console.log('!results.length')
-        console.log(!results.length)
         if (!results.length) {
             res.json({
                 msg: 'tokenInvalid'

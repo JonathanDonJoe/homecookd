@@ -15,10 +15,9 @@ export class Compose extends Component {
 
   refreshMessages = (e)=> {
     e.preventDefault()
-    if(this.props.refresh == 0){
+    if(this.props.refresh === 0){
       this.props.refreshMessages(1)
     }else{this.props.refreshMessages(0)}
-    console.log(this.props.refresh);
   }
 
   postMessage = async (e)=> {
@@ -31,17 +30,15 @@ export class Compose extends Component {
         auth: this.props.auth,
         eventId: this.props.conversation.conversation.id
       }
-      const messageSent = await axios.post(url, requestData)
-      console.log(`message sent`);
+      await axios.post(url, requestData)
+      // const messageSent = await axios.post(url, requestData)
       this.setState({
         message: ''
       })
       if(this.props.refresh){
         this.props.refreshMessages(1)
-        console.log(this.props.refresh);
       }else{
         this.props.refreshMessages(0)
-        console.log(this.props.refresh);
       }
     }
   }
@@ -53,8 +50,6 @@ export class Compose extends Component {
     })
 }
   render() {
-    console.log('gahjkhgfghjklhgfghjkgfcghjhgfghidfghjhgfghjhgchjhgckjhgfcjkjhcvhjkjvcvjkjhgvchjvcvbjhvcvbjvcvbnkjvcvbkjvcvbn')
-    console.log(this.props);
     return (<>
       <form onSubmit={this.postMessage} className="col s12">
           <div className="input-field col s12">
