@@ -1,13 +1,15 @@
 # Welcome to HomeCookd
 
+[Live Demo](https://homecookd.us)
+
 Contents
 ---
-* [Description](https://github.com/JonathanDonJoe/SweetHub#Description)
-* [Technologies Used](https://github.com/JonathanDonJoe/SweetHub#Technologies-Used)
-* [MVP](https://github.com/JonathanDonJoe/SweetHub#MVP)
-* [Stretch Goals](https://github.com/JonathanDonJoe/SweetHub#Stretch-Goals)
-* [Authors](https://github.com/JonathanDonJoe/SweetHub#Authors)
-* [Screenshots](https://github.com/JonathanDonJoe/SweetHub#Screenshots)
+* [Description](https://github.com/JonathanDonJoe/homecookd#Description)
+* [Technologies Used](https://github.com/JonathanDonJoe/homecookd#Technologies-Used)
+* [MVP](https://github.com/JonathanDonJoe/homecookd#MVP)
+* [Stretch Goals](https://github.com/JonathanDonJoe/homecookd#Stretch-Goals)
+* [Authors](https://github.com/JonathanDonJoe/homecookd#Authors)
+* [Screenshots](https://github.com/JonathanDonJoe/homecookd#Screenshots)
 
 Description
 ---
@@ -18,10 +20,12 @@ Technologies Used
 ---
 The following languages were used to create this website:
 * React/Redux
+* Express
+* Node
+* MySQL
 * Google Maps
 * Stripe Payments
 * Auth0
-* MySQL
 * JavaScript
 * Materialze
 * HTML
